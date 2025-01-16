@@ -1,10 +1,11 @@
+import { motion } from "framer-motion";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
 import { Pricing } from "@/components/Pricing";
-import { motion } from "framer-motion";
 import PlatformComparison from "@/components/PlatformComparison";
 import ImageCarousel from "@/components/ImageCarousel";
 import { NewsletterSubscription } from "@/components/NewsletterSubscription";
+import { ExitPopup } from "@/components/ExitPopup";
 
 const Index = () => {
   return (
@@ -19,6 +20,7 @@ const Index = () => {
       <ImageCarousel />
       <Pricing />
       <NewsletterSubscription />
+      <ExitPopup />
     </motion.div>
   );
 };
