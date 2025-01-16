@@ -39,7 +39,7 @@ export const NewsletterSubscription = () => {
   };
 
   return (
-    <section className="py-20 bg-soft-purple">
+    <section className="py-20 bg-[#F1F0FB]"> {/* Updated background color */}
       <div className="container px-4 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

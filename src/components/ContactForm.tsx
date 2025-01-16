@@ -44,12 +44,12 @@ export const ContactForm = () => {
   };
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-soft-blue">
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-[#7E69AB] text-white"> {/* Updated background color */}
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Contact Us</h2>
-            <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+            <p className="mx-auto max-w-[700px] text-gray-100 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
               Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
             </p>
           </div>
@@ -57,7 +57,7 @@ export const ContactForm = () => {
         <div className="mx-auto max-w-[600px] mt-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-100 mb-2">
                 Name
               </label>
               <Input
@@ -66,10 +66,11 @@ export const ContactForm = () => {
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Your name"
                 required
+                className="bg-white/10 border-white/20 text-white placeholder:text-gray-300"
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-100 mb-2">
                 Email
               </label>
               <Input
@@ -79,10 +80,11 @@ export const ContactForm = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 required
+                className="bg-white/10 border-white/20 text-white placeholder:text-gray-300"
               />
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="message" className="block text-sm font-medium text-gray-100 mb-2">
                 Message
               </label>
               <Textarea
@@ -91,20 +93,24 @@ export const ContactForm = () => {
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Your message"
                 required
-                className="min-h-[150px]"
+                className="min-h-[150px] bg-white/10 border-white/20 text-white placeholder:text-gray-300"
               />
             </div>
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
+            <Button 
+              type="submit" 
+              className="w-full bg-white text-[#7E69AB] hover:bg-gray-100" 
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "Sending..." : "Send Message"}
             </Button>
           </form>
           <div className="mt-8 text-center">
-            <p className="text-sm text-gray-500 mb-2">Or reach us directly via WhatsApp</p>
+            <p className="text-sm text-gray-200 mb-2">Or reach us directly via WhatsApp</p>
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+              className="inline-flex items-center gap-2 text-white hover:text-gray-200 transition-colors"
             >
               <MessageCircle className="h-4 w-4" />
               {whatsappNumber}
