@@ -44,7 +44,7 @@ export const ContactForm = () => {
   };
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-[#7E69AB] text-white"> {/* Updated background color */}
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-[#ea384c] text-white"> {/* Updated to the brand red color */}
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
@@ -98,7 +98,7 @@ export const ContactForm = () => {
             </div>
             <Button 
               type="submit" 
-              className="w-full bg-white text-[#7E69AB] hover:bg-gray-100" 
+              className="w-full bg-white text-[#ea384c] hover:bg-gray-100" 
               disabled={isSubmitting}
             >
               {isSubmitting ? "Sending..." : "Send Message"}
