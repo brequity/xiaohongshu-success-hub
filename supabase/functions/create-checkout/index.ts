@@ -16,11 +16,37 @@ serve(async (req) => {
       apiVersion: '2023-10-16',
     });
 
+    // Log the stripe configuration
+    console.log('Creating payment session with Stripe configuration:', {
+      apiVersion: '2023-10-16',
+      hasSecretKey: !!Deno.env.get('STRIPE_SECRET_KEY'),
+    });
+
+    // Verify the price exists before creating the session
+    const priceId = 'price_1QhtABKQHLuFrkaPXYZWGy8M';
+    try {
+      const price = await stripe.prices.retrieve(priceId);
+      console.log('Price found:', {
+        id: price.id,
+        active: price.active,
+        currency: price.currency,
+      });
+    } catch (priceError) {
+      console.error('Error retrieving price:', priceError);
+      return new Response(
+        JSON.stringify({ error: `Price verification failed: ${priceError.message}` }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 400,
+        }
+      );
+    }
+
     console.log('Creating payment session...');
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
-          price: 'price_1QhtABKQHLuFrkaPXYZWGy8M', // Replace with your actual price ID
+          price: priceId,
           quantity: 1,
         },
       ],
