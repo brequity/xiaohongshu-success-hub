@@ -13,6 +13,11 @@ import { Link } from "react-router-dom"
 
 export const Navigation = () => {
   const scrollToSection = (sectionId: string) => {
+    if (sectionId === 'top') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
@@ -25,8 +30,8 @@ export const Navigation = () => {
         <NavigationMenu className="mx-auto my-2">
           <NavigationMenuList className="gap-6">
             <NavigationMenuItem>
-              <Link 
-                to="/"
+              <button
+                onClick={() => scrollToSection('top')}
                 className={cn(
                   navigationMenuTriggerStyle(),
                   "flex items-center gap-2 bg-transparent hover:bg-transparent"
@@ -34,12 +39,12 @@ export const Navigation = () => {
               >
                 <Home className="w-4 h-4" />
                 <span>Home</span>
-              </Link>
+              </button>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
               <button
-                onClick={() => scrollToSection('features')}
+                onClick={() => scrollToSection('what-is-xiaohongshu')}
                 className={cn(
                   navigationMenuTriggerStyle(),
                   "flex items-center gap-2 bg-transparent hover:bg-transparent"

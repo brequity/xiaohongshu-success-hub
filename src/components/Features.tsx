@@ -34,6 +34,7 @@ export const Features = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center mb-20"
+          id="what-is-xiaohongshu"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-coral">
             What is Xiaohongshu?
