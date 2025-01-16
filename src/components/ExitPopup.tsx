@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Gift, ArrowRight } from "lucide-react";
+import { Gift, ArrowRight, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
@@ -61,6 +61,9 @@ export const ExitPopup = () => {
     }
   };
 
+  const whatsappNumber = "+6582029372";
+  const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\+/g, '')}`;
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="sm:max-w-md">
@@ -108,6 +111,17 @@ export const ExitPopup = () => {
             <Button variant="outline" onClick={() => setIsOpen(false)} className="flex-1">
               Maybe Later
             </Button>
+          </div>
+          <div className="pt-4 border-t">
+            <a 
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <MessageCircle className="h-4 w-4" />
+              Contact us on WhatsApp: {whatsappNumber}
+            </a>
           </div>
         </div>
       </DialogContent>
