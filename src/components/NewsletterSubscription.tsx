@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { motion } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
 
 export const NewsletterSubscription = () => {
   const [email, setEmail] = useState("");
@@ -15,9 +15,9 @@ export const NewsletterSubscription = () => {
     setIsLoading(true);
 
     try {
-      const { error } = await supabase
-        .from("newsletter_subscriptions")
-        .insert([{ email }]);
+      const { data, error } = await supabase.functions.invoke('subscribe-newsletter', {
+        body: { email }
+      });
 
       if (error) throw error;
 
@@ -30,9 +30,7 @@ export const NewsletterSubscription = () => {
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message === "duplicate key value violates unique constraint \"newsletter_subscriptions_email_key\""
-          ? "This email is already subscribed!"
-          : "Failed to subscribe. Please try again.",
+        description: error.message || "Failed to subscribe. Please try again.",
         variant: "destructive",
       });
     } finally {
