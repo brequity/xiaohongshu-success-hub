@@ -3,10 +3,14 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { Gift, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Input } from "@/components/ui/input";
+import { supabase } from "@/integrations/supabase/client";
 
 export const ExitPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [hasShown, setHasShown] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -21,12 +25,40 @@ export const ExitPopup = () => {
     return () => document.removeEventListener("mouseleave", handleMouseLeave);
   }, [hasShown]);
 
-  const handleStayClick = () => {
-    setIsOpen(false);
-    toast({
-      title: "Thank you for staying!",
-      description: "We appreciate your interest in our content.",
-    });
+  const handleSubscribe = async () => {
+    if (!email) {
+      toast({
+        title: "Error",
+        description: "Please enter your email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('subscribe-newsletter', {
+        body: { email }
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Success!",
+        description: "You've been subscribed to our newsletter.",
+        className: "bg-jade text-white",
+      });
+      setIsOpen(false);
+      setEmail("");
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to subscribe. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -55,13 +87,28 @@ export const ExitPopup = () => {
             </ul>
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col sm:flex-row gap-3 mt-4">
-          <Button onClick={handleStayClick} className="flex-1">
-            Stay and Learn More
-          </Button>
-          <Button variant="outline" onClick={() => setIsOpen(false)} className="flex-1">
-            Maybe Later
-          </Button>
+        <div className="space-y-4">
+          <div className="flex gap-3">
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="flex-1"
+            />
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button 
+              onClick={handleSubscribe} 
+              className="flex-1"
+              disabled={isLoading}
+            >
+              {isLoading ? "Subscribing..." : "Subscribe & Stay"}
+            </Button>
+            <Button variant="outline" onClick={() => setIsOpen(false)} className="flex-1">
+              Maybe Later
+            </Button>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
