@@ -7,6 +7,7 @@ import ImageCarousel from "@/components/ImageCarousel";
 import { NewsletterSubscription } from "@/components/NewsletterSubscription";
 import { ExitPopup } from "@/components/ExitPopup";
 import { ContactForm } from "@/components/ContactForm";
+import { Navigation } from "@/components/Navigation";
 
 const Index = () => {
   return (
@@ -15,6 +16,7 @@ const Index = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      <Navigation />
       <Hero />
       <Features />
       <PlatformComparison />
