@@ -42,7 +42,7 @@ const PlatformComparison = () => {
   ];
 
   return (
-    <div className="w-full py-12 px-4 md:px-6 lg:px-8 bg-red-50">
+    <div id="pricing" className="w-full py-12 px-4 md:px-6 lg:px-8 bg-red-50">
       <h2 className="text-3xl font-bold text-center mb-8 text-[#ea384c]">Platform Comparison</h2>
       <div className="max-w-4xl mx-auto mb-12 text-center">
         <p className="text-lg text-gray-600">

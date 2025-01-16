@@ -84,5 +84,5 @@ export const Navigation = () => {
         </NavigationMenu>
       </div>
     </div>
-  )
-}
+  );
+};
