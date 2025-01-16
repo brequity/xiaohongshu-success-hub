@@ -114,3 +114,6 @@ export const ContactForm = () => {
       </div>
     </section>
   );
+};
+
+export default ContactForm;
