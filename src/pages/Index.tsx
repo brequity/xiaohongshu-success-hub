@@ -3,6 +3,7 @@ import { Features } from "@/components/Features";
 import { Pricing } from "@/components/Pricing";
 import { motion } from "framer-motion";
 import PlatformComparison from "@/components/PlatformComparison";
+import ImageCarousel from "@/components/ImageCarousel";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
       <Hero />
       <Features />
       <PlatformComparison />
+      <ImageCarousel />
       <Pricing />
     </motion.div>
   );
