@@ -23,7 +23,7 @@ serve(async (req) => {
     });
 
     // Verify the price exists before creating the session
-    const priceId = 'price_1QhtABKQHLuFrkaPXYZWGy8M';
+    const priceId = 'price_1QhtLRKQHLuFrkaP6wUOMZE6';
     try {
       const price = await stripe.prices.retrieve(priceId);
       console.log('Price found:', {
