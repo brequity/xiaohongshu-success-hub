@@ -4,23 +4,23 @@ import { BookOpen, Target, TrendingUp, DollarSign } from "lucide-react";
 const features = [
   {
     icon: <BookOpen className="w-6 h-6" />,
-    title: "Comprehensive Guide",
-    description: "Step-by-step instructions to create engaging content that resonates with your audience",
+    title: "Comprehensive Xiaohongshu Guide",
+    description: "Step-by-step instructions for creating engaging Xiaohongshu content that resonates with Chinese audiences",
   },
   {
     icon: <Target className="w-6 h-6" />,
-    title: "Proven Strategies",
-    description: "Tested methods to increase your followers and engagement rates",
+    title: "Platform Migration Strategy",
+    description: "Expert guidance on migrating your content strategy to Xiaohongshu from other social platforms",
   },
   {
     icon: <TrendingUp className="w-6 h-6" />,
-    title: "Growth Tactics",
-    description: "Advanced techniques to optimize your content for Xiaohongshu's algorithm",
+    title: "Content Creation Mastery",
+    description: "Master Xiaohongshu's unique content style and learn how to optimize for the platform's algorithm",
   },
   {
     icon: <DollarSign className="w-6 h-6" />,
-    title: "Monetization Guide",
-    description: "Learn how to turn your following into a sustainable income stream",
+    title: "Monetization Blueprint",
+    description: "Transform your Xiaohongshu presence into a sustainable income stream with proven monetization strategies",
   },
 ];
 
@@ -36,24 +36,25 @@ export const Features = () => {
           className="text-center mb-20"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-coral">
-            Welcome TikTok Refugee!
+            What is Xiaohongshu?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We're excited to welcome you to your new space on Xiaohongshu. Get ready for an exciting journey as we ensure your success on this vibrant platform.
+            Xiaohongshu (Little Red Book) is China's leading lifestyle and shopping platform. Our academy guides you through creating authentic, engaging content that resonates with Chinese audiences.
           </p>
         </motion.div>
 
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-jade/10 text-jade rounded-full">
-            What You'll Learn
+            Xiaohongshu Academy Curriculum
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Everything You Need to Succeed
+            Master Xiaohongshu Content Creation
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Our comprehensive guide covers all aspects of becoming a successful content creator on Xiaohongshu
+            Our comprehensive guide covers everything you need to know about becoming a successful content creator on Xiaohongshu
           </p>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <motion.div

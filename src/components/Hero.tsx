@@ -26,19 +26,19 @@ export const Hero = () => {
           className="text-center max-w-3xl mx-auto"
         >
           <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-coral/90 text-white rounded-full">
-            Master Xiaohongshu
+            Welcome to Xiaohongshu Academy
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
-            Unlock Your Success on Xiaohongshu
+            Your Complete Guide to Xiaohongshu Content Creation
           </h1>
           <p className="text-lg md:text-xl text-gray-100 mb-8">
-            Learn proven strategies to grow your presence and monetize your content on China's fastest-growing social platform
+            Learn everything about Xiaohongshu - from understanding the platform to creating engaging content that resonates with Chinese audiences. Perfect for creators migrating from other platforms.
           </p>
           <Button 
             size="lg"
             className="bg-coral hover:bg-coral-light text-white transition-all duration-300 transform hover:scale-105"
           >
-            Get Started Today
+            Start Your Xiaohongshu Journey
           </Button>
         </motion.div>
       </div>
