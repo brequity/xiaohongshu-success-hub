@@ -15,7 +15,7 @@ export const VideoSection = () => {
           </h2>
           <div className="relative w-full pt-[56.25%] rounded-xl overflow-hidden shadow-lg">
             <iframe
-              src="https://app.heygen.com/share/faee8be9e4224eec8f4de7f53a796673"
+              src="https://www.youtube.com/embed/1r92f7AZd0Q"
               className="absolute top-0 left-0 w-full h-full border-0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
