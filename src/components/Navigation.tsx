@@ -7,7 +7,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import { Menu } from "lucide-react"
+import { Menu, Home, Info, ShoppingBag, Contact } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
@@ -35,6 +35,7 @@ export const Navigation = () => {
             "flex items-center gap-2 bg-transparent hover:bg-transparent"
           )}
         >
+          <Home className="h-4 w-4" />
           <span>Home</span>
         </button>
       </NavigationMenuItem>
@@ -47,6 +48,7 @@ export const Navigation = () => {
             "flex items-center gap-2 bg-transparent hover:bg-transparent"
           )}
         >
+          <Info className="h-4 w-4" />
           <span>Xiaohongshu</span>
         </button>
       </NavigationMenuItem>
@@ -59,6 +61,7 @@ export const Navigation = () => {
             "flex items-center gap-2 bg-transparent hover:bg-transparent"
           )}
         >
+          <ShoppingBag className="h-4 w-4" />
           <span>Product</span>
         </button>
       </NavigationMenuItem>
@@ -71,6 +74,7 @@ export const Navigation = () => {
             "flex items-center gap-2 bg-transparent hover:bg-transparent"
           )}
         >
+          <Contact className="h-4 w-4" />
           <span>Contact</span>
         </button>
       </NavigationMenuItem>
@@ -99,24 +103,28 @@ export const Navigation = () => {
                   onClick={() => scrollToSection('top')}
                   className="flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors"
                 >
+                  <Home className="h-5 w-5" />
                   Home
                 </button>
                 <button
                   onClick={() => scrollToSection('what-is-xiaohongshu')}
                   className="flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors"
                 >
+                  <Info className="h-5 w-5" />
                   Xiaohongshu
                 </button>
                 <button
                   onClick={() => scrollToSection('pricing')}
                   className="flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors"
                 >
+                  <ShoppingBag className="h-5 w-5" />
                   Product
                 </button>
                 <button
                   onClick={() => scrollToSection('contact')}
                   className="flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors"
                 >
+                  <Contact className="h-5 w-5" />
                   Contact
                 </button>
               </nav>
