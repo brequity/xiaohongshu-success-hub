@@ -6,6 +6,7 @@ import PlatformComparison from "@/components/PlatformComparison";
 import ImageCarousel from "@/components/ImageCarousel";
 import { NewsletterSubscription } from "@/components/NewsletterSubscription";
 import { ExitPopup } from "@/components/ExitPopup";
+import { ContactForm } from "@/components/ContactForm";
 
 const Index = () => {
   return (
@@ -20,6 +21,7 @@ const Index = () => {
       <ImageCarousel />
       <Pricing />
       <NewsletterSubscription />
+      <ContactForm />
       <ExitPopup />
     </motion.div>
   );
