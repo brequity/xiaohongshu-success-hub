@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { motion } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
 
 const features = [
   "Complete Xiaohongshu Strategy Guide",
@@ -20,6 +22,28 @@ const bootcampFeatures = [
 ];
 
 export const Pricing = () => {
+  const { toast } = useToast();
+
+  const handleCheckout = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        method: 'POST',
+      });
+
+      if (error) throw error;
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to initiate checkout. Please try again.",
+      });
+    }
+  };
+
   return (
     <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="container px-4 mx-auto">
@@ -51,6 +75,7 @@ export const Pricing = () => {
               <Button 
                 size="lg" 
                 className="w-full bg-coral hover:bg-coral-light transition-all duration-300"
+                onClick={handleCheckout}
               >
                 Get Access Now
               </Button>
@@ -85,6 +110,7 @@ export const Pricing = () => {
               <Button 
                 size="lg" 
                 className="w-full bg-coral hover:bg-coral-light transition-all duration-300"
+                onClick={handleCheckout}
               >
                 Enroll Now
               </Button>
