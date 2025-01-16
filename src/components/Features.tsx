@@ -63,8 +63,15 @@ export const Features = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300"
             >
-              <div className="w-12 h-12 bg-coral/10 rounded-xl flex items-center justify-center mb-4 text-coral">
-                {feature.icon}
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-coral/10 rounded-xl flex items-center justify-center text-coral">
+                  {feature.icon}
+                </div>
+                <img 
+                  src="/lovable-uploads/40ec6227-aaaf-4f19-b08a-6618a1281fc6.png" 
+                  alt="Xiaohongshu Logo" 
+                  className="w-8 h-8 object-contain"
+                />
               </div>
               <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
               <p className="text-gray-600">{feature.description}</p>
