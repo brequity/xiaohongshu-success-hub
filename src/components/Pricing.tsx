@@ -49,7 +49,7 @@ export const Pricing = () => {
       <div className="container px-4 mx-auto">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-coral/10 text-coral rounded-full">
-            Investment
+            Success
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Start Your Journey Today
