@@ -69,6 +69,26 @@ const PlatformComparison = () => {
           </TableBody>
         </Table>
       </div>
+      
+      {/* Platform Logos */}
+      <div className="flex justify-center gap-20 mt-8">
+        <div className="text-center">
+          <img 
+            src="/lovable-uploads/40ec6227-aaaf-4f19-b08a-6618a1281fc6.png" 
+            alt="Xiaohongshu Logo" 
+            className="w-24 h-24 object-contain mx-auto rounded-xl"
+          />
+          <p className="mt-2 font-medium text-[#ea384c]">Xiaohongshu</p>
+        </div>
+        <div className="text-center">
+          <img 
+            src="/lovable-uploads/c049559b-d34a-4e88-9e7a-baea7489e9b0.png" 
+            alt="TikTok Logo" 
+            className="w-24 h-24 object-contain mx-auto rounded-xl"
+          />
+          <p className="mt-2 font-medium text-[#ea384c]">TikTok</p>
+        </div>
+      </div>
     </div>
   );
 };
