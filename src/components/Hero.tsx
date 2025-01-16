@@ -2,6 +2,13 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 export const Hero = () => {
+  const scrollToFeatures = () => {
+    const featuresSection = document.querySelector('#features');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="min-h-[80vh] flex items-center justify-center relative">
       {/* Background Image */}
@@ -36,6 +43,7 @@ export const Hero = () => {
           </p>
           <Button 
             size="lg"
+            onClick={scrollToFeatures}
             className="bg-coral hover:bg-coral-light text-white transition-all duration-300 transform hover:scale-105"
           >
             Start Your Xiaohongshu Journey

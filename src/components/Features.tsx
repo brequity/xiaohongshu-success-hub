@@ -26,7 +26,7 @@ const features = [
 
 export const Features = () => {
   return (
-    <section className="py-20 bg-white">
+    <section id="features" className="py-20 bg-white">
       <div className="container px-4 mx-auto">
         {/* Welcome Section */}
         <motion.div 
