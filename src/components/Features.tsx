@@ -28,6 +28,21 @@ export const Features = () => {
   return (
     <section className="py-20 bg-white">
       <div className="container px-4 mx-auto">
+        {/* Welcome Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-coral">
+            Welcome TikTok Refugee!
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            We're excited to welcome you to your new space on Xiaohongshu. Get ready for an exciting journey as we ensure your success on this vibrant platform.
+          </p>
+        </motion.div>
+
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-jade/10 text-jade rounded-full">
             What You'll Learn
