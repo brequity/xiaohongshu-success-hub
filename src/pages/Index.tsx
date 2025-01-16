@@ -8,6 +8,7 @@ import { NewsletterSubscription } from "@/components/NewsletterSubscription";
 import { ExitPopup } from "@/components/ExitPopup";
 import { ContactForm } from "@/components/ContactForm";
 import { Navigation } from "@/components/Navigation";
+import { VideoSection } from "@/components/VideoSection";
 
 const Index = () => {
   return (
@@ -19,6 +20,7 @@ const Index = () => {
       <Navigation />
       <Hero />
       <Features />
+      <VideoSection />
       <PlatformComparison />
       <ImageCarousel />
       <Pricing />
