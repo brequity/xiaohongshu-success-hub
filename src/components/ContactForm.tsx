@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 export const ContactForm = () => {
   const [name, setName] = useState("");
@@ -20,8 +21,11 @@ export const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Here you would typically send this to your backend
-      console.log("Form submitted:", { name, email, message });
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: { name, email, message }
+      });
+
+      if (error) throw error;
       
       toast({
         title: "Message sent!",
@@ -32,10 +36,11 @@ export const ContactForm = () => {
       setName("");
       setEmail("");
       setMessage("");
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Error sending contact form:", error);
       toast({
         title: "Error",
-        description: "Something went wrong. Please try again.",
+        description: "Failed to send message. Please try again or contact us via WhatsApp.",
         variant: "destructive",
       });
     } finally {
