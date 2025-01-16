@@ -4,6 +4,7 @@ import { Pricing } from "@/components/Pricing";
 import { motion } from "framer-motion";
 import PlatformComparison from "@/components/PlatformComparison";
 import ImageCarousel from "@/components/ImageCarousel";
+import { NewsletterSubscription } from "@/components/NewsletterSubscription";
 
 const Index = () => {
   return (
@@ -17,6 +18,7 @@ const Index = () => {
       <PlatformComparison />
       <ImageCarousel />
       <Pricing />
+      <NewsletterSubscription />
     </motion.div>
   );
 };
