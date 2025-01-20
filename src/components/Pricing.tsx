@@ -3,6 +3,7 @@ import { Check } from "lucide-react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
+import { EbookPreview } from "./EbookPreview";
 
 const features = [
   "Complete Xiaohongshu Strategy Guide",
@@ -58,6 +59,8 @@ export const Pricing = () => {
             Get instant access to our comprehensive guide and start building your Xiaohongshu presence
           </p>
         </div>
+        
+        <EbookPreview />
         
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           <motion.div
