@@ -50,7 +50,7 @@ export const Pricing = () => {
       <div className="container px-4 mx-auto">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-coral/10 text-coral rounded-full">
-            Success
+            Limited Time Offer
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Start Your Journey Today
@@ -71,10 +71,12 @@ export const Pricing = () => {
           >
             <div className="p-8 text-center border-b">
               <h3 className="text-2xl font-bold mb-2">Complete Guide Ebook</h3>
-              <div className="flex items-center justify-center mb-4">
-                <span className="text-4xl font-bold">$5</span>
-                <span className="text-gray-600 ml-2">USD</span>
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <span className="text-lg text-gray-500 line-through">$29.90</span>
+                <span className="text-4xl font-bold text-coral">$9.90</span>
+                <span className="text-gray-600">USD</span>
               </div>
+              <p className="text-sm text-coral mb-4">Save $20 Today!</p>
               <Button 
                 size="lg" 
                 className="w-full bg-coral hover:bg-coral-light transition-all duration-300"
