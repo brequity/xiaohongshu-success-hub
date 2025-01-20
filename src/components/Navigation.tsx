@@ -62,7 +62,7 @@ export const Navigation = () => {
           )}
         >
           <ShoppingBag className="h-4 w-4" />
-          <span>Product</span>
+          <span>Ebook</span>
         </button>
       </NavigationMenuItem>
 
@@ -118,7 +118,7 @@ export const Navigation = () => {
                   className="flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors"
                 >
                   <ShoppingBag className="h-5 w-5" />
-                  Product
+                  Ebook
                 </button>
                 <button
                   onClick={() => scrollToSection('contact')}
