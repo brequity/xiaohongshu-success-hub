@@ -12,7 +12,7 @@ export const EbookPreview = () => {
         <div className="grid md:grid-cols-2 gap-8 p-8">
           <div className="flex items-center justify-center">
             <img
-              src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
+              src="/lovable-uploads/5e81858d-ab51-48e2-a60f-f4b633728fc3.png"
               alt="Mastering Xiaohongshu Ebook Cover"
               className="rounded-lg shadow-md w-full max-w-md object-cover"
             />
