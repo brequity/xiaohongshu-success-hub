@@ -7,7 +7,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import { Menu, Home, Info, ShoppingBag, Contact } from "lucide-react"
+import { Menu, Home, Info, ShoppingBag, Contact, Book } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
@@ -68,6 +68,19 @@ export const Navigation = () => {
 
       <NavigationMenuItem>
         <button
+          onClick={() => scrollToSection('starter-guide')}
+          className={cn(
+            navigationMenuTriggerStyle(),
+            "flex items-center gap-2 bg-transparent hover:bg-transparent"
+          )}
+        >
+          <Book className="h-4 w-4" />
+          <span>Starter Guide</span>
+        </button>
+      </NavigationMenuItem>
+
+      <NavigationMenuItem>
+        <button
           onClick={() => scrollToSection('contact')}
           className={cn(
             navigationMenuTriggerStyle(),
@@ -119,6 +132,13 @@ export const Navigation = () => {
                 >
                   <ShoppingBag className="h-5 w-5" />
                   Rednote vs Tiktok
+                </button>
+                <button
+                  onClick={() => scrollToSection('starter-guide')}
+                  className="flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors"
+                >
+                  <Book className="h-5 w-5" />
+                  Starter Guide
                 </button>
                 <button
                   onClick={() => scrollToSection('contact')}
