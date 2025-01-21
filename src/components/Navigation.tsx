@@ -12,42 +12,47 @@ import { cn } from "@/lib/utils"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { Link, useNavigate, useLocation } from "react-router-dom"
+import { useState } from "react"
 
 export const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isNavigating, setIsNavigating] = useState(false);
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = async (sectionId: string) => {
+    setIsNavigating(true);
+    
     if (sectionId === 'starter-guide') {
       navigate('/starter-guide');
+      setIsNavigating(false);
       return;
     }
 
     if (location.pathname !== '/') {
       navigate('/');
       // Add a small delay to ensure the navigation completes before scrolling
-      setTimeout(() => {
-        if (sectionId === 'top') {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-          const section = document.getElementById(sectionId);
-          if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
-          }
+      await new Promise(resolve => setTimeout(resolve, 100));
+      if (sectionId === 'top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100);
+      }
+      setIsNavigating(false);
       return;
     }
 
     if (sectionId === 'top') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
+    } else {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
     }
-    
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
+    setIsNavigating(false);
   };
 
   const NavItems = () => (
@@ -57,8 +62,10 @@ export const Navigation = () => {
           onClick={() => scrollToSection('top')}
           className={cn(
             navigationMenuTriggerStyle(),
-            "flex items-center gap-2 bg-transparent hover:bg-transparent"
+            "flex items-center gap-2 bg-transparent hover:bg-transparent",
+            isNavigating && "opacity-50 pointer-events-none"
           )}
+          disabled={isNavigating}
         >
           <Home className="h-4 w-4" />
           <span>Home</span>
@@ -70,8 +77,10 @@ export const Navigation = () => {
           onClick={() => scrollToSection('what-is-xiaohongshu')}
           className={cn(
             navigationMenuTriggerStyle(),
-            "flex items-center gap-2 bg-transparent hover:bg-transparent"
+            "flex items-center gap-2 bg-transparent hover:bg-transparent",
+            isNavigating && "opacity-50 pointer-events-none"
           )}
+          disabled={isNavigating}
         >
           <Info className="h-4 w-4" />
           <span>Xiaohongshu</span>
@@ -83,8 +92,10 @@ export const Navigation = () => {
           onClick={() => scrollToSection('pricing')}
           className={cn(
             navigationMenuTriggerStyle(),
-            "flex items-center gap-2 bg-transparent hover:bg-transparent"
+            "flex items-center gap-2 bg-transparent hover:bg-transparent",
+            isNavigating && "opacity-50 pointer-events-none"
           )}
+          disabled={isNavigating}
         >
           <ShoppingBag className="h-4 w-4" />
           <span>Rednote vs Tiktok</span>
@@ -96,8 +107,10 @@ export const Navigation = () => {
           onClick={() => scrollToSection('starter-guide')}
           className={cn(
             navigationMenuTriggerStyle(),
-            "flex items-center gap-2 bg-transparent hover:bg-transparent"
+            "flex items-center gap-2 bg-transparent hover:bg-transparent",
+            isNavigating && "opacity-50 pointer-events-none"
           )}
+          disabled={isNavigating}
         >
           <Book className="h-4 w-4" />
           <span>Starter Guide</span>
@@ -109,8 +122,10 @@ export const Navigation = () => {
           onClick={() => scrollToSection('contact')}
           className={cn(
             navigationMenuTriggerStyle(),
-            "flex items-center gap-2 bg-transparent hover:bg-transparent"
+            "flex items-center gap-2 bg-transparent hover:bg-transparent",
+            isNavigating && "opacity-50 pointer-events-none"
           )}
+          disabled={isNavigating}
         >
           <Contact className="h-4 w-4" />
           <span>Contact</span>
@@ -139,35 +154,55 @@ export const Navigation = () => {
               <nav className="flex flex-col gap-4">
                 <button
                   onClick={() => scrollToSection('top')}
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors"
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors",
+                    isNavigating && "opacity-50 pointer-events-none"
+                  )}
+                  disabled={isNavigating}
                 >
                   <Home className="h-5 w-5" />
                   Home
                 </button>
                 <button
                   onClick={() => scrollToSection('what-is-xiaohongshu')}
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors"
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors",
+                    isNavigating && "opacity-50 pointer-events-none"
+                  )}
+                  disabled={isNavigating}
                 >
                   <Info className="h-5 w-5" />
                   Xiaohongshu
                 </button>
                 <button
                   onClick={() => scrollToSection('pricing')}
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors"
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors",
+                    isNavigating && "opacity-50 pointer-events-none"
+                  )}
+                  disabled={isNavigating}
                 >
                   <ShoppingBag className="h-5 w-5" />
                   Rednote vs Tiktok
                 </button>
                 <button
                   onClick={() => scrollToSection('starter-guide')}
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors"
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors",
+                    isNavigating && "opacity-50 pointer-events-none"
+                  )}
+                  disabled={isNavigating}
                 >
                   <Book className="h-5 w-5" />
                   Starter Guide
                 </button>
                 <button
                   onClick={() => scrollToSection('contact')}
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors"
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors",
+                    isNavigating && "opacity-50 pointer-events-none"
+                  )}
+                  disabled={isNavigating}
                 >
                   <Contact className="h-5 w-5" />
                   Contact
