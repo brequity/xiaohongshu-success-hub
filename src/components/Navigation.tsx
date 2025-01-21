@@ -11,14 +11,31 @@ import { Menu, Home, Info, ShoppingBag, Contact, Book } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useLocation } from "react-router-dom"
 
 export const Navigation = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const scrollToSection = (sectionId: string) => {
     if (sectionId === 'starter-guide') {
       navigate('/starter-guide');
+      return;
+    }
+
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Add a small delay to ensure the navigation completes before scrolling
+      setTimeout(() => {
+        if (sectionId === 'top') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }, 100);
       return;
     }
 
