@@ -11,9 +11,17 @@ import { Menu, Home, Info, ShoppingBag, Contact, Book } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
+import { Link, useNavigate } from "react-router-dom"
 
 export const Navigation = () => {
+  const navigate = useNavigate();
+
   const scrollToSection = (sectionId: string) => {
+    if (sectionId === 'starter-guide') {
+      navigate('/starter-guide');
+      return;
+    }
+
     if (sectionId === 'top') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
