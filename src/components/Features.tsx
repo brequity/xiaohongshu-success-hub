@@ -36,7 +36,7 @@ export const Features = () => {
           className="text-center mb-20"
           id="what-is-xiaohongshu"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-coral">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#ea384c]">
             What is Xiaohongshu?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
