@@ -19,12 +19,15 @@ const Quiz = () => {
   const [showResults, setShowResults] = useState(false);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
+        setError(null);
         console.log('Fetching questions...');
+        
         // Fetch the latest Excel file from the excel_instructions table
         const { data: fileData, error: fileError } = await supabase
           .from('excel_instructions')
@@ -34,12 +37,12 @@ const Quiz = () => {
 
         if (fileError) {
           console.error('File fetch error:', fileError);
-          throw fileError;
+          throw new Error(`Failed to fetch file: ${fileError.message}`);
         }
         
         if (!fileData || fileData.length === 0) {
           console.error('No quiz file found');
-          throw new Error('No quiz file found');
+          throw new Error('No quiz file found in the database');
         }
 
         console.log('File data:', fileData[0]);
@@ -52,12 +55,12 @@ const Quiz = () => {
 
         if (error) {
           console.error('Process excel error:', error);
-          throw error;
+          throw new Error(`Failed to process Excel file: ${error.message}`);
         }
 
-        if (!data || !data.questions) {
-          console.error('No questions in response:', data);
-          throw new Error('Failed to process quiz file');
+        if (!data || !Array.isArray(data.questions) || data.questions.length === 0) {
+          console.error('Invalid questions data:', data);
+          throw new Error('No valid questions found in the Excel file');
         }
 
         console.log('Processed questions:', data.questions);
@@ -67,10 +70,12 @@ const Quiz = () => {
           description: "Quiz questions loaded successfully!",
         });
       } catch (error) {
-        console.error('Error loading quiz:', error);
+        const errorMessage = error instanceof Error ? error.message : 'Failed to load quiz questions';
+        console.error('Error loading quiz:', errorMessage);
+        setError(errorMessage);
         toast({
           title: "Error",
-          description: "Failed to load quiz questions. Please try again later.",
+          description: errorMessage,
           variant: "destructive",
         });
       } finally {
@@ -148,6 +153,12 @@ const Quiz = () => {
                 <CardContent className="text-center py-8">
                   <Loader2 className="h-8 w-8 animate-spin mx-auto text-coral" />
                   <p className="mt-2 text-gray-600">Loading quiz questions...</p>
+                </CardContent>
+              </Card>
+            ) : error ? (
+              <Card className="border-coral/20 shadow-lg">
+                <CardContent className="text-center py-8">
+                  <p className="text-red-500">{error}</p>
                 </CardContent>
               </Card>
             ) : questions.length > 0 ? (

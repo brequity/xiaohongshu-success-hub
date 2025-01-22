@@ -14,8 +14,10 @@ serve(async (req) => {
 
   try {
     const { filePath } = await req.json()
+    console.log('Processing file:', filePath)
 
     if (!filePath) {
+      console.error('No file path provided')
       return new Response(
         JSON.stringify({ error: 'No file path provided' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
@@ -37,6 +39,8 @@ serve(async (req) => {
       throw downloadError
     }
 
+    console.log('File downloaded successfully')
+
     // Convert the downloaded file to array buffer
     const arrayBuffer = await fileData.arrayBuffer()
     
@@ -45,17 +49,34 @@ serve(async (req) => {
     const worksheet = workbook.Sheets[workbook.SheetNames[0]]
     const jsonData = XLSX.utils.sheet_to_json(worksheet)
 
+    console.log('Excel data parsed:', jsonData)
+
+    if (!Array.isArray(jsonData) || jsonData.length === 0) {
+      console.error('No data found in Excel file')
+      throw new Error('No data found in Excel file')
+    }
+
     // Process and validate the quiz data
-    const questions = jsonData.map((row: any) => ({
-      question: row.Question,
-      options: [
-        row.Option1,
-        row.Option2,
-        row.Option3,
-        row.Option4
-      ],
-      correctAnswer: parseInt(row.CorrectAnswer) - 1
-    }))
+    const questions = jsonData.map((row: any) => {
+      console.log('Processing row:', row)
+      if (!row.Question || !row.Option1 || !row.Option2 || !row.Option3 || !row.Option4 || !row.CorrectAnswer) {
+        console.error('Invalid row data:', row)
+        throw new Error('Invalid row data: missing required fields')
+      }
+      
+      return {
+        question: row.Question,
+        options: [
+          row.Option1,
+          row.Option2,
+          row.Option3,
+          row.Option4
+        ],
+        correctAnswer: parseInt(row.CorrectAnswer) - 1
+      }
+    })
+
+    console.log('Processed questions:', questions)
 
     return new Response(
       JSON.stringify({ 
