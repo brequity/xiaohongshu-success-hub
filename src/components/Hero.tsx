@@ -15,14 +15,14 @@ export const Hero = () => {
       <div 
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: "url('/lovable-uploads/d42d5b8e-4024-47c6-be55-5c639dfb6fce.png')",
+          backgroundImage: "url('/lovable-uploads/21cf5e60-5451-4e74-9b23-1523c24cf140.png')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/20" /> {/* Reduced opacity for better visibility */}
       </div>
 
       <div className="container px-4 mx-auto relative z-10">
