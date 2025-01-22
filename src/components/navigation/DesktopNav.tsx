@@ -4,7 +4,7 @@ import {
   NavigationMenuItem,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import { Home, Info, ShoppingBag, Contact, Book } from "lucide-react"
+import { Home, Info, ShoppingBag, Contact, Book, Brain } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface DesktopNavProps {
@@ -58,6 +58,21 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
           >
             <ShoppingBag className="h-4 w-4" />
             <span>Rednote vs Tiktok</span>
+          </button>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <button
+            onClick={() => scrollToSection('quiz')}
+            className={cn(
+              navigationMenuTriggerStyle(),
+              "flex items-center gap-2 bg-transparent hover:bg-transparent",
+              isNavigating && "opacity-50 pointer-events-none"
+            )}
+            disabled={isNavigating}
+          >
+            <Brain className="h-4 w-4" />
+            <span>Quiz</span>
           </button>
         </NavigationMenuItem>
 

@@ -1,6 +1,6 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { Menu, Home, Info, ShoppingBag, Contact, Book } from "lucide-react"
+import { Menu, Home, Info, ShoppingBag, Contact, Book, Brain } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface MobileNavProps {
@@ -51,6 +51,17 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
             >
               <ShoppingBag className="h-5 w-5" />
               Rednote vs Tiktok
+            </button>
+            <button
+              onClick={() => scrollToSection('quiz')}
+              className={cn(
+                "flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors",
+                isNavigating && "opacity-50 pointer-events-none"
+              )}
+              disabled={isNavigating}
+            >
+              <Brain className="h-5 w-5" />
+              Quiz
             </button>
             <button
               onClick={() => scrollToSection('starter-guide')}
