@@ -21,6 +21,13 @@ const questions: Question[] = [
     body: "Is it photos, videos, or blogs?",
     options: ["Photos", "Videos", "Blogs"],
     correctAnswer: 0, // Index of "Photos" in the options array
+  },
+  {
+    title: "Influencer Trivia",
+    hook: "Which influencer is most popular on Xiaohongshu?",
+    body: "A lifestyle, beauty, or food creator?",
+    options: ["Beauty creator", "Food creator", "Lifestyle creator"],
+    correctAnswer: 0, // Index of "Beauty creator" in the options array
   }
 ];
 
