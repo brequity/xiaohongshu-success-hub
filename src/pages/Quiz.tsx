@@ -1,12 +1,10 @@
 import { Navigation } from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { Upload, Award, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Award, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Question {
@@ -20,51 +18,54 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [isUploading, setIsUploading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        // Fetch the latest Excel file from the excel_instructions table
+        const { data: fileData, error: fileError } = await supabase
+          .from('excel_instructions')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(1);
 
-    setIsUploading(true);
-    const formData = new FormData();
-    formData.append('file', file);
-
-    try {
-      const response = await fetch('https://auwvgimsiynkfmzdbpug.supabase.co/functions/v1/process-excel', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`
+        if (fileError) throw fileError;
+        if (!fileData || fileData.length === 0) {
+          throw new Error('No quiz file found');
         }
-      });
 
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to process file');
+        const filePath = fileData[0].file_path;
+
+        // Process the Excel file using our edge function
+        const response = await supabase.functions.invoke('process-excel', {
+          body: { filePath },
+        });
+
+        if (!response.data) {
+          throw new Error('Failed to process quiz file');
+        }
+
+        setQuestions(response.data.questions);
+        toast({
+          title: "Success",
+          description: "Quiz questions loaded successfully!",
+        });
+      } catch (error) {
+        console.error('Error loading quiz:', error);
+        toast({
+          title: "Error",
+          description: "Failed to load quiz questions. Please try again later.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsLoading(false);
       }
+    };
 
-      setQuestions(data.questions);
-      setCurrentQuestion(0);
-      setScore(0);
-      setShowResults(false);
-      
-      toast({
-        title: "Success",
-        description: "Quiz questions loaded successfully!",
-      });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to process the Excel file. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsUploading(false);
-    }
-  };
+    fetchQuestions();
+  }, [toast]);
 
   const handleAnswer = (selectedOption: number) => {
     if (selectedOption === questions[currentQuestion].correctAnswer) {
@@ -115,7 +116,7 @@ const Quiz = () => {
               Xiaohongshu Quiz
             </h1>
             <p className="text-lg text-gray-100 max-w-2xl mx-auto">
-              Upload your quiz Excel file or take our default quiz
+              Test your knowledge about Xiaohongshu
             </p>
           </motion.div>
         </div>
@@ -128,29 +129,14 @@ const Quiz = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Card className="border-coral/20 shadow-lg mb-8">
-              <CardHeader>
-                <CardTitle className="text-coral text-center">Upload Quiz</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Label htmlFor="excel-upload" className="cursor-pointer">
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-coral transition-colors">
-                    <Upload className="mx-auto h-12 w-12 text-gray-400" />
-                    <p className="mt-2 text-sm text-gray-600">Upload Excel file with quiz questions</p>
-                    <Input
-                      id="excel-upload"
-                      type="file"
-                      accept=".xlsx,.xls"
-                      className="hidden"
-                      onChange={handleFileUpload}
-                      disabled={isUploading}
-                    />
-                  </div>
-                </Label>
-              </CardContent>
-            </Card>
-
-            {questions.length > 0 && (
+            {isLoading ? (
+              <Card className="border-coral/20 shadow-lg">
+                <CardContent className="text-center py-8">
+                  <Loader2 className="h-8 w-8 animate-spin mx-auto text-coral" />
+                  <p className="mt-2 text-gray-600">Loading quiz questions...</p>
+                </CardContent>
+              </Card>
+            ) : questions.length > 0 ? (
               <Card className="border-coral/20 shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-coral text-center">
@@ -158,12 +144,7 @@ const Quiz = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {isUploading ? (
-                    <div className="text-center py-8">
-                      <Loader2 className="h-8 w-8 animate-spin mx-auto text-coral" />
-                      <p className="mt-2 text-gray-600">Processing quiz file...</p>
-                    </div>
-                  ) : !showResults ? (
+                  {!showResults ? (
                     <>
                       <p className="text-lg font-medium mb-4">
                         {questions[currentQuestion].question}
@@ -200,6 +181,12 @@ const Quiz = () => {
                       </Button>
                     </div>
                   )}
+                </CardContent>
+              </Card>
+            ) : (
+              <Card className="border-coral/20 shadow-lg">
+                <CardContent className="text-center py-8">
+                  <p className="text-gray-600">No quiz questions available. Please try again later.</p>
                 </CardContent>
               </Card>
             )}
