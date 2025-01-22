@@ -2,6 +2,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { Menu, Home, Info, ShoppingBag, Contact, Book, Brain } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useNavigate } from "react-router-dom"
 
 interface MobileNavProps {
   isNavigating: boolean;
@@ -9,6 +10,12 @@ interface MobileNavProps {
 }
 
 export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => {
+  const navigate = useNavigate();
+
+  const handleQuizClick = () => {
+    navigate('/quiz');
+  };
+
   return (
     <div className="flex md:hidden justify-end p-4">
       <Sheet>
@@ -53,12 +60,8 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
               Rednote vs Tiktok
             </button>
             <button
-              onClick={() => scrollToSection('quiz')}
-              className={cn(
-                "flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors",
-                isNavigating && "opacity-50 pointer-events-none"
-              )}
-              disabled={isNavigating}
+              onClick={handleQuizClick}
+              className="flex items-center gap-2 px-4 py-2 hover:bg-accent rounded-md transition-colors"
             >
               <Brain className="h-5 w-5" />
               Quiz

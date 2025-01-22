@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Home, Info, ShoppingBag, Contact, Book, Brain } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useNavigate } from "react-router-dom"
 
 interface DesktopNavProps {
   isNavigating: boolean;
@@ -13,6 +14,12 @@ interface DesktopNavProps {
 }
 
 export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) => {
+  const navigate = useNavigate();
+
+  const handleQuizClick = () => {
+    navigate('/quiz');
+  };
+
   return (
     <NavigationMenu className="mx-auto my-2 hidden md:flex">
       <NavigationMenuList className="gap-6">
@@ -63,13 +70,11 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
 
         <NavigationMenuItem>
           <button
-            onClick={() => scrollToSection('quiz')}
+            onClick={handleQuizClick}
             className={cn(
               navigationMenuTriggerStyle(),
-              "flex items-center gap-2 bg-transparent hover:bg-transparent",
-              isNavigating && "opacity-50 pointer-events-none"
+              "flex items-center gap-2 bg-transparent hover:bg-transparent"
             )}
-            disabled={isNavigating}
           >
             <Brain className="h-4 w-4" />
             <span>Quiz</span>
