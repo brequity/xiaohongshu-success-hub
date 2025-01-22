@@ -28,6 +28,13 @@ const questions: Question[] = [
     body: "A lifestyle, beauty, or food creator?",
     options: ["Beauty creator", "Food creator", "Lifestyle creator"],
     correctAnswer: 0, // Index of "Beauty creator" in the options array
+  },
+  {
+    title: "Features Spotlight",
+    hook: "Which feature helps users shop directly?",
+    body: "Is it \"Notes,\" \"Store,\" or \"Live\"?",
+    options: ["Notes", "Store", "Live"],
+    correctAnswer: 1, // Index of "Store" in the options array
   }
 ];
 
