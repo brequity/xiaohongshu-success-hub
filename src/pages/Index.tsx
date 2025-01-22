@@ -11,7 +11,7 @@ import { VideoSection } from "@/components/VideoSection";
 
 const Index = () => {
   return (
-    <>
+    <div className="relative">
       <Navigation />
       <main className="min-h-screen">
         <Hero />
@@ -24,7 +24,7 @@ const Index = () => {
         <ContactForm />
         <ExitPopup />
       </main>
-    </>
+    </div>
   );
 };
 
