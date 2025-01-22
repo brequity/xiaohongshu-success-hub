@@ -12,22 +12,20 @@ import { VideoSection } from "@/components/VideoSection";
 
 const Index = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className="min-h-screen">
       <Navigation />
-      <Hero />
-      <Features />
-      <VideoSection />
-      <PlatformComparison />
-      <ImageCarousel />
-      <Pricing />
-      <NewsletterSubscription />
-      <ContactForm />
-      <ExitPopup />
-    </motion.div>
+      <main>
+        <Hero />
+        <Features />
+        <VideoSection />
+        <PlatformComparison />
+        <ImageCarousel />
+        <Pricing />
+        <NewsletterSubscription />
+        <ContactForm />
+        <ExitPopup />
+      </main>
+    </div>
   );
 };
 
