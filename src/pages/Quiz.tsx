@@ -3,92 +3,46 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import { Award, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
+import { Award } from "lucide-react";
 
 interface Question {
-  question: string;
+  title: string;
+  hook: string;
+  body: string;
   options: string[];
   correctAnswer: number;
 }
+
+const questions: Question[] = [
+  {
+    title: "Xiaohongshu Basics",
+    hook: "What is the main content format on Xiaohongshu?",
+    body: "Is it photos, videos, or blogs?",
+    options: ["Photos", "Videos", "Blogs"],
+    correctAnswer: 0, // Index of "Photos" in the options array
+  }
+];
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showResults, setShowResults] = useState(false);
-  const [questions, setQuestions] = useState<Question[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
-
-  useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        setError(null);
-        console.log('Fetching questions...');
-        
-        // Fetch the latest Excel file from the excel_instructions table
-        const { data: fileData, error: fileError } = await supabase
-          .from('excel_instructions')
-          .select('*')
-          .order('created_at', { ascending: false })
-          .limit(1);
-
-        if (fileError) {
-          console.error('File fetch error:', fileError);
-          throw new Error(`Failed to fetch file: ${fileError.message}`);
-        }
-        
-        if (!fileData || fileData.length === 0) {
-          console.error('No quiz file found');
-          throw new Error('No quiz file found in the database');
-        }
-
-        console.log('File data:', fileData[0]);
-        const filePath = fileData[0].file_path;
-
-        // Process the Excel file using our edge function
-        const { data, error } = await supabase.functions.invoke('process-excel', {
-          body: { filePath },
-        });
-
-        if (error) {
-          console.error('Process excel error:', error);
-          throw new Error(`Failed to process Excel file: ${error.message}`);
-        }
-
-        if (!data || !Array.isArray(data.questions) || data.questions.length === 0) {
-          console.error('Invalid questions data:', data);
-          throw new Error('No valid questions found in the Excel file');
-        }
-
-        console.log('Processed questions:', data.questions);
-        setQuestions(data.questions);
-        toast({
-          title: "Success",
-          description: "Quiz questions loaded successfully!",
-        });
-      } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : 'Failed to load quiz questions';
-        console.error('Error loading quiz:', errorMessage);
-        setError(errorMessage);
-        toast({
-          title: "Error",
-          description: errorMessage,
-          variant: "destructive",
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchQuestions();
-  }, [toast]);
 
   const handleAnswer = (selectedOption: number) => {
     if (selectedOption === questions[currentQuestion].correctAnswer) {
       setScore(score + 1);
+      toast({
+        title: "Correct!",
+        description: "Well done! That's the right answer.",
+      });
+    } else {
+      toast({
+        title: "Incorrect",
+        description: `The correct answer was: ${questions[currentQuestion].options[questions[currentQuestion].correctAnswer]}`,
+        variant: "destructive",
+      });
     }
 
     if (currentQuestion < questions.length - 1) {
@@ -148,31 +102,21 @@ const Quiz = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {isLoading ? (
-              <Card className="border-coral/20 shadow-lg">
-                <CardContent className="text-center py-8">
-                  <Loader2 className="h-8 w-8 animate-spin mx-auto text-coral" />
-                  <p className="mt-2 text-gray-600">Loading quiz questions...</p>
-                </CardContent>
-              </Card>
-            ) : error ? (
-              <Card className="border-coral/20 shadow-lg">
-                <CardContent className="text-center py-8">
-                  <p className="text-red-500">{error}</p>
-                </CardContent>
-              </Card>
-            ) : questions.length > 0 ? (
-              <Card className="border-coral/20 shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-coral text-center">
-                    {showResults ? "Quiz Results" : `Question ${currentQuestion + 1} of ${questions.length}`}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {!showResults ? (
-                    <>
-                      <p className="text-lg font-medium mb-4">
-                        {questions[currentQuestion].question}
+            <Card className="border-coral/20 shadow-lg">
+              <CardHeader>
+                <CardTitle className="text-coral text-center">
+                  {showResults ? "Quiz Results" : questions[currentQuestion].title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {!showResults ? (
+                  <>
+                    <div className="space-y-4">
+                      <p className="text-xl font-medium mb-2">
+                        {questions[currentQuestion].hook}
+                      </p>
+                      <p className="text-gray-600 mb-4">
+                        {questions[currentQuestion].body}
                       </p>
                       <div className="space-y-3">
                         {questions[currentQuestion].options.map((option, index) => (
@@ -186,35 +130,29 @@ const Quiz = () => {
                           </Button>
                         ))}
                       </div>
-                    </>
-                  ) : (
-                    <div className="text-center space-y-4">
-                      <Award className="h-16 w-16 mx-auto text-coral" />
-                      <p className="text-2xl font-bold text-coral">
-                        Your Score: {score}/{questions.length}
-                      </p>
-                      <p className="text-gray-600">
-                        {score === questions.length 
-                          ? "Perfect! You're ready to start your Xiaohongshu journey!"
-                          : "Keep learning! Check out our starter guide for more information."}
-                      </p>
-                      <Button
-                        onClick={resetQuiz}
-                        className="bg-coral hover:bg-coral/90 text-white"
-                      >
-                        Try Again
-                      </Button>
                     </div>
-                  )}
-                </CardContent>
-              </Card>
-            ) : (
-              <Card className="border-coral/20 shadow-lg">
-                <CardContent className="text-center py-8">
-                  <p className="text-gray-600">No quiz questions available. Please try again later.</p>
-                </CardContent>
-              </Card>
-            )}
+                  </>
+                ) : (
+                  <div className="text-center space-y-4">
+                    <Award className="h-16 w-16 mx-auto text-coral" />
+                    <p className="text-2xl font-bold text-coral">
+                      Your Score: {score}/{questions.length}
+                    </p>
+                    <p className="text-gray-600">
+                      {score === questions.length 
+                        ? "Perfect! You're ready to start your Xiaohongshu journey!"
+                        : "Keep learning! Check out our starter guide for more information."}
+                    </p>
+                    <Button
+                      onClick={resetQuiz}
+                      className="bg-coral hover:bg-coral/90 text-white"
+                    >
+                      Try Again
+                    </Button>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
       </main>
