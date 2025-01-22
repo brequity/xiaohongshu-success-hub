@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
 import { Pricing } from "@/components/Pricing";
@@ -12,9 +11,9 @@ import { VideoSection } from "@/components/VideoSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <>
       <Navigation />
-      <main>
+      <main className="min-h-screen">
         <Hero />
         <Features />
         <VideoSection />
@@ -25,7 +24,7 @@ const Index = () => {
         <ContactForm />
         <ExitPopup />
       </main>
-    </div>
+    </>
   );
 };
 
