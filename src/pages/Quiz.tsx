@@ -24,6 +24,7 @@ const Quiz = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
+        console.log('Fetching questions...');
         // Fetch the latest Excel file from the excel_instructions table
         const { data: fileData, error: fileError } = await supabase
           .from('excel_instructions')
@@ -31,23 +32,36 @@ const Quiz = () => {
           .order('created_at', { ascending: false })
           .limit(1);
 
-        if (fileError) throw fileError;
+        if (fileError) {
+          console.error('File fetch error:', fileError);
+          throw fileError;
+        }
+        
         if (!fileData || fileData.length === 0) {
+          console.error('No quiz file found');
           throw new Error('No quiz file found');
         }
 
+        console.log('File data:', fileData[0]);
         const filePath = fileData[0].file_path;
 
         // Process the Excel file using our edge function
-        const response = await supabase.functions.invoke('process-excel', {
+        const { data, error } = await supabase.functions.invoke('process-excel', {
           body: { filePath },
         });
 
-        if (!response.data) {
+        if (error) {
+          console.error('Process excel error:', error);
+          throw error;
+        }
+
+        if (!data || !data.questions) {
+          console.error('No questions in response:', data);
           throw new Error('Failed to process quiz file');
         }
 
-        setQuestions(response.data.questions);
+        console.log('Processed questions:', data.questions);
+        setQuestions(data.questions);
         toast({
           title: "Success",
           description: "Quiz questions loaded successfully!",
