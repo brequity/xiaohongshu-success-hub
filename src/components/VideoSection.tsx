@@ -20,7 +20,7 @@ export const VideoSection = () => {
           </h2>
           <div className="relative w-full pt-[56.25%] rounded-xl overflow-hidden shadow-lg">
             <iframe
-              src={`https://www.youtube.com/embed/1r92f7AZd0Q?autoplay=${isInView ? 1 : 0}&rel=0&modestbranding=1&disablekb=1&controls=0`}
+              src={`https://www.youtube.com/embed/349FzITX9-0?autoplay=${isInView ? 1 : 0}&rel=0&modestbranding=1&disablekb=1&controls=0`}
               className="absolute top-0 left-0 w-full h-full border-0 pointer-events-none"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
