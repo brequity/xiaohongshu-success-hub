@@ -7,9 +7,6 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
-const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
-const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -19,14 +16,19 @@ serve(async (req) => {
   try {
     console.log("Starting get-dashboard-stats function");
     
-    if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-      throw new Error("Missing environment variables");
+    // Validate environment variables
+    if (!Deno.env.get("SUPABASE_URL") || !Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")) {
+      throw new Error("Missing required environment variables");
     }
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+    // Initialize Supabase client
+    const supabaseAdmin = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+    );
 
-    // Get daily leads count for the last 30 days
-    const { data: leadsData, error: leadsError } = await supabase
+    console.log("Fetching leads data...");
+    const { data: leadsData, error: leadsError } = await supabaseAdmin
       .from('growth_strategy_leads')
       .select('created_at')
       .gte('created_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString());
@@ -36,8 +38,8 @@ serve(async (req) => {
       throw leadsError;
     }
 
-    // Get daily contact form submissions count for the last 30 days
-    const { data: contactData, error: contactError } = await supabase
+    console.log("Fetching contact form submissions...");
+    const { data: contactData, error: contactError } = await supabaseAdmin
       .from('contact_form_submissions')
       .select('created_at')
       .gte('created_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString());
@@ -47,7 +49,8 @@ serve(async (req) => {
       throw contactError;
     }
 
-    // Process data to get daily counts
+    console.log("Processing data...");
+    // Initialize daily stats map
     const dailyStats = new Map();
     const now = new Date();
     
@@ -86,20 +89,24 @@ serve(async (req) => {
       .sort((a, b) => a.date.localeCompare(b.date));
 
     console.log("Successfully processed stats data");
-
+    
     return new Response(JSON.stringify({ stats }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
   } catch (error) {
     console.error("Error in get-dashboard-stats:", error);
+    
     return new Response(
-      JSON.stringify({ 
+      JSON.stringify({
         error: error.message,
-        details: error.stack 
-      }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
-    });
+        details: error.stack,
+        timestamp: new Date().toISOString()
+      }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      }
+    );
   }
 });
