@@ -9,8 +9,7 @@ const caseStudies = [
       roi: "280%",
       duration: "8 months",
       engagement: "42% engagement rate",
-      exposure: "1.8M+ impressions",
-      followers: "80K+ new followers"
+      exposure: "1.8M+ impressions"
     }
   },
   {
@@ -21,8 +20,7 @@ const caseStudies = [
       roi: "180%",
       duration: "12 months",
       engagement: "38% engagement rate",
-      exposure: "5M+ impressions",
-      followers: "250K+ new followers"
+      exposure: "5M+ impressions"
     }
   },
   {
@@ -33,8 +31,7 @@ const caseStudies = [
       roi: "320%",
       duration: "9 months",
       engagement: "52% engagement rate",
-      exposure: "3.8M+ impressions",
-      followers: "180K+ new followers"
+      exposure: "3.8M+ impressions"
     }
   }
 ];
@@ -89,10 +86,6 @@ export const CaseStudiesSection = () => {
                   <div className="text-sm">
                     <span className="text-coral font-semibold">Exposure:</span>
                     <span className="ml-2 text-gray-700">{study.metrics.exposure}</span>
-                  </div>
-                  <div className="text-sm">
-                    <span className="text-coral font-semibold">Growth:</span>
-                    <span className="ml-2 text-gray-700">{study.metrics.followers}</span>
                   </div>
                 </div>
               </div>
