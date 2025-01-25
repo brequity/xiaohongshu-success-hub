@@ -24,13 +24,21 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
 
   const onSubmit = async (data: CreateUserForm) => {
     try {
-      const { error } = await supabase.auth.admin.createUser({
-        email: data.email,
-        password: data.password,
-        email_confirm: true,
-      });
+      const response = await fetch(
+        `${supabase.supabaseUrl}/functions/v1/create-admin-user`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${supabase.supabaseKey}`,
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
-      if (error) throw error;
+      const result = await response.json();
+      
+      if (!response.ok) throw new Error(result.error);
 
       toast({
         title: "Success",
