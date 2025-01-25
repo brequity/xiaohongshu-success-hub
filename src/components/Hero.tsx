@@ -12,16 +12,9 @@ export const Hero = () => {
   return (
     <section className="min-h-[80vh] flex items-center justify-center relative">
       <div 
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat md:bg-[75%_center]"
         style={{
           backgroundImage: "url('/lovable-uploads/9c5572d8-6103-42c0-be4c-9fc9041bbb51.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          '@media (max-width: 768px)': {
-            backgroundPosition: '75% center',
-            backgroundSize: 'cover',
-          }
         }}
       >
         <div className="absolute inset-0 bg-black/50 md:bg-black/40" />
