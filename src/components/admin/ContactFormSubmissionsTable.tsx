@@ -1,6 +1,7 @@
-import { Mail, Trash2 } from "lucide-react";
+import { Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import {
   Table,
   TableBody,
@@ -9,49 +10,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { StatusSelector } from "./contact-form/StatusSelector";
+import { SubmissionDialog } from "./contact-form/SubmissionDialog";
 import { useState } from "react";
-import { toast } from "sonner";
-
-const formatDateTime = (dateString: string) => {
-  return new Date(dateString).toLocaleString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-  });
-};
-
-type Submission = {
-  id: string;
-  name: string;
-  email: string;
-  message: string;
-  status: string;
-  created_at: string;
-};
+import { Submission } from "./types/contact-form";
 
 export const ContactFormSubmissionsTable = () => {
   const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null);
-  const [editedName, setEditedName] = useState("");
-  const [editedEmail, setEditedEmail] = useState("");
-  const [editedMessage, setEditedMessage] = useState("");
   const queryClient = useQueryClient();
 
   const { data: submissions, isLoading } = useQuery({
@@ -63,7 +28,7 @@ export const ContactFormSubmissionsTable = () => {
         .order('created_at', { ascending: false });
       
       if (error) throw error;
-      return data;
+      return data as Submission[];
     }
   });
 
@@ -98,34 +63,6 @@ export const ContactFormSubmissionsTable = () => {
     queryClient.invalidateQueries({ queryKey: ['contact-form-submissions'] });
   };
 
-  const handleEdit = async () => {
-    if (!selectedSubmission) return;
-
-    const { error } = await supabase
-      .from('contact_form_submissions')
-      .update({
-        name: editedName,
-        email: editedEmail,
-        message: editedMessage
-      })
-      .eq('id', selectedSubmission.id);
-
-    if (error) {
-      toast.error("Failed to update submission");
-      return;
-    }
-
-    toast.success("Submission updated successfully");
-    queryClient.invalidateQueries({ queryKey: ['contact-form-submissions'] });
-  };
-
-  const handleSubmissionSelect = (submission: Submission) => {
-    setSelectedSubmission(submission);
-    setEditedName(submission.name);
-    setEditedEmail(submission.email);
-    setEditedMessage(submission.message);
-  };
-
   return (
     <>
       <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
@@ -155,26 +92,31 @@ export const ContactFormSubmissionsTable = () => {
                     <TableRow 
                       key={submission.id}
                       className="cursor-pointer hover:bg-muted/50"
-                      onClick={() => handleSubmissionSelect(submission)}
+                      onClick={() => setSelectedSubmission(submission)}
                     >
                       <TableCell>{submission.name}</TableCell>
                       <TableCell>{submission.email}</TableCell>
-                      <TableCell className="max-w-md truncate">{submission.message}</TableCell>
-                      <TableCell>
-                        <Select
-                          value={submission.status}
-                          onValueChange={(value) => handleStatusChange(submission.id, value)}
-                        >
-                          <SelectTrigger className="w-[130px]" onClick={(e) => e.stopPropagation()}>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="uncontacted">Uncontacted</SelectItem>
-                            <SelectItem value="contacted">Contacted</SelectItem>
-                          </SelectContent>
-                        </Select>
+                      <TableCell className="max-w-md truncate">
+                        {submission.message}
                       </TableCell>
-                      <TableCell>{formatDateTime(submission.created_at)}</TableCell>
+                      <TableCell>
+                        <StatusSelector
+                          status={submission.status}
+                          onStatusChange={(value) => {
+                            handleStatusChange(submission.id, value);
+                          }}
+                          className="w-[130px]"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        {new Date(submission.created_at).toLocaleString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: 'numeric',
+                          minute: 'numeric',
+                        })}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -184,76 +126,14 @@ export const ContactFormSubmissionsTable = () => {
         </div>
       </div>
 
-      <Dialog open={!!selectedSubmission} onOpenChange={() => setSelectedSubmission(null)}>
-        <DialogContent className="sm:max-w-[600px]">
-          <DialogHeader>
-            <DialogTitle>Contact Form Submission Details</DialogTitle>
-          </DialogHeader>
-          {selectedSubmission && (
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-medium text-sm">Name</h3>
-                <Input 
-                  value={editedName}
-                  onChange={(e) => setEditedName(e.target.value)}
-                  className="mt-1"
-                />
-              </div>
-              <div>
-                <h3 className="font-medium text-sm">Email</h3>
-                <Input 
-                  value={editedEmail}
-                  onChange={(e) => setEditedEmail(e.target.value)}
-                  className="mt-1"
-                />
-              </div>
-              <div>
-                <h3 className="font-medium text-sm">Message</h3>
-                <Textarea 
-                  value={editedMessage}
-                  onChange={(e) => setEditedMessage(e.target.value)}
-                  className="mt-1"
-                />
-              </div>
-              <div>
-                <h3 className="font-medium text-sm">Status</h3>
-                <Select
-                  value={selectedSubmission.status}
-                  onValueChange={(value) => handleStatusChange(selectedSubmission.id, value)}
-                >
-                  <SelectTrigger className="w-[130px] mt-1">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="uncontacted">Uncontacted</SelectItem>
-                    <SelectItem value="contacted">Contacted</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <h3 className="font-medium text-sm">Submitted At</h3>
-                <p className="mt-1">{formatDateTime(selectedSubmission.created_at)}</p>
-              </div>
-              <div className="flex gap-4 pt-4">
-                <Button
-                  onClick={handleEdit}
-                  className="flex-1"
-                >
-                  Save Changes
-                </Button>
-                <Button
-                  variant="destructive"
-                  onClick={() => handleDelete(selectedSubmission.id)}
-                  className="flex-1"
-                >
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  Delete Submission
-                </Button>
-              </div>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+      <SubmissionDialog
+        submission={selectedSubmission}
+        onClose={() => setSelectedSubmission(null)}
+        onDelete={handleDelete}
+        onUpdate={() => {
+          queryClient.invalidateQueries({ queryKey: ['contact-form-submissions'] });
+        }}
+      />
     </>
   );
 };
