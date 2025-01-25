@@ -25,7 +25,7 @@ export const MarketingPlanSection = ({
   handleGetStrategy
 }: MarketingPlanSectionProps) => {
   return (
-    <section id="marketing-plan" className="py-16 bg-white">
+    <section id="marketing-plan" className="py-16 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="container mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
