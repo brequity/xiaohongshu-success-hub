@@ -226,6 +226,95 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Case Studies Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">Success Stories on Xiaohongshu</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Discover how brands are achieving remarkable success on Xiaohongshu through strategic content and community engagement
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+            >
+              <div className="relative h-48">
+                <img
+                  src="/lovable-uploads/f33e660f-6b20-402d-b4f2-b54d474cb06e.png"
+                  alt="Beauty Brand Case Study"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">International Beauty Brand</h3>
+                <p className="text-gray-600 mb-4">
+                  Achieved 300% growth in Chinese market penetration through strategic Xiaohongshu content marketing
+                </p>
+                <div className="flex items-center justify-between text-sm text-gray-500">
+                  <span>ROI: 250%</span>
+                  <span>6 months</span>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+            >
+              <div className="relative h-48">
+                <img
+                  src="/lovable-uploads/644fa23f-ba2e-44e0-a963-72111efc0fc8.png"
+                  alt="Fashion Brand Case Study"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">Fashion Retailer</h3>
+                <p className="text-gray-600 mb-4">
+                  Generated 1M+ authentic user engagements and established a loyal customer base
+                </p>
+                <div className="flex items-center justify-between text-sm text-gray-500">
+                  <span>ROI: 180%</span>
+                  <span>12 months</span>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+            >
+              <div className="relative h-48">
+                <img
+                  src="/lovable-uploads/5e81858d-ab51-48e2-a60f-f4b633728fc3.png"
+                  alt="Lifestyle Brand Case Study"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">Lifestyle Brand</h3>
+                <p className="text-gray-600 mb-4">
+                  Expanded market reach by 500% through influencer collaborations and user-generated content
+                </p>
+                <div className="flex items-center justify-between text-sm text-gray-500">
+                  <span>ROI: 320%</span>
+                  <span>9 months</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-coral to-coral-light text-white">
         <div className="container mx-auto px-4 text-center">
