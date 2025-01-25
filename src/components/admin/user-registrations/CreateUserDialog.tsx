@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface CreateUserForm {
   email: string;
@@ -19,6 +20,7 @@ interface CreateUserDialogProps {
 
 export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
   const form = useForm<CreateUserForm>({
     defaultValues: {
@@ -29,14 +31,20 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
 
   const onSubmit = async (data: CreateUserForm) => {
     try {
+      setError(null);
       const { data: functionData, error: functionError } = await supabase.functions.invoke('create-admin-user', {
         body: data
       });
 
       if (functionError) {
         const errorMessage = functionError.message;
-        const parsedError = JSON.parse(functionError.message);
-        throw new Error(parsedError.error || errorMessage);
+        let parsedError;
+        try {
+          parsedError = JSON.parse(errorMessage);
+          throw new Error(parsedError.error);
+        } catch (e) {
+          throw new Error(errorMessage);
+        }
       }
 
       toast({
@@ -48,6 +56,7 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
       setOpen(false);
       onUserCreated();
     } catch (error: any) {
+      setError(error.message);
       toast({
         title: "Error",
         description: error.message || "Failed to create user",
@@ -68,6 +77,11 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
         <DialogHeader>
           <DialogTitle>Create New User</DialogTitle>
         </DialogHeader>
+        {error && (
+          <Alert variant="destructive">
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
