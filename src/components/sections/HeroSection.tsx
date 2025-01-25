@@ -18,8 +18,7 @@ export const HeroSection = ({ scrollToMarketingPlan }: { scrollToMarketingPlan: 
   };
 
   return (
-    <section className="pt-32 pb-20 relative overflow-hidden">
-      {/* Background Image */}
+    <section className="pt-20 md:pt-32 pb-16 md:pb-20 relative overflow-hidden">
       <div 
         className="absolute inset-0 z-0"
         style={{
@@ -27,10 +26,13 @@ export const HeroSection = ({ scrollToMarketingPlan }: { scrollToMarketingPlan: 
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
+          '@media (max-width: 768px)': {
+            backgroundPosition: '75% center',
+            backgroundSize: 'cover',
+          }
         }}
       >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/50 md:bg-black/40" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -40,13 +42,13 @@ export const HeroSection = ({ scrollToMarketingPlan }: { scrollToMarketingPlan: 
           transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto text-center"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
             Grow Your Business on Xiaohongshu
           </h1>
-          <p className="text-xl text-gray-100 mb-8">
+          <p className="text-base md:text-xl text-gray-100 mb-8">
             Tap into China's most influential social commerce platform. Our expert team will help you create a winning strategy to reach millions of potential customers and drive real business results.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 md:mb-16">
             <Button 
               size="lg" 
               className="bg-coral hover:bg-coral-light"
@@ -66,8 +68,7 @@ export const HeroSection = ({ scrollToMarketingPlan }: { scrollToMarketingPlan: 
           </div>
         </motion.div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
@@ -76,8 +77,8 @@ export const HeroSection = ({ scrollToMarketingPlan }: { scrollToMarketingPlan: 
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="text-center"
             >
-              <h3 className="text-4xl font-bold text-white mb-2">{stat.number}</h3>
-              <p className="text-gray-200">{stat.label}</p>
+              <h3 className="text-2xl md:text-4xl font-bold text-white mb-2">{stat.number}</h3>
+              <p className="text-sm md:text-base text-gray-200">{stat.label}</p>
             </motion.div>
           ))}
         </div>

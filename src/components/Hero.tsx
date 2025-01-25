@@ -18,9 +18,13 @@ export const Hero = () => {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
+          '@media (max-width: 768px)': {
+            backgroundPosition: '75% center',
+            backgroundSize: 'cover',
+          }
         }}
       >
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/50 md:bg-black/40" />
       </div>
 
       <div className="container px-4 mx-auto relative z-10">
@@ -33,10 +37,10 @@ export const Hero = () => {
           <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-coral/90 text-white rounded-full">
             Understanding Xiaohongshu (RED)
           </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
             Your Gateway to China's Leading Lifestyle Platform
           </h1>
-          <p className="text-lg md:text-xl text-gray-100 mb-8">
+          <p className="text-base md:text-xl text-gray-100 mb-8">
             Xiaohongshu is more than just a social media platform; it's a lifestyle and e-commerce hub where over 200 million young, affluent Chinese users share their experiences in fashion, beauty, and travel.
           </p>
           <Button 
