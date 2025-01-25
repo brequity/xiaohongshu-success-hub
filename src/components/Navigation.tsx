@@ -46,9 +46,11 @@ export const Navigation = () => {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b">
-      <div className="container mx-auto">
+      <div className="container mx-auto relative">
         <DesktopNav isNavigating={isNavigating} scrollToSection={scrollToSection} />
-        <MobileNav isNavigating={isNavigating} scrollToSection={scrollToSection} />
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 md:hidden">
+          <MobileNav isNavigating={isNavigating} scrollToSection={scrollToSection} />
+        </div>
       </div>
     </div>
   );

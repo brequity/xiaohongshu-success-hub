@@ -28,7 +28,6 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          className="md:hidden"
           size="icon"
         >
           <Menu className="h-5 w-5" />
