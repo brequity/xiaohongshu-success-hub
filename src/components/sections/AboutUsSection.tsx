@@ -24,7 +24,7 @@ export const AboutUsSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#ea384c]">About Us</h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -64,12 +64,12 @@ export const AboutUsSection = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="space-y-6 md:col-span-2"
+            className="space-y-6"
           >
-            <div className="flex items-start gap-4 max-w-2xl mx-auto">
+            <div className="flex items-start gap-4">
               <div className="w-12 h-12 bg-coral/10 rounded-xl flex items-center justify-center text-coral shrink-0 mt-1">
                 <Users className="w-6 h-6" />
               </div>
