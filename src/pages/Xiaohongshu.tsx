@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
 
 const stats = [
   { number: "600M+", label: "Monthly Active Users" },
@@ -43,6 +44,12 @@ const benefits = [
 
 const Xiaohongshu = () => {
   const navigate = useNavigate();
+  const [marketingObjective, setMarketingObjective] = useState("");
+  const [budget, setBudget] = useState("");
+
+  const handleGetStrategy = () => {
+    navigate(`/growth-strategy?objective=${encodeURIComponent(marketingObjective)}&budget=${encodeURIComponent(budget)}`);
+  };
 
   const scrollToMarketingPlan = () => {
     const marketingPlanSection = document.getElementById('marketing-plan');
@@ -139,7 +146,7 @@ const Xiaohongshu = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Marketing Objectives
                   </label>
-                  <Select>
+                  <Select onValueChange={setMarketingObjective} value={marketingObjective}>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select your business objectives" />
                     </SelectTrigger>
@@ -157,7 +164,7 @@ const Xiaohongshu = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Monthly Marketing Investment
                   </label>
-                  <Select>
+                  <Select onValueChange={setBudget} value={budget}>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select your investment range" />
                     </SelectTrigger>
@@ -173,7 +180,8 @@ const Xiaohongshu = () => {
                 <Button 
                   size="lg" 
                   className="w-full bg-coral hover:bg-coral-light"
-                  onClick={() => navigate('/growth-strategy')}
+                  onClick={handleGetStrategy}
+                  disabled={!marketingObjective || !budget}
                 >
                   Get Your Growth Strategy
                   <ArrowRight className="ml-2 w-4 h-4" />

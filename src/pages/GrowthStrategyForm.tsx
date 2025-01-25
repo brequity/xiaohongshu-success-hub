@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,14 +10,23 @@ import { supabase } from "@/integrations/supabase/client";
 
 const GrowthStrategyForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  
+  // Get URL parameters
+  const searchParams = new URLSearchParams(location.search);
+  const objective = searchParams.get('objective') || '';
+  const budget = searchParams.get('budget') || '';
+
   const [formData, setFormData] = useState({
     email: "",
     companyName: "",
     contactNumber: "",
-    information: ""
+    information: "",
+    marketingObjective: objective,
+    budget: budget
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,7 +40,7 @@ const GrowthStrategyForm = () => {
           email: formData.email,
           company_name: formData.companyName,
           contact_number: formData.contactNumber,
-          information: formData.information
+          information: `Marketing Objective: ${formData.marketingObjective}\nBudget Range: ${formData.budget}\nAdditional Information: ${formData.information}`
         }]);
 
       if (error) throw error;
