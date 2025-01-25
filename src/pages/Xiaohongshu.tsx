@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, TrendingUp, Users, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2, TrendingUp, Users, Zap, Building, Network, ChartBar, Megaphone } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { useNavigate } from "react-router-dom";
 import {
@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
+import { ServicesSection } from "@/components/sections/ServicesSection";
 
 const stats = [
   { number: "600M+", label: "Monthly Active Users" },
@@ -241,6 +242,9 @@ const Xiaohongshu = () => {
           </Button>
         </div>
       </section>
+
+      {/* Services Section */}
+      <ServicesSection />
     </div>
   );
 };
