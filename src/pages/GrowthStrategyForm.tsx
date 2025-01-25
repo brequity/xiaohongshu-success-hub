@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -12,6 +12,7 @@ const GrowthStrategyForm = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     companyName: "",
@@ -40,7 +41,7 @@ const GrowthStrategyForm = () => {
         description: "Our team will contact you within 24 hours with your customized growth strategy.",
       });
 
-      navigate('/xiaohongshu');
+      setIsSubmitted(true);
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
@@ -59,6 +60,40 @@ const GrowthStrategyForm = () => {
       [e.target.name]: e.target.value
     }));
   };
+
+  if (isSubmitted) {
+    return (
+      <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mx-auto">
+          <button
+            onClick={() => navigate('/xiaohongshu')}
+            className="flex items-center text-gray-600 hover:text-gray-900 mb-8"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Xiaohongshu
+          </button>
+
+          <div className="bg-white p-8 rounded-xl shadow-lg text-center">
+            <div className="mb-6 flex justify-center">
+              <CheckCircle2 className="w-16 h-16 text-jade" />
+            </div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+              Thank You for Your Request!
+            </h1>
+            <p className="text-gray-600 mb-8">
+              Our team will review your information and contact you within 24 hours with your customized growth strategy. We're excited to help you grow your business on Xiaohongshu!
+            </p>
+            <Button
+              onClick={() => navigate('/xiaohongshu')}
+              className="bg-coral hover:bg-coral-light"
+            >
+              Return to Homepage
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
