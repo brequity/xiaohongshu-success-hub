@@ -1,4 +1,5 @@
-import { Users } from "lucide-react";
+import { useState } from "react";
+import { Users, Pencil } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -9,6 +10,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { UserDialog } from "./user-registrations/UserDialog";
 
 const formatDateTime = (dateString: string) => {
   return new Date(dateString).toLocaleString('en-US', {
@@ -21,7 +24,10 @@ const formatDateTime = (dateString: string) => {
 };
 
 export const UserRegistrationsTable = () => {
-  const { data: users, isLoading: isUsersLoading } = useQuery({
+  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const { data: users, isLoading: isUsersLoading, refetch } = useQuery({
     queryKey: ['user-registrations'],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -33,6 +39,11 @@ export const UserRegistrationsTable = () => {
       return data;
     }
   });
+
+  const handleEditClick = (user: any) => {
+    setSelectedUser(user);
+    setDialogOpen(true);
+  };
 
   return (
     <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
@@ -53,6 +64,7 @@ export const UserRegistrationsTable = () => {
                   <TableHead>Email</TableHead>
                   <TableHead>Created At</TableHead>
                   <TableHead>Last Updated</TableHead>
+                  <TableHead>Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -61,6 +73,15 @@ export const UserRegistrationsTable = () => {
                     <TableCell>{user.email || '-'}</TableCell>
                     <TableCell>{formatDateTime(user.created_at)}</TableCell>
                     <TableCell>{formatDateTime(user.updated_at)}</TableCell>
+                    <TableCell>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleEditClick(user)}
+                      >
+                        <Pencil className="h-4 w-4" />
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -68,6 +89,15 @@ export const UserRegistrationsTable = () => {
           </div>
         )}
       </div>
+      <UserDialog
+        user={selectedUser}
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        onUserUpdated={() => {
+          refetch();
+          setDialogOpen(false);
+        }}
+      />
     </div>
   );
 };
