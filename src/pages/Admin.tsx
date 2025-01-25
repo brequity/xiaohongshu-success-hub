@@ -4,6 +4,7 @@ import { Shield } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { UserRegistrationsTable } from "@/components/admin/UserRegistrationsTable";
 import { GrowthStrategyLeadsTable } from "@/components/admin/GrowthStrategyLeadsTable";
+import { ContactFormSubmissionsTable } from "@/components/admin/ContactFormSubmissionsTable";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ const Admin = () => {
       </div>
       
       <div className="space-y-8">
+        <ContactFormSubmissionsTable />
         <UserRegistrationsTable />
         <GrowthStrategyLeadsTable />
       </div>
