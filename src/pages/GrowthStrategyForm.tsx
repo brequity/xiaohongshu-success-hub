@@ -34,7 +34,8 @@ const GrowthStrategyForm = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      // First, save to database
+      const { error: dbError } = await supabase
         .from('growth_strategy_leads')
         .insert([{
           email: formData.email,
@@ -43,7 +44,17 @@ const GrowthStrategyForm = () => {
           information: `Marketing Objective: ${formData.marketingObjective}\nBudget Range: ${formData.budget}\nAdditional Information: ${formData.information}`
         }]);
 
-      if (error) throw error;
+      if (dbError) throw dbError;
+
+      // Then, send email notification
+      const { error: emailError } = await supabase.functions.invoke('send-growth-strategy-email', {
+        body: formData
+      });
+
+      if (emailError) {
+        console.error("Error sending email:", emailError);
+        // Don't throw here, as we still want to show success if the data was saved
+      }
 
       toast({
         title: "Request submitted successfully!",
