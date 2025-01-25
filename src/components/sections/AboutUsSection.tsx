@@ -21,7 +21,7 @@ export const AboutUsSection = () => {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">About Us</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#ea384c]">About Us</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
