@@ -11,32 +11,32 @@ import {
 } from "@/components/ui/select";
 
 const stats = [
-  { number: "600M+", label: "Active Users" },
-  { number: "200M+", label: "Daily Posts" },
-  { number: "50B+", label: "Monthly Views" },
-  { number: "#1", label: "Lifestyle Platform in China" },
+  { number: "600M+", label: "Monthly Active Users" },
+  { number: "70%", label: "Users with High Purchasing Power" },
+  { number: "80%", label: "Brand Conversion Rate" },
+  { number: "#1", label: "Social Commerce Platform" },
 ];
 
 const benefits = [
   {
     icon: <TrendingUp className="w-6 h-6" />,
-    title: "Rapid Growth Platform",
-    description: "Tap into China's fastest-growing social commerce platform with over 600 million active users"
+    title: "Market Penetration",
+    description: "Access China's most influential social commerce platform with over 600 million active consumers ready to discover your brand"
   },
   {
     icon: <Users className="w-6 h-6" />,
-    title: "Targeted Audience",
-    description: "Connect with young, urban Chinese consumers who are actively seeking lifestyle and product recommendations"
+    title: "Premium Audience",
+    description: "Connect with affluent Chinese consumers who have high purchasing power and actively seek product recommendations"
   },
   {
     icon: <Zap className="w-6 h-6" />,
-    title: "High Engagement",
-    description: "Benefit from Xiaohongshu's highly engaged community with authentic user-generated content"
+    title: "High ROI",
+    description: "Benefit from Xiaohongshu's exceptional conversion rates and proven track record in driving sales"
   },
   {
     icon: <CheckCircle2 className="w-6 h-6" />,
-    title: "Proven Results",
-    description: "Join thousands of successful creators and brands who have built their presence on Xiaohongshu"
+    title: "Expert Support",
+    description: "Get comprehensive support from our team to develop and execute your Xiaohongshu marketing strategy"
   }
 ];
 
@@ -69,18 +69,18 @@ const Xiaohongshu = () => {
             className="max-w-4xl mx-auto text-center"
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
-              Master Xiaohongshu Marketing
+              Grow Your Business on Xiaohongshu
             </h1>
             <p className="text-xl text-gray-100 mb-8">
-              Transform your brand's presence on China's most influential lifestyle platform. Get started with our comprehensive guide and expert strategies.
+              Tap into China's most influential social commerce platform. Our expert team will help you create a winning strategy to reach millions of potential customers and drive real business results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Button size="lg" className="bg-coral hover:bg-coral-light">
-                Get Started Now
+                Start Your Growth Strategy
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
               <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white">
-                Watch Demo
+                View Success Stories
               </Button>
             </div>
           </motion.div>
@@ -113,9 +113,9 @@ const Xiaohongshu = () => {
             className="max-w-3xl mx-auto"
           >
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Get Your Free Quote Today</h2>
+              <h2 className="text-3xl font-bold mb-4">Get Your Custom Marketing Plan</h2>
               <p className="text-gray-600">
-                Select your monthly marketing budget to receive a customized Xiaohongshu strategy proposal
+                Select your marketing budget to receive a tailored strategy that maximizes your ROI on Xiaohongshu
               </p>
             </div>
 
@@ -123,11 +123,11 @@ const Xiaohongshu = () => {
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Monthly Marketing Budget
+                    Monthly Marketing Investment
                   </label>
                   <Select>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select your budget range" />
+                      <SelectValue placeholder="Select your investment range" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="2000-5000">¥2,000 - ¥5,000</SelectItem>
@@ -143,12 +143,12 @@ const Xiaohongshu = () => {
                   size="lg" 
                   className="w-full bg-coral hover:bg-coral-light"
                 >
-                  Get Your Free Quote
+                  Get Your Growth Strategy
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
 
                 <p className="text-sm text-gray-500 text-center">
-                  * We'll get back to you within 24 hours with a customized proposal
+                  * Our business strategists will contact you within 24 hours with your customized plan
                 </p>
               </div>
             </div>
@@ -160,9 +160,9 @@ const Xiaohongshu = () => {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Why Choose Xiaohongshu?</h2>
+            <h2 className="text-3xl font-bold mb-4">Why Choose Xiaohongshu for Your Business?</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Discover why leading brands and creators are choosing Xiaohongshu as their primary platform for reaching Chinese consumers
+              Join successful brands that are leveraging Xiaohongshu's unique ecosystem to drive significant business growth in China
             </p>
           </div>
 
@@ -190,13 +190,13 @@ const Xiaohongshu = () => {
       <section className="py-20 bg-gradient-to-br from-coral to-coral-light text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Grow Your Presence on Xiaohongshu?
+            Ready to Expand Your Business in China?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Join thousands of successful creators and brands. Get started today!
+            Join successful brands generating significant ROI on Xiaohongshu. Let's create your success story.
           </p>
           <Button size="lg" variant="secondary" className="bg-white text-coral hover:bg-gray-100">
-            Start Your Journey
+            Start Your Growth Journey
             <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
         </div>
