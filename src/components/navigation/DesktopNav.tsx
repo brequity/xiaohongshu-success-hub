@@ -12,6 +12,13 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
       <div className="flex items-center space-x-4">
         <Button 
           variant="ghost"
+          onClick={() => scrollToSection('top')}
+          disabled={isNavigating}
+        >
+          Home
+        </Button>
+        <Button 
+          variant="ghost"
           onClick={() => scrollToSection('starter-guide')}
           disabled={isNavigating}
         >

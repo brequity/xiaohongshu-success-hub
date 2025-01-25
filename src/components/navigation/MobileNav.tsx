@@ -34,6 +34,14 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
           <Button 
             variant="ghost" 
             className="w-full justify-start"
+            onClick={() => scrollToSection('top')}
+            disabled={isNavigating}
+          >
+            Home
+          </Button>
+          <Button 
+            variant="ghost" 
+            className="w-full justify-start"
             onClick={() => scrollToSection('starter-guide')}
             disabled={isNavigating}
           >
