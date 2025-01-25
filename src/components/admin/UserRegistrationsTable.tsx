@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { UserDialog } from "./user-registrations/UserDialog";
 import { CreateUserDialog } from "./user-registrations/CreateUserDialog";
 
@@ -33,10 +34,18 @@ export const UserRegistrationsTable = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('profiles')
-        .select('*')
+        .select(`
+          *,
+          user_roles (
+            role
+          )
+        `)
         .order('created_at', { ascending: false });
       
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching users:', error);
+        throw error;
+      }
       return data;
     }
   });
@@ -44,6 +53,17 @@ export const UserRegistrationsTable = () => {
   const handleEditClick = (user: any) => {
     setSelectedUser(user);
     setDialogOpen(true);
+  };
+
+  const getRoleColor = (role: string | undefined) => {
+    switch (role) {
+      case 'admin':
+        return 'destructive';
+      case 'user':
+        return 'secondary';
+      default:
+        return 'default';
+    }
   };
 
   return (
@@ -66,6 +86,7 @@ export const UserRegistrationsTable = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead>Email</TableHead>
+                  <TableHead>Role</TableHead>
                   <TableHead>Created At</TableHead>
                   <TableHead>Last Updated</TableHead>
                   <TableHead>Actions</TableHead>
@@ -75,6 +96,11 @@ export const UserRegistrationsTable = () => {
                 {users.map((user) => (
                   <TableRow key={user.id}>
                     <TableCell>{user.email || '-'}</TableCell>
+                    <TableCell>
+                      <Badge variant={getRoleColor(user.user_roles?.[0]?.role)}>
+                        {user.user_roles?.[0]?.role || 'user'}
+                      </Badge>
+                    </TableCell>
                     <TableCell>{formatDateTime(user.created_at)}</TableCell>
                     <TableCell>{formatDateTime(user.updated_at)}</TableCell>
                     <TableCell>
