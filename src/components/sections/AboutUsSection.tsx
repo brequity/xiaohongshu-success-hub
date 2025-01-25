@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Globe2, Lightbulb } from "lucide-react";
+import { Globe2, Lightbulb, Users } from "lucide-react";
 
 export const AboutUsSection = () => {
   const offices = [
@@ -58,6 +58,25 @@ export const AboutUsSection = () => {
                 <h3 className="text-xl font-semibold mb-3">Global Presence</h3>
                 <p className="text-gray-600 leading-relaxed">
                   With offices in {offices.slice(0, -1).join(", ")}, and {offices[offices.length - 1]}, we offer a global perspective with localized service. Our team is committed to helping brands increase visibility, drive sales, and build community on Xiaohongshu, leveraging innovation to deliver results across diverse markets and cultures.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="space-y-6 md:col-span-2"
+          >
+            <div className="flex items-start gap-4 max-w-2xl mx-auto">
+              <div className="w-12 h-12 bg-coral/10 rounded-xl flex items-center justify-center text-coral shrink-0 mt-1">
+                <Users className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-3">Partnership Philosophy</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Whether you're looking to increase brand visibility, drive sales, or build community, our business philosophy is that every client is our partner in navigating the vibrant world of Xiaohongshu with innovation, insight, and impact. We are successful only when you are.
                 </p>
               </div>
             </div>
