@@ -66,13 +66,13 @@ const AdminLogin = () => {
 
       console.log("Successfully signed in, checking admin role for user:", signInData.user.id);
 
-      // Check if user has admin role
-      const { data: roles, error: rolesError } = await supabase
+      // Check if user has admin role using maybeSingle() instead of single()
+      const { data: role, error: rolesError } = await supabase
         .from("user_roles")
         .select("role")
         .eq("user_id", signInData.user.id)
         .eq("role", "admin")
-        .single();
+        .maybeSingle();
 
       if (rolesError) {
         console.error("Error checking admin role:", rolesError);
@@ -80,7 +80,7 @@ const AdminLogin = () => {
         throw new Error("Error verifying admin privileges");
       }
 
-      if (!roles) {
+      if (!role) {
         console.error("No admin role found");
         await supabase.auth.signOut();
         throw new Error("Access denied - Admin privileges required");
