@@ -9,7 +9,7 @@ export const Hero = () => {
         <img
           src="/lovable-uploads/cfa0847e-9f5c-4e97-87bb-371204052bad.png"
           alt="Xiaohongshu content creator using phone"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover absolute inset-0"
           loading="eager"
           fetchPriority="high"
         />
