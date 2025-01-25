@@ -2,6 +2,13 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2, TrendingUp, Users, Zap } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const stats = [
   { number: "600M+", label: "Active Users" },
@@ -93,6 +100,59 @@ const Xiaohongshu = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Get a Quote Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mx-auto"
+          >
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-4">Get Your Free Quote Today</h2>
+              <p className="text-gray-600">
+                Select your monthly marketing budget to receive a customized Xiaohongshu strategy proposal
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Monthly Marketing Budget
+                  </label>
+                  <Select>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select your budget range" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="2000-5000">¥2,000 - ¥5,000</SelectItem>
+                      <SelectItem value="5000-10000">¥5,000 - ¥10,000</SelectItem>
+                      <SelectItem value="10000-20000">¥10,000 - ¥20,000</SelectItem>
+                      <SelectItem value="20000-50000">¥20,000 - ¥50,000</SelectItem>
+                      <SelectItem value="50000+">¥50,000+</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <Button 
+                  size="lg" 
+                  className="w-full bg-coral hover:bg-coral-light"
+                >
+                  Get Your Free Quote
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+
+                <p className="text-sm text-gray-500 text-center">
+                  * We'll get back to you within 24 hours with a customized proposal
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
