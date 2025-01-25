@@ -7,6 +7,7 @@ import { SuccessStoriesSection } from "@/components/sections/SuccessStoriesSecti
 import { EbookPreview } from "@/components/EbookPreview";
 import { XiaohongshuFeaturesSection } from "@/components/sections/XiaohongshuFeaturesSection";
 import { WhyMarketSection } from "@/components/sections/WhyMarketSection";
+import { KeyFeaturesForBrandsSection } from "@/components/sections/KeyFeaturesForBrandsSection";
 
 const Xiaohongshu = () => {
   return (
@@ -15,6 +16,7 @@ const Xiaohongshu = () => {
       <Hero />
       <Features />
       <WhyMarketSection />
+      <KeyFeaturesForBrandsSection />
       <XiaohongshuFeaturesSection />
       <SuccessStoriesSection />
       <EbookPreview />
