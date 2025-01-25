@@ -31,6 +31,14 @@ export const EbookPreview = () => {
               <p>
                 Learn proven strategies, understand the platform's unique features, and discover how to create content that resonates with the Xiaohongshu community.
               </p>
+              <a
+                href="https://www.amazon.com/Rednote-Advantage-Definitive-Playbook-Xiahongshu-ebook/dp/B0DTQCPBPY"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-4 px-6 py-3 bg-coral text-white rounded-lg hover:bg-coral/90 transition-colors duration-200"
+              >
+                Get the Ebook on Amazon
+              </a>
             </div>
           </div>
         </div>
