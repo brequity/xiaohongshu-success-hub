@@ -127,7 +127,7 @@ const Xiaohongshu = () => {
                   </label>
                   <Select>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select your primary objective" />
+                      <SelectValue placeholder="Select your business objectives" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="brand-awareness">Build Brand Awareness</SelectItem>
