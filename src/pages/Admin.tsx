@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Shield, Users, FileSpreadsheet } from "lucide-react";
+import { Shield, FileSpreadsheet } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { Navigation } from "@/components/Navigation";
 import {
   Table,
   TableBody,
@@ -54,8 +53,7 @@ const Admin = () => {
   });
 
   return (
-    <div>
-      <Navigation />
+    <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center gap-4 mb-8">
           <Shield className="h-8 w-8 text-primary" />
