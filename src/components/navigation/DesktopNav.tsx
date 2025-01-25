@@ -23,6 +23,10 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleXiaohongshuClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="hidden md:flex items-center justify-between h-16">
       <div className="flex items-center space-x-4">
@@ -56,7 +60,7 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <Link to="/xiaohongshu">
+        <Link to="/xiaohongshu" onClick={handleXiaohongshuClick}>
           <Button variant="ghost" className="flex items-center gap-2">
             <BookOpen className="h-4 w-4" />
             Xiaohongshu

@@ -23,6 +23,10 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleXiaohongshuClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -64,7 +68,7 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
               RedNote vs TikTok
             </Button>
           </div>
-          <Link to="/xiaohongshu">
+          <Link to="/xiaohongshu" onClick={handleXiaohongshuClick}>
             <Button variant="ghost" className="w-full justify-start gap-2">
               <BookOpen className="h-4 w-4" />
               Xiaohongshu
