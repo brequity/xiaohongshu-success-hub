@@ -2,15 +2,15 @@ import { motion } from "framer-motion";
 
 const caseStudies = [
   {
-    image: "/lovable-uploads/f33e660f-6b20-402d-b4f2-b54d474cb06e.png",
-    title: "International Beauty Brand",
-    description: "Achieved 300% growth in Chinese market penetration through strategic Xiaohongshu content marketing",
+    image: "/lovable-uploads/c049559b-d34a-4e88-9e7a-baea7489e9b0.png",
+    title: "Singapore Aesthetic Clinic",
+    description: "Transformed digital presence and client acquisition through strategic Xiaohongshu content marketing",
     metrics: {
-      roi: "250%",
-      duration: "6 months",
-      engagement: "45% engagement rate",
-      exposure: "2.5M+ impressions",
-      followers: "100K+ new followers"
+      roi: "280%",
+      duration: "8 months",
+      engagement: "42% engagement rate",
+      exposure: "1.8M+ impressions",
+      followers: "80K+ new followers"
     }
   },
   {
