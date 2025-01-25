@@ -31,6 +31,11 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
           <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col gap-4 mt-4">
+          <Link to="/">
+            <Button variant="ghost" className="w-full justify-start">
+              Home
+            </Button>
+          </Link>
           <div className="space-y-3">
             <Link to="/academy">
               <Button 
