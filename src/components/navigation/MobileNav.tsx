@@ -32,14 +32,14 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
         </SheetHeader>
         <div className="flex flex-col gap-4 mt-4">
           <div className="space-y-3">
-            <Button 
-              variant="ghost" 
-              className="w-full justify-start"
-              onClick={() => scrollToSection('top')}
-              disabled={isNavigating}
-            >
-              Academy
-            </Button>
+            <Link to="/academy">
+              <Button 
+                variant="ghost" 
+                className="w-full justify-start"
+              >
+                Academy
+              </Button>
+            </Link>
             <Button 
               variant="ghost" 
               className="w-full justify-start pl-8 text-sm"
