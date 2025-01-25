@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { TrendingUp, Users, Zap, CheckCircle2 } from "lucide-react";
+import { CheckCircle2, TrendingUp, Users, Zap } from "lucide-react";
 
 const benefits = [
   {
