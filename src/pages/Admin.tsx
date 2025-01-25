@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { UserRegistrationsTable } from "@/components/admin/UserRegistrationsTable";
 import { GrowthStrategyLeadsTable } from "@/components/admin/GrowthStrategyLeadsTable";
 import { ContactFormSubmissionsTable } from "@/components/admin/ContactFormSubmissionsTable";
+import { DashboardStats } from "@/components/admin/DashboardStats";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const Admin = () => {
       </div>
       
       <div className="space-y-8">
+        <DashboardStats />
         <ContactFormSubmissionsTable />
         <UserRegistrationsTable />
         <GrowthStrategyLeadsTable />
