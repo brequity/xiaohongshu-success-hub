@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const PlatformComparison = () => {
+export const PlatformComparison = () => {
   const comparisons = [
     {
       feature: "Primary Content Type",
@@ -50,7 +50,6 @@ const PlatformComparison = () => {
         </p>
       </div>
 
-      {/* Platform Logos - Moved above the table */}
       <div className="flex justify-center gap-20 mb-8">
         <div className="text-center">
           <img 
@@ -93,5 +92,3 @@ const PlatformComparison = () => {
     </div>
   );
 };
-
-export default PlatformComparison;
