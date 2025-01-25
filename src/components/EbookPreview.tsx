@@ -9,7 +9,7 @@ export const EbookPreview = () => {
         transition={{ duration: 0.5 }}
         className="text-center mb-12"
       >
-        <h2 className="text-3xl font-bold text-[#1A1F2C] mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1A1F2C]">
           Not Ready to Embark on Our Services?
         </h2>
         <p className="text-xl text-gray-600">
