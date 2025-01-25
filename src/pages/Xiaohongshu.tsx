@@ -130,11 +130,10 @@ const Xiaohongshu = () => {
                       <SelectValue placeholder="Select your investment range" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="2000-5000">¥2,000 - ¥5,000</SelectItem>
-                      <SelectItem value="5000-10000">¥5,000 - ¥10,000</SelectItem>
-                      <SelectItem value="10000-20000">¥10,000 - ¥20,000</SelectItem>
-                      <SelectItem value="20000-50000">¥20,000 - ¥50,000</SelectItem>
-                      <SelectItem value="50000+">¥50,000+</SelectItem>
+                      <SelectItem value="500-1000">$500 - $1,000</SelectItem>
+                      <SelectItem value="1000-2000">$1,000 - $2,000</SelectItem>
+                      <SelectItem value="2001-5000">$2,001 - $5,000</SelectItem>
+                      <SelectItem value="5000+">$5,000+</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
