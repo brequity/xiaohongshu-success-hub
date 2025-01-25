@@ -6,6 +6,7 @@ import { CTASection } from "@/components/sections/CTASection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { SuccessStoriesSection } from "@/components/sections/SuccessStoriesSection";
 import { EbookPreview } from "@/components/EbookPreview";
+import { XiaohongshuFeaturesSection } from "@/components/sections/XiaohongshuFeaturesSection";
 
 const Xiaohongshu = () => {
   return (
@@ -13,6 +14,7 @@ const Xiaohongshu = () => {
       <Navigation />
       <Hero />
       <Features />
+      <XiaohongshuFeaturesSection />
       <BenefitsSection />
       <SuccessStoriesSection />
       <EbookPreview />
