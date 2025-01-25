@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { LeadDialog } from "./growth-strategy/LeadDialog";
+import { StatusSelector } from "./contact-form/StatusSelector";
 
 const formatDateTime = (dateString: string) => {
   return new Date(dateString).toLocaleString('en-US', {
@@ -45,6 +46,20 @@ export const GrowthStrategyLeadsTable = () => {
     setDialogOpen(true);
   };
 
+  const handleStatusChange = async (leadId: string, newStatus: string) => {
+    try {
+      const { error } = await supabase
+        .from('growth_strategy_leads')
+        .update({ status: newStatus })
+        .eq('id', leadId);
+
+      if (error) throw error;
+      refetch();
+    } catch (error) {
+      console.error('Error updating lead status:', error);
+    }
+  };
+
   return (
     <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
       <div className="flex items-center gap-2 p-6 border-b">
@@ -66,6 +81,7 @@ export const GrowthStrategyLeadsTable = () => {
                   <TableHead>Contact Number</TableHead>
                   <TableHead>Created At</TableHead>
                   <TableHead>Information</TableHead>
+                  <TableHead>Status</TableHead>
                   <TableHead>Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -78,6 +94,13 @@ export const GrowthStrategyLeadsTable = () => {
                     <TableCell>{formatDateTime(lead.created_at)}</TableCell>
                     <TableCell className="max-w-xs truncate">
                       {lead.information || '-'}
+                    </TableCell>
+                    <TableCell>
+                      <StatusSelector
+                        status={lead.status}
+                        onStatusChange={(value) => handleStatusChange(lead.id, value)}
+                        className="w-32"
+                      />
                     </TableCell>
                     <TableCell>
                       <Button

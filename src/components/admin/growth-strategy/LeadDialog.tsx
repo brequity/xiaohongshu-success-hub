@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { StatusSelector } from "../contact-form/StatusSelector";
 
 interface LeadDialogProps {
   lead: any;
@@ -26,6 +27,7 @@ export const LeadDialog = ({ lead, open, onOpenChange, onLeadUpdated }: LeadDial
   const [companyName, setCompanyName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [information, setInformation] = useState("");
+  const [status, setStatus] = useState("uncontacted");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -34,6 +36,7 @@ export const LeadDialog = ({ lead, open, onOpenChange, onLeadUpdated }: LeadDial
       setCompanyName(lead.company_name || "");
       setContactNumber(lead.contact_number || "");
       setInformation(lead.information || "");
+      setStatus(lead.status || "uncontacted");
     }
   }, [lead]);
 
@@ -49,6 +52,7 @@ export const LeadDialog = ({ lead, open, onOpenChange, onLeadUpdated }: LeadDial
           company_name: companyName,
           contact_number: contactNumber,
           information,
+          status,
           updated_at: new Date().toISOString(),
         })
         .eq("id", lead.id);
@@ -113,6 +117,14 @@ export const LeadDialog = ({ lead, open, onOpenChange, onLeadUpdated }: LeadDial
               value={information}
               onChange={(e) => setInformation(e.target.value)}
               rows={4}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="status">Status</Label>
+            <StatusSelector
+              status={status}
+              onStatusChange={setStatus}
+              className="w-full"
             />
           </div>
         </div>
