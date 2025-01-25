@@ -12,12 +12,13 @@ export const Hero = () => {
   return (
     <section className="min-h-[80vh] flex items-center justify-center relative">
       <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat md:bg-[75%_center]"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/lovable-uploads/9c5572d8-6103-42c0-be4c-9fc9041bbb51.png')",
+          backgroundImage: "url('/lovable-uploads/be80b333-e12f-4cac-8731-d442fa67f8bf.png')",
+          backgroundPosition: "center 25%"
         }}
       >
-        <div className="absolute inset-0 bg-black/50 md:bg-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
       </div>
 
       <div className="container px-4 mx-auto relative z-10">
