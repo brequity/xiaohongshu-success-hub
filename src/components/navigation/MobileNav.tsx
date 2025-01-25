@@ -15,6 +15,10 @@ interface MobileNavProps {
 }
 
 export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => {
+  const handleAcademyClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -37,7 +41,7 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
             </Button>
           </Link>
           <div className="space-y-3">
-            <Link to="/academy">
+            <Link to="/academy" onClick={handleAcademyClick}>
               <Button 
                 variant="ghost" 
                 className="w-full justify-start"

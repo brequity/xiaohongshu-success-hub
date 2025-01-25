@@ -14,6 +14,10 @@ interface DesktopNavProps {
 }
 
 export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) => {
+  const handleAcademyClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="hidden md:flex items-center justify-between h-16">
       <div className="flex items-center space-x-4">
@@ -23,7 +27,7 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <Link to="/academy">
+              <Link to="/academy" onClick={handleAcademyClick}>
                 <NavigationMenuTrigger className="bg-transparent hover:bg-accent">
                   Academy
                 </NavigationMenuTrigger>
