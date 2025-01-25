@@ -38,6 +38,12 @@ export const Features = () => {
   const isMobile = useIsMobile();
   const { api, setApi, activeSlide, onSelect } = useCarousel();
 
+  const handleDotClick = (index: number) => {
+    if (api) {
+      api.scrollTo(index);
+    }
+  };
+
   const FeatureCard = ({ feature, index }: { feature: typeof features[0], index: number }) => (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -102,7 +108,11 @@ export const Features = () => {
               <div className="absolute -right-2 top-1/2 -translate-y-1/2 z-10">
                 <CarouselNext className="h-8 w-8 rounded-full" />
               </div>
-              <CarouselDots itemCount={features.length} activeSlide={activeSlide} />
+              <CarouselDots 
+                itemCount={features.length} 
+                activeSlide={activeSlide} 
+                onDotClick={handleDotClick}
+              />
             </Carousel>
           </div>
         ) : (
