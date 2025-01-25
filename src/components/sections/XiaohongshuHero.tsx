@@ -8,7 +8,7 @@ export const XiaohongshuHero = () => {
       <div 
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: "url('/lovable-uploads/2bc9c4e5-8efa-47e6-ab5c-a2b76d1fe92c.png')",
+          backgroundImage: "url('/lovable-uploads/cdceaf44-3441-40e7-9997-49cfbbfd6a67.png')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
