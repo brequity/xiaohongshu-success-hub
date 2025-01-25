@@ -20,7 +20,12 @@ interface CreateUserDialogProps {
 export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
-  const form = useForm<CreateUserForm>();
+  const form = useForm<CreateUserForm>({
+    defaultValues: {
+      email: "",
+      password: ""
+    }
+  });
 
   const onSubmit = async (data: CreateUserForm) => {
     try {
@@ -28,7 +33,11 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
         body: data
       });
 
-      if (functionError) throw new Error(functionError.message);
+      if (functionError) {
+        const errorMessage = functionError.message;
+        const parsedError = JSON.parse(functionError.message);
+        throw new Error(parsedError.error || errorMessage);
+      }
 
       toast({
         title: "Success",
@@ -64,6 +73,13 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
             <FormField
               control={form.control}
               name="email"
+              rules={{
+                required: "Email is required",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address"
+                }
+              }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
@@ -77,6 +93,13 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
             <FormField
               control={form.control}
               name="password"
+              rules={{
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters"
+                }
+              }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Password</FormLabel>
