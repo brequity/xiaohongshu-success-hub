@@ -18,8 +18,8 @@ import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
+  email: z.string().email("Please enter a valid email address").toLowerCase(),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
 const AdminLogin = () => {
@@ -41,11 +41,12 @@ const AdminLogin = () => {
       setIsLoading(true);
       setError(null);
       
-      console.log("Starting login process for:", values.email);
+      const normalizedEmail = values.email.trim().toLowerCase();
+      console.log("Starting login process for:", normalizedEmail);
       
       // First attempt to sign in
       const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
-        email: values.email,
+        email: normalizedEmail,
         password: values.password,
       });
 
@@ -113,12 +114,7 @@ const AdminLogin = () => {
         description: errorMessage,
       });
       
-      // Only reset form for certain errors
-      if (error instanceof Error && 
-          (error.message.includes("Invalid login credentials") || 
-           error.message.includes("Access denied"))) {
-        form.reset();
-      }
+      form.reset();
     } finally {
       setIsLoading(false);
     }
@@ -151,7 +147,11 @@ const AdminLogin = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="admin@example.com" {...field} />
+                    <Input 
+                      placeholder="admin@example.com" 
+                      {...field} 
+                      onChange={(e) => field.onChange(e.target.value.toLowerCase())}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
