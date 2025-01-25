@@ -115,12 +115,30 @@ const Xiaohongshu = () => {
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold mb-4">Get Your Custom Marketing Plan</h2>
               <p className="text-gray-600">
-                Select your marketing budget to receive a tailored strategy that maximizes your ROI on Xiaohongshu
+                Select your marketing objectives and budget to receive a tailored strategy that maximizes your ROI on Xiaohongshu
               </p>
             </div>
 
             <div className="bg-white rounded-xl shadow-lg p-8">
               <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Marketing Objectives
+                  </label>
+                  <Select>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select your primary objective" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="brand-awareness">Build Brand Awareness</SelectItem>
+                      <SelectItem value="sales-growth">Drive Sales Growth</SelectItem>
+                      <SelectItem value="market-entry">Enter Chinese Market</SelectItem>
+                      <SelectItem value="engagement">Increase Customer Engagement</SelectItem>
+                      <SelectItem value="influencer">Develop Influencer Partnerships</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Monthly Marketing Investment
