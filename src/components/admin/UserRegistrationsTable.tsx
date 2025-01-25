@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { UserDialog } from "./user-registrations/UserDialog";
+import { CreateUserDialog } from "./user-registrations/CreateUserDialog";
 
 const formatDateTime = (dateString: string) => {
   return new Date(dateString).toLocaleString('en-US', {
@@ -47,9 +48,12 @@ export const UserRegistrationsTable = () => {
 
   return (
     <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
-      <div className="flex items-center gap-2 p-6 border-b">
-        <Users className="h-5 w-5" />
-        <h2 className="text-xl font-semibold">User Registrations</h2>
+      <div className="flex items-center justify-between p-6 border-b">
+        <div className="flex items-center gap-2">
+          <Users className="h-5 w-5" />
+          <h2 className="text-xl font-semibold">User Registrations</h2>
+        </div>
+        <CreateUserDialog onUserCreated={refetch} />
       </div>
       <div className="p-6">
         {isUsersLoading ? (
