@@ -23,6 +23,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -47,6 +49,9 @@ type Submission = {
 
 export const ContactFormSubmissionsTable = () => {
   const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null);
+  const [editedName, setEditedName] = useState("");
+  const [editedEmail, setEditedEmail] = useState("");
+  const [editedMessage, setEditedMessage] = useState("");
   const queryClient = useQueryClient();
 
   const { data: submissions, isLoading } = useQuery({
@@ -93,6 +98,34 @@ export const ContactFormSubmissionsTable = () => {
     queryClient.invalidateQueries({ queryKey: ['contact-form-submissions'] });
   };
 
+  const handleEdit = async () => {
+    if (!selectedSubmission) return;
+
+    const { error } = await supabase
+      .from('contact_form_submissions')
+      .update({
+        name: editedName,
+        email: editedEmail,
+        message: editedMessage
+      })
+      .eq('id', selectedSubmission.id);
+
+    if (error) {
+      toast.error("Failed to update submission");
+      return;
+    }
+
+    toast.success("Submission updated successfully");
+    queryClient.invalidateQueries({ queryKey: ['contact-form-submissions'] });
+  };
+
+  const handleSubmissionSelect = (submission: Submission) => {
+    setSelectedSubmission(submission);
+    setEditedName(submission.name);
+    setEditedEmail(submission.email);
+    setEditedMessage(submission.message);
+  };
+
   return (
     <>
       <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
@@ -122,7 +155,7 @@ export const ContactFormSubmissionsTable = () => {
                     <TableRow 
                       key={submission.id}
                       className="cursor-pointer hover:bg-muted/50"
-                      onClick={() => setSelectedSubmission(submission)}
+                      onClick={() => handleSubmissionSelect(submission)}
                     >
                       <TableCell>{submission.name}</TableCell>
                       <TableCell>{submission.email}</TableCell>
@@ -130,13 +163,9 @@ export const ContactFormSubmissionsTable = () => {
                       <TableCell>
                         <Select
                           value={submission.status}
-                          onValueChange={(value) => {
-                            handleStatusChange(submission.id, value);
-                          }}
-                          // Prevent the row click from triggering when interacting with the select
-                          onClick={(e) => e.stopPropagation()}
+                          onValueChange={(value) => handleStatusChange(submission.id, value)}
                         >
-                          <SelectTrigger className="w-[130px]">
+                          <SelectTrigger className="w-[130px]" onClick={(e) => e.stopPropagation()}>
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -164,23 +193,33 @@ export const ContactFormSubmissionsTable = () => {
             <div className="space-y-4">
               <div>
                 <h3 className="font-medium text-sm">Name</h3>
-                <p className="mt-1">{selectedSubmission.name}</p>
+                <Input 
+                  value={editedName}
+                  onChange={(e) => setEditedName(e.target.value)}
+                  className="mt-1"
+                />
               </div>
               <div>
                 <h3 className="font-medium text-sm">Email</h3>
-                <p className="mt-1">{selectedSubmission.email}</p>
+                <Input 
+                  value={editedEmail}
+                  onChange={(e) => setEditedEmail(e.target.value)}
+                  className="mt-1"
+                />
               </div>
               <div>
                 <h3 className="font-medium text-sm">Message</h3>
-                <p className="mt-1 whitespace-pre-wrap">{selectedSubmission.message}</p>
+                <Textarea 
+                  value={editedMessage}
+                  onChange={(e) => setEditedMessage(e.target.value)}
+                  className="mt-1"
+                />
               </div>
               <div>
                 <h3 className="font-medium text-sm">Status</h3>
                 <Select
                   value={selectedSubmission.status}
-                  onValueChange={(value) => {
-                    handleStatusChange(selectedSubmission.id, value);
-                  }}
+                  onValueChange={(value) => handleStatusChange(selectedSubmission.id, value)}
                 >
                   <SelectTrigger className="w-[130px] mt-1">
                     <SelectValue />
@@ -195,11 +234,17 @@ export const ContactFormSubmissionsTable = () => {
                 <h3 className="font-medium text-sm">Submitted At</h3>
                 <p className="mt-1">{formatDateTime(selectedSubmission.created_at)}</p>
               </div>
-              <div className="pt-4">
+              <div className="flex gap-4 pt-4">
+                <Button
+                  onClick={handleEdit}
+                  className="flex-1"
+                >
+                  Save Changes
+                </Button>
                 <Button
                   variant="destructive"
                   onClick={() => handleDelete(selectedSubmission.id)}
-                  className="w-full"
+                  className="flex-1"
                 >
                   <Trash2 className="mr-2 h-4 w-4" />
                   Delete Submission
