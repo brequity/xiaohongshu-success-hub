@@ -9,6 +9,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useState } from "react";
 
 const formatDateTime = (dateString: string) => {
   return new Date(dateString).toLocaleString('en-US', {
@@ -20,7 +27,17 @@ const formatDateTime = (dateString: string) => {
   });
 };
 
+type Submission = {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  created_at: string;
+};
+
 export const ContactFormSubmissionsTable = () => {
+  const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null);
+
   const { data: submissions, isLoading } = useQuery({
     queryKey: ['contact-form-submissions'],
     queryFn: async () => {
@@ -35,41 +52,75 @@ export const ContactFormSubmissionsTable = () => {
   });
 
   return (
-    <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
-      <div className="flex items-center gap-2 p-6 border-b">
-        <Mail className="h-5 w-5" />
-        <h2 className="text-xl font-semibold">Contact Form Submissions</h2>
-      </div>
-      <div className="p-6">
-        {isLoading ? (
-          <p>Loading submissions...</p>
-        ) : !submissions?.length ? (
-          <p>No contact form submissions found.</p>
-        ) : (
-          <div className="rounded-md border">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead>Message</TableHead>
-                  <TableHead>Submitted At</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {submissions.map((submission) => (
-                  <TableRow key={submission.id}>
-                    <TableCell>{submission.name}</TableCell>
-                    <TableCell>{submission.email}</TableCell>
-                    <TableCell className="max-w-md truncate">{submission.message}</TableCell>
-                    <TableCell>{formatDateTime(submission.created_at)}</TableCell>
+    <>
+      <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
+        <div className="flex items-center gap-2 p-6 border-b">
+          <Mail className="h-5 w-5" />
+          <h2 className="text-xl font-semibold">Contact Form Submissions</h2>
+        </div>
+        <div className="p-6">
+          {isLoading ? (
+            <p>Loading submissions...</p>
+          ) : !submissions?.length ? (
+            <p>No contact form submissions found.</p>
+          ) : (
+            <div className="rounded-md border">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Email</TableHead>
+                    <TableHead>Message</TableHead>
+                    <TableHead>Submitted At</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        )}
+                </TableHeader>
+                <TableBody>
+                  {submissions.map((submission) => (
+                    <TableRow 
+                      key={submission.id}
+                      className="cursor-pointer hover:bg-muted/50"
+                      onClick={() => setSelectedSubmission(submission)}
+                    >
+                      <TableCell>{submission.name}</TableCell>
+                      <TableCell>{submission.email}</TableCell>
+                      <TableCell className="max-w-md truncate">{submission.message}</TableCell>
+                      <TableCell>{formatDateTime(submission.created_at)}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+
+      <Dialog open={!!selectedSubmission} onOpenChange={() => setSelectedSubmission(null)}>
+        <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>Contact Form Submission Details</DialogTitle>
+          </DialogHeader>
+          {selectedSubmission && (
+            <div className="space-y-4">
+              <div>
+                <h3 className="font-medium text-sm">Name</h3>
+                <p className="mt-1">{selectedSubmission.name}</p>
+              </div>
+              <div>
+                <h3 className="font-medium text-sm">Email</h3>
+                <p className="mt-1">{selectedSubmission.email}</p>
+              </div>
+              <div>
+                <h3 className="font-medium text-sm">Message</h3>
+                <p className="mt-1 whitespace-pre-wrap">{selectedSubmission.message}</p>
+              </div>
+              <div>
+                <h3 className="font-medium text-sm">Submitted At</h3>
+                <p className="mt-1">{formatDateTime(selectedSubmission.created_at)}</p>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
