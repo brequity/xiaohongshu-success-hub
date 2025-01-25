@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Shield, LogIn } from "lucide-react";
+import { Shield, LogIn, AlertOctagon } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +24,7 @@ const formSchema = z.object({
 
 const AdminLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -38,9 +39,12 @@ const AdminLogin = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
+      setError(null);
+      
+      console.log("Attempting to sign in with:", values.email);
       
       // First attempt to sign in
-      const { data: { user }, error: signInError } = await supabase.auth.signInWithPassword({
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
         email: values.email,
         password: values.password,
       });
@@ -50,30 +54,34 @@ const AdminLogin = () => {
         throw new Error(signInError.message);
       }
 
-      if (!user) {
+      if (!signInData.user) {
+        console.error("No user data returned after sign in");
         throw new Error("No user found");
       }
+
+      console.log("Successfully signed in, checking admin role for user:", signInData.user.id);
 
       // Check if user has admin role
       const { data: roles, error: rolesError } = await supabase
         .from("user_roles")
         .select("role")
-        .eq("user_id", user.id)
+        .eq("user_id", signInData.user.id)
         .eq("role", "admin")
         .single();
 
       if (rolesError) {
         console.error("Roles error:", rolesError);
-        // Sign out if there's an error checking roles
         await supabase.auth.signOut();
         throw new Error("Error checking admin privileges");
       }
 
       if (!roles) {
-        // Sign out if not an admin
+        console.error("No admin role found for user");
         await supabase.auth.signOut();
         throw new Error("Unauthorized access - Admin privileges required");
       }
+
+      console.log("Admin role verified, proceeding to admin dashboard");
 
       toast({
         title: "Success",
@@ -83,15 +91,20 @@ const AdminLogin = () => {
       navigate("/admin");
     } catch (error) {
       console.error("Login error:", error);
+      
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : "Failed to login. Please check your credentials.";
+      
+      setError(errorMessage);
+      
       toast({
         variant: "destructive",
         title: "Error",
-        description: error instanceof Error 
-          ? error.message 
-          : "Failed to login. Please check your credentials.",
+        description: errorMessage,
       });
       
-      if (error instanceof Error && error.message === "Unauthorized access") {
+      if (error instanceof Error && error.message.includes("Unauthorized access")) {
         form.reset();
       }
     } finally {
@@ -109,6 +122,13 @@ const AdminLogin = () => {
             Please sign in with your admin credentials
           </p>
         </div>
+
+        {error && (
+          <div className="flex items-center gap-2 p-4 text-sm text-red-800 bg-red-50 rounded-md">
+            <AlertOctagon className="h-4 w-4" />
+            <span>{error}</span>
+          </div>
+        )}
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="mt-8 space-y-6">
