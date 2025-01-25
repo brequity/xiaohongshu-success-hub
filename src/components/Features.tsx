@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useState, useCallback } from "react";
 
 const features = [
   {
@@ -34,6 +35,12 @@ const features = [
 
 export const Features = () => {
   const isMobile = useIsMobile();
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const handleSlideChange = useCallback((api: any) => {
+    if (!api) return;
+    setActiveSlide(api.selectedScrollSnap());
+  }, []);
 
   const FeatureCard = ({ feature, index }: { feature: typeof features[0], index: number }) => (
     <motion.div
@@ -85,6 +92,7 @@ export const Features = () => {
                 containScroll: "trimSnaps"
               }}
               className="w-full"
+              onSlideChange={handleSlideChange}
             >
               <CarouselContent className="-ml-4">
                 {features.map((feature, index) => (
@@ -98,6 +106,17 @@ export const Features = () => {
               </div>
               <div className="absolute -right-2 top-1/2 -translate-y-1/2 z-10">
                 <CarouselNext className="h-8 w-8 rounded-full" />
+              </div>
+              <div className="flex justify-center gap-2 mt-4">
+                {features.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      activeSlide === index ? "bg-coral" : "bg-gray-300"
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
               </div>
             </Carousel>
           </div>

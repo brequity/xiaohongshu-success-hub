@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, TrendingUp, Users, Zap } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useState, useCallback } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -34,6 +35,12 @@ const benefits = [
 
 export const BenefitsSection = () => {
   const isMobile = useIsMobile();
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const handleSlideChange = useCallback((api: any) => {
+    if (!api) return;
+    setActiveSlide(api.selectedScrollSnap());
+  }, []);
 
   const BenefitCard = ({ benefit, index }: { benefit: typeof benefits[0], index: number }) => (
     <motion.div
@@ -70,6 +77,7 @@ export const BenefitsSection = () => {
                 containScroll: "trimSnaps"
               }}
               className="w-full"
+              onSlideChange={handleSlideChange}
             >
               <CarouselContent className="-ml-4">
                 {benefits.map((benefit, index) => (
@@ -83,6 +91,17 @@ export const BenefitsSection = () => {
               </div>
               <div className="absolute -right-2 top-1/2 -translate-y-1/2 z-10">
                 <CarouselNext className="h-8 w-8 rounded-full" />
+              </div>
+              <div className="flex justify-center gap-2 mt-4">
+                {benefits.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      activeSlide === index ? "bg-coral" : "bg-gray-300"
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
               </div>
             </Carousel>
           </div>
