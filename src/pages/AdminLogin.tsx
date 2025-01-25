@@ -38,14 +38,21 @@ const AdminLogin = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
+      
+      // First attempt to sign in
       const { data: { user }, error: signInError } = await supabase.auth.signInWithPassword({
         email: values.email,
         password: values.password,
       });
 
-      if (signInError) throw signInError;
+      if (signInError) {
+        console.error("Sign in error:", signInError);
+        throw new Error(signInError.message);
+      }
 
-      if (!user) throw new Error("No user found");
+      if (!user) {
+        throw new Error("No user found");
+      }
 
       // Check if user has admin role
       const { data: roles, error: rolesError } = await supabase
@@ -55,11 +62,17 @@ const AdminLogin = () => {
         .eq("role", "admin")
         .single();
 
-      if (rolesError) throw rolesError;
+      if (rolesError) {
+        console.error("Roles error:", rolesError);
+        // Sign out if there's an error checking roles
+        await supabase.auth.signOut();
+        throw new Error("Error checking admin privileges");
+      }
 
       if (!roles) {
+        // Sign out if not an admin
         await supabase.auth.signOut();
-        throw new Error("Unauthorized access");
+        throw new Error("Unauthorized access - Admin privileges required");
       }
 
       toast({
@@ -73,7 +86,9 @@ const AdminLogin = () => {
       toast({
         variant: "destructive",
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to login",
+        description: error instanceof Error 
+          ? error.message 
+          : "Failed to login. Please check your credentials.",
       });
       
       if (error instanceof Error && error.message === "Unauthorized access") {
