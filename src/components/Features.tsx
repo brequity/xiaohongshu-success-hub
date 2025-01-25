@@ -1,26 +1,26 @@
 import { motion } from "framer-motion";
-import { BookOpen, Target, TrendingUp, DollarSign } from "lucide-react";
+import { BookOpen, Target, TrendingUp, DollarSign, Users, Globe, MessageSquare, ShoppingCart } from "lucide-react";
 
 const features = [
   {
-    icon: <BookOpen className="w-6 h-6" />,
-    title: "Comprehensive Xiaohongshu Guide",
-    description: "Step-by-step instructions for creating engaging Xiaohongshu content that resonates with Chinese audiences",
+    icon: <Users className="w-6 h-6" />,
+    title: "Target Audience",
+    description: "Reach predominantly female users aged 18-35, known for their high purchasing power and interest in lifestyle content",
   },
   {
-    icon: <Target className="w-6 h-6" />,
-    title: "Platform Migration Strategy",
-    description: "Expert guidance on migrating your content strategy to Xiaohongshu from other social platforms",
+    icon: <Globe className="w-6 h-6" />,
+    title: "Market Influence",
+    description: "Tap into China's leading trendsetter platform that shapes consumer behavior and drives purchasing decisions",
   },
   {
-    icon: <TrendingUp className="w-6 h-6" />,
-    title: "Content Creation Mastery",
-    description: "Master Xiaohongshu's unique content style and learn how to optimize for the platform's algorithm",
+    icon: <MessageSquare className="w-6 h-6" />,
+    title: "Community Engagement",
+    description: "Benefit from high interaction rates through authentic recommendations and active user participation",
   },
   {
-    icon: <DollarSign className="w-6 h-6" />,
-    title: "Monetization Blueprint",
-    description: "Transform your Xiaohongshu presence into a sustainable income stream with proven monetization strategies",
+    icon: <ShoppingCart className="w-6 h-6" />,
+    title: "E-commerce Integration",
+    description: "Leverage direct links between content and sales through seamless shopping features",
   },
 ];
 
@@ -28,7 +28,6 @@ export const Features = () => {
   return (
     <section id="features" className="py-20 bg-white">
       <div className="container px-4 mx-auto">
-        {/* Welcome Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -37,24 +36,12 @@ export const Features = () => {
           id="what-is-xiaohongshu"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#ea384c]">
-            What is Xiaohongshu?
+            Why Choose Xiaohongshu?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Xiaohongshu (Little Red Book) is China's leading lifestyle and shopping platform. Our academy guides you through creating authentic, engaging content that resonates with Chinese audiences.
+            Discover why Xiaohongshu has become China's most influential platform for lifestyle content and social commerce, connecting brands with over 200 million engaged users.
           </p>
         </motion.div>
-
-        <div className="text-center mb-16">
-          <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-jade/10 text-jade rounded-full">
-            Xiaohongshu Academy Curriculum
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Master Xiaohongshu Content Creation
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Our comprehensive guide covers everything you need to know about becoming a successful content creator on Xiaohongshu
-          </p>
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
