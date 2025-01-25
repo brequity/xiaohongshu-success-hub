@@ -20,12 +20,13 @@ export const HeroSection = ({ scrollToMarketingPlan }: { scrollToMarketingPlan: 
   return (
     <section className="pt-20 md:pt-32 pb-16 md:pb-20 relative overflow-hidden">
       <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat md:bg-[75%_center]"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/lovable-uploads/2bc9c4e5-8efa-47e6-ab5c-a2b76d1fe92c.png')",
+          backgroundImage: "url('/lovable-uploads/1f6e988a-8cb3-4a4f-9cca-4a9df5d182b8.png')",
+          backgroundPosition: "left center",
         }}
       >
-        <div className="absolute inset-0 bg-black/50 md:bg-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/40" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
