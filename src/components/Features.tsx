@@ -1,5 +1,13 @@
 import { motion } from "framer-motion";
 import { BookOpen, Target, TrendingUp, DollarSign, Users, Globe, MessageSquare, ShoppingCart } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const features = [
   {
@@ -25,6 +33,30 @@ const features = [
 ];
 
 export const Features = () => {
+  const isMobile = useIsMobile();
+
+  const FeatureCard = ({ feature, index }: { feature: typeof features[0], index: number }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 h-full"
+    >
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-12 h-12 bg-coral/10 rounded-xl flex items-center justify-center text-coral">
+          {feature.icon}
+        </div>
+        <img 
+          src="/lovable-uploads/40ec6227-aaaf-4f19-b08a-6618a1281fc6.png" 
+          alt="Xiaohongshu Logo" 
+          className="w-8 h-8 object-contain"
+        />
+      </div>
+      <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+      <p className="text-gray-600">{feature.description}</p>
+    </motion.div>
+  );
+
   return (
     <section id="features" className="py-20 bg-white">
       <div className="container px-4 mx-auto">
@@ -43,30 +75,31 @@ export const Features = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-coral/10 rounded-xl flex items-center justify-center text-coral">
-                  {feature.icon}
-                </div>
-                <img 
-                  src="/lovable-uploads/40ec6227-aaaf-4f19-b08a-6618a1281fc6.png" 
-                  alt="Xiaohongshu Logo" 
-                  className="w-8 h-8 object-contain"
-                />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </motion.div>
-          ))}
-        </div>
+        {isMobile ? (
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent>
+              {features.map((feature, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                  <FeatureCard feature={feature} index={index} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <FeatureCard key={index} feature={feature} index={index} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
