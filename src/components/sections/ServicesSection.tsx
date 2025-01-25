@@ -72,7 +72,7 @@ export const ServicesSection = () => {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#ea384c]">Our Services</h2>
           <p className="text-xl text-gray-600">
             Comprehensive solutions to establish and grow your brand on Xiaohongshu
           </p>
