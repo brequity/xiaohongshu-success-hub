@@ -17,10 +17,13 @@ serve(async (req) => {
   }
 
   try {
-    const supabase = createClient(
-      SUPABASE_URL!,
-      SUPABASE_SERVICE_ROLE_KEY!
-    );
+    console.log("Starting get-dashboard-stats function");
+    
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+      throw new Error("Missing environment variables");
+    }
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
     // Get daily leads count for the last 30 days
     const { data: leadsData, error: leadsError } = await supabase
@@ -28,7 +31,10 @@ serve(async (req) => {
       .select('created_at')
       .gte('created_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString());
 
-    if (leadsError) throw leadsError;
+    if (leadsError) {
+      console.error("Error fetching leads:", leadsError);
+      throw leadsError;
+    }
 
     // Get daily contact form submissions count for the last 30 days
     const { data: contactData, error: contactError } = await supabase
@@ -36,7 +42,10 @@ serve(async (req) => {
       .select('created_at')
       .gte('created_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString());
 
-    if (contactError) throw contactError;
+    if (contactError) {
+      console.error("Error fetching contacts:", contactError);
+      throw contactError;
+    }
 
     // Process data to get daily counts
     const dailyStats = new Map();
@@ -76,13 +85,19 @@ serve(async (req) => {
       }))
       .sort((a, b) => a.date.localeCompare(b.date));
 
+    console.log("Successfully processed stats data");
+
     return new Response(JSON.stringify({ stats }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
   } catch (error) {
     console.error("Error in get-dashboard-stats:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(
+      JSON.stringify({ 
+        error: error.message,
+        details: error.stack 
+      }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
     });
