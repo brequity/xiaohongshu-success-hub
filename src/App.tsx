@@ -10,6 +10,7 @@ import AdminLogin from "./pages/AdminLogin";
 import Admin from "./pages/Admin";
 import Register from "./pages/Register";
 import Xiaohongshu from "./pages/Xiaohongshu";
+import GrowthStrategyForm from "./pages/GrowthStrategyForm";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/admin" element={<Admin />} />
           <Route path="/register" element={<Register />} />
           <Route path="/xiaohongshu" element={<Xiaohongshu />} />
+          <Route path="/growth-strategy" element={<GrowthStrategyForm />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2, TrendingUp, Users, Zap } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
+import { useNavigate } from "react-router-dom";
 import {
   Select,
   SelectContent,
@@ -41,6 +42,8 @@ const benefits = [
 ];
 
 const Xiaohongshu = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
@@ -159,6 +162,7 @@ const Xiaohongshu = () => {
                 <Button 
                   size="lg" 
                   className="w-full bg-coral hover:bg-coral-light"
+                  onClick={() => navigate('/growth-strategy')}
                 >
                   Get Your Growth Strategy
                   <ArrowRight className="ml-2 w-4 h-4" />
