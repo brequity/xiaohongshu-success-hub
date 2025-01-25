@@ -11,15 +11,13 @@ export const Hero = () => {
 
   return (
     <section className="min-h-[80vh] flex items-center justify-center relative">
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/lovable-uploads/be80b333-e12f-4cac-8731-d442fa67f8bf.png')",
-          backgroundPosition: "center 25%"
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
-      </div>
+      <img 
+        src="/lovable-uploads/be80b333-e12f-4cac-8731-d442fa67f8bf.png"
+        alt="Hero background"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+        style={{ objectPosition: "center 25%" }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
 
       <div className="container px-4 mx-auto relative z-10">
         <motion.div 
