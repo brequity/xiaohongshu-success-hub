@@ -16,12 +16,21 @@ Deno.serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
-    const { data: { user }, error: userError } = await supabaseClient.auth.admin.updateUserById(
-      'replace-with-user-id',
+    // Get user by email
+    const { data: userData, error: userError } = await supabaseClient.auth.admin.listUsers()
+    
+    if (userError) throw userError
+
+    const user = userData.users.find(u => u.email === 'adjial@gmail.com')
+    if (!user) throw new Error('User not found')
+
+    // Update password for the found user
+    const { error: updateError } = await supabaseClient.auth.admin.updateUserById(
+      user.id,
       { password: 'PL1q2w3e4r' }
     )
 
-    if (userError) throw userError
+    if (updateError) throw updateError
 
     return new Response(
       JSON.stringify({ message: 'Password updated successfully' }),
