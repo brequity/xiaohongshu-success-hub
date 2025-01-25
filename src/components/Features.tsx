@@ -77,7 +77,7 @@ export const Features = () => {
           id="what-is-xiaohongshu"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#ea384c]">
-            Why Choose Xiaohongshu?
+            Discover Xiaohongshu (Rednote)
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Discover why Xiaohongshu has become China's most influential platform for lifestyle content and social commerce, connecting brands with over 200 million engaged users.
