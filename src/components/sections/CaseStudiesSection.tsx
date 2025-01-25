@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const caseStudies = [
   {
-    image: "/lovable-uploads/ea2ba83c-8ff5-4fbc-ae99-49e5c69c2376.png",
+    image: "/lovable-uploads/4b5de9e7-e83b-4550-a41c-829ada35d22e.png",
     title: "Singapore Aesthetic Clinic",
     description: "Transformed digital presence and client acquisition through strategic Xiaohongshu content marketing",
     metrics: {
