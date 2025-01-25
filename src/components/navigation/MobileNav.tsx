@@ -6,7 +6,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface MobileNavProps {
@@ -31,22 +31,25 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
           <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col gap-4 mt-4">
-          <Button 
-            variant="ghost" 
-            className="w-full justify-start"
-            onClick={() => scrollToSection('top')}
-            disabled={isNavigating}
-          >
-            Home
-          </Button>
-          <Button 
-            variant="ghost" 
-            className="w-full justify-start"
-            onClick={() => scrollToSection('pricing')}
-            disabled={isNavigating}
-          >
-            RedNote vs TikTok
-          </Button>
+          <div className="space-y-3">
+            <Button 
+              variant="ghost" 
+              className="w-full justify-start"
+              onClick={() => scrollToSection('top')}
+              disabled={isNavigating}
+            >
+              Home
+            </Button>
+            <Button 
+              variant="ghost" 
+              className="w-full justify-start pl-8 text-sm"
+              onClick={() => scrollToSection('pricing')}
+              disabled={isNavigating}
+            >
+              <ChevronRight className="mr-2 h-4 w-4" />
+              RedNote vs TikTok
+            </Button>
+          </div>
           <Button 
             variant="ghost" 
             className="w-full justify-start"
