@@ -30,40 +30,59 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
     }
   });
 
+  const checkExistingUser = async (email: string) => {
+    const { data } = await supabase.auth.admin.listUsers({
+      page: 1,
+      perPage: 1,
+      search: email.trim().toLowerCase()
+    });
+    return data?.users?.some(user => user.email === email.trim().toLowerCase());
+  };
+
+  const handleCreateUser = async (email: string, password: string) => {
+    const { data: functionData, error: functionError } = await supabase.functions.invoke('create-admin-user', {
+      body: { email, password }
+    });
+
+    if (functionError) {
+      let errorMessage = functionError.message;
+      try {
+        const parsedError = JSON.parse(functionError.message);
+        errorMessage = parsedError.error || errorMessage;
+      } catch (e) {
+        console.error('Error parsing error message:', e);
+      }
+      throw new Error(errorMessage);
+    }
+
+    return functionData;
+  };
+
+  const handleSuccess = () => {
+    toast({
+      title: "Success",
+      description: "User created successfully",
+    });
+    form.reset();
+    setOpen(false);
+    onUserCreated();
+  };
+
   const onSubmit = async (data: CreateUserForm) => {
     try {
       setIsSubmitting(true);
       setError(null);
       
-      // Check if user exists first
-      const { data: existingUsers } = await supabase.auth.admin.listUsers({
-        filters: {
-          email: data.email.trim().toLowerCase()
-        }
-      });
-
-      if (existingUsers?.users?.length > 0) {
+      const userExists = await checkExistingUser(data.email);
+      if (userExists) {
         setError("A user with this email address already exists. Please use a different email.");
         return;
       }
 
-      const { data: functionData, error: functionError } = await supabase.functions.invoke('create-admin-user', {
-        body: {
-          email: data.email.trim().toLowerCase(),
-          password: data.password
-        }
-      });
-
-      if (functionError) {
-        let errorMessage = functionError.message;
-        try {
-          const parsedError = JSON.parse(functionError.message);
-          errorMessage = parsedError.error || errorMessage;
-        } catch (e) {
-          console.error('Error parsing error message:', e);
-        }
-        throw new Error(errorMessage);
-      }
+      const functionData = await handleCreateUser(
+        data.email.trim().toLowerCase(),
+        data.password
+      );
 
       if (functionData?.warning) {
         toast({
@@ -72,13 +91,7 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
           variant: "destructive",
         });
       } else {
-        toast({
-          title: "Success",
-          description: "User created successfully",
-        });
-        form.reset();
-        setOpen(false);
-        onUserCreated();
+        handleSuccess();
       }
     } catch (error: any) {
       setError(error.message);
