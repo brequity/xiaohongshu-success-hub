@@ -22,11 +22,12 @@ export const HeroSection = ({ scrollToMarketingPlan }: { scrollToMarketingPlan: 
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/lovable-uploads/1f6e988a-8cb3-4a4f-9cca-4a9df5d182b8.png')",
+          backgroundImage: "url('/lovable-uploads/ac19513b-5dd0-4ea5-941b-7adbf4947e68.png')",
           backgroundPosition: "left center",
+          backgroundSize: "cover"
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
