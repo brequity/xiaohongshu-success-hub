@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const Hero = () => {
   return (
     <section className="relative">
-      <div className="h-[400px] w-full relative overflow-hidden">
+      <div className="min-h-[80vh] w-full relative overflow-hidden">
         <img
           src="/lovable-uploads/cfa0847e-9f5c-4e97-87bb-371204052bad.png"
           alt="Xiaohongshu content creator using phone"
