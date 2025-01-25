@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
-import { Mail } from "lucide-react";
 
 export const NewsletterSubscription = () => {
   const [email, setEmail] = useState("");
@@ -40,7 +39,7 @@ export const NewsletterSubscription = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-r from-coral to-coral-light">
+    <section className="py-20 bg-white"> {/* Changed from bg-[#ff9999] to bg-white */}
       <div className="container px-4 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -48,14 +47,11 @@ export const NewsletterSubscription = () => {
           transition={{ duration: 0.5 }}
           className="max-w-2xl mx-auto text-center"
         >
-          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Mail className="w-8 h-8 text-white" />
-          </div>
-          <h2 className="text-3xl font-bold mb-4 text-white">
-            Stay Updated with Xiaohongshu Trends
+          <h2 className="text-3xl font-bold mb-4">
+            Not Ready to Start Yet?
           </h2>
-          <p className="text-white/90 mb-8">
-            Subscribe to our newsletter and get the latest tips, trends, and insights delivered to your inbox.
+          <p className="text-gray-600 mb-8">
+            Subscribe to our newsletter and get the latest offers, discounts, and Xiaohongshu content creation tips delivered to your inbox.
           </p>
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <Input
@@ -64,12 +60,12 @@ export const NewsletterSubscription = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="flex-1 bg-white/90 border-0 placeholder:text-gray-500"
+              className="flex-1"
             />
             <Button 
               type="submit" 
               disabled={isLoading}
-              className="bg-white text-coral hover:bg-white/90 transition-all duration-300"
+              className="bg-coral hover:bg-coral-light transition-all duration-300"
             >
               {isLoading ? "Subscribing..." : "Subscribe"}
             </Button>
