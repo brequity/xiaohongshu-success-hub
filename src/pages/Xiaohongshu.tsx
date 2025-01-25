@@ -1,19 +1,19 @@
 import { Navigation } from "@/components/Navigation";
-import { XiaohongshuHero } from "@/components/sections/XiaohongshuHero";
+import { Features } from "@/components/Features";
+import { PlatformComparison } from "@/components/PlatformComparison";
+import { Hero } from "@/components/Hero";
 import { BenefitsSection } from "@/components/sections/BenefitsSection";
-import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { CTASection } from "@/components/sections/CTASection";
-import { ContactForm } from "@/components/ContactForm";
 
 const Xiaohongshu = () => {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      <XiaohongshuHero />
+      <Hero />
+      <Features />
+      <PlatformComparison />
       <BenefitsSection />
-      <CaseStudiesSection />
       <CTASection />
-      <ContactForm />
     </div>
   );
 };
