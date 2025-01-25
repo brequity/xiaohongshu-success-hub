@@ -4,7 +4,6 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
@@ -41,6 +40,9 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
+        <Link to="/xiaohongshu">
+          <Button variant="ghost">Xiaohongshu</Button>
+        </Link>
         <Button 
           variant="ghost"
           onClick={() => scrollToSection('starter-guide')}

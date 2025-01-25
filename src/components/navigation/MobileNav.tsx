@@ -50,6 +50,11 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
               RedNote vs TikTok
             </Button>
           </div>
+          <Link to="/xiaohongshu">
+            <Button variant="ghost" className="w-full justify-start">
+              Xiaohongshu
+            </Button>
+          </Link>
           <Button 
             variant="ghost" 
             className="w-full justify-start"

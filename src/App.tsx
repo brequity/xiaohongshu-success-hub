@@ -9,6 +9,7 @@ import Quiz from "./pages/Quiz";
 import AdminLogin from "./pages/AdminLogin";
 import Admin from "./pages/Admin";
 import Register from "./pages/Register";
+import Xiaohongshu from "./pages/Xiaohongshu";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/xiaohongshu" element={<Xiaohongshu />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
