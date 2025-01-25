@@ -1,18 +1,31 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-export const DesktopNav = () => {
+interface DesktopNavProps {
+  isNavigating: boolean;
+  scrollToSection: (sectionId: string) => Promise<void>;
+}
+
+export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) => {
   return (
-    <nav className="hidden md:flex items-center gap-6">
-      <Link to="/starter-guide">
-        <Button variant="ghost">Starter Guide</Button>
-      </Link>
-      <Link to="/quiz">
-        <Button variant="ghost">Quiz</Button>
-      </Link>
-      <Link to="/register">
-        <Button variant="ghost">Sign Up</Button>
-      </Link>
-    </nav>
+    <div className="hidden md:flex items-center justify-between h-16">
+      <div className="flex items-center space-x-4">
+        <Button 
+          variant="ghost"
+          onClick={() => scrollToSection('starter-guide')}
+          disabled={isNavigating}
+        >
+          Starter Guide
+        </Button>
+        <Link to="/quiz">
+          <Button variant="ghost">Quiz</Button>
+        </Link>
+      </div>
+      <div>
+        <Link to="/register">
+          <Button>Sign Up</Button>
+        </Link>
+      </div>
+    </div>
   );
 };

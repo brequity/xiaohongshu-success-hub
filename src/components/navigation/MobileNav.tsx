@@ -9,7 +9,12 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export const MobileNav = () => {
+interface MobileNavProps {
+  isNavigating: boolean;
+  scrollToSection: (sectionId: string) => Promise<void>;
+}
+
+export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -26,11 +31,14 @@ export const MobileNav = () => {
           <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col gap-4 mt-4">
-          <Link to="/starter-guide">
-            <Button variant="ghost" className="w-full justify-start">
-              Starter Guide
-            </Button>
-          </Link>
+          <Button 
+            variant="ghost" 
+            className="w-full justify-start"
+            onClick={() => scrollToSection('starter-guide')}
+            disabled={isNavigating}
+          >
+            Starter Guide
+          </Button>
           <Link to="/quiz">
             <Button variant="ghost" className="w-full justify-start">
               Quiz
