@@ -44,21 +44,38 @@ export const UserRegistrationsTable = () => {
   const { data: users, isLoading: isUsersLoading, refetch } = useQuery({
     queryKey: ['user-registrations'],
     queryFn: async () => {
-      const { data, error } = await supabase
+      // First get all profiles
+      const { data: profiles, error: profilesError } = await supabase
         .from('profiles')
-        .select(`
-          *,
-          user_roles (
-            role
-          )
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
       
-      if (error) {
-        console.error('Error fetching users:', error);
-        throw error;
+      if (profilesError) {
+        console.error('Error fetching profiles:', profilesError);
+        throw profilesError;
       }
-      return data as User[];
+
+      // Then get roles for these profiles
+      const profileIds = profiles.map(profile => profile.id);
+      const { data: roles, error: rolesError } = await supabase
+        .from('user_roles')
+        .select('*')
+        .in('user_id', profileIds);
+
+      if (rolesError) {
+        console.error('Error fetching roles:', rolesError);
+        throw rolesError;
+      }
+
+      // Combine the data
+      const usersWithRoles = profiles.map(profile => ({
+        ...profile,
+        user_roles: roles
+          .filter(role => role.user_id === profile.id)
+          .map(role => ({ role: role.role }))
+      }));
+
+      return usersWithRoles as User[];
     }
   });
 
