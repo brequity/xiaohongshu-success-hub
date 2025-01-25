@@ -76,7 +76,7 @@ export const Features = () => {
         </motion.div>
 
         {isMobile ? (
-          <div className="relative px-8">
+          <div className="relative px-4">
             <Carousel
               opts={{
                 align: "start",
@@ -86,16 +86,16 @@ export const Features = () => {
             >
               <CarouselContent>
                 {features.map((feature, index) => (
-                  <CarouselItem key={index} className="basis-full">
+                  <CarouselItem key={index} className="w-full flex-[0_0_100%]">
                     <FeatureCard feature={feature} index={index} />
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <div className="absolute -left-2 top-1/2 -translate-y-1/2">
-                <CarouselPrevious className="relative left-0" />
+              <div className="absolute -left-4 top-1/2 -translate-y-1/2 z-10">
+                <CarouselPrevious />
               </div>
-              <div className="absolute -right-2 top-1/2 -translate-y-1/2">
-                <CarouselNext className="relative right-0" />
+              <div className="absolute -right-4 top-1/2 -translate-y-1/2 z-10">
+                <CarouselNext />
               </div>
             </Carousel>
           </div>
