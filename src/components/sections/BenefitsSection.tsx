@@ -63,7 +63,7 @@ export const BenefitsSection = () => {
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">Why Choose Xiaohongshu for Your Business?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#ea384c]">Why Choose Xiaohongshu for Your Business?</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Join successful brands that are leveraging Xiaohongshu's unique ecosystem to drive significant business growth in China
           </p>
