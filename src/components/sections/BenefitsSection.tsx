@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, TrendingUp, Users, Zap } from "lucide-react";
+import { TrendingUp, Users, Zap, CheckCircle2 } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useState, useCallback } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -9,7 +8,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import type { CarouselApi } from "@/components/ui/carousel";
+import { CarouselDots } from "@/components/ui/carousel-dots";
+import { useCarousel } from "@/hooks/use-carousel";
 
 const benefits = [
   {
@@ -36,13 +36,7 @@ const benefits = [
 
 export const BenefitsSection = () => {
   const isMobile = useIsMobile();
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [api, setApi] = useState<CarouselApi>();
-
-  const onSelect = useCallback(() => {
-    if (!api) return;
-    setActiveSlide(api.selectedScrollSnap());
-  }, [api]);
+  const { api, setApi, activeSlide, onSelect } = useCarousel();
 
   const BenefitCard = ({ benefit, index }: { benefit: typeof benefits[0], index: number }) => (
     <motion.div
@@ -93,17 +87,7 @@ export const BenefitsSection = () => {
               <div className="absolute -right-2 top-1/2 -translate-y-1/2 z-10">
                 <CarouselNext className="h-8 w-8 rounded-full" />
               </div>
-              <div className="flex justify-center gap-2 mt-4">
-                {benefits.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      activeSlide === index ? "bg-coral" : "bg-gray-300"
-                    }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
+              <CarouselDots itemCount={benefits.length} activeSlide={activeSlide} />
             </Carousel>
           </div>
         ) : (

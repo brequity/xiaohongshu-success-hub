@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { BookOpen, Target, TrendingUp, DollarSign, Users, Globe, MessageSquare, ShoppingCart } from "lucide-react";
+import { Users, Globe, MessageSquare, ShoppingCart } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Carousel,
@@ -8,8 +8,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useState, useCallback } from "react";
-import type { CarouselApi } from "@/components/ui/carousel";
+import { CarouselDots } from "@/components/ui/carousel-dots";
+import { useCarousel } from "@/hooks/use-carousel";
 
 const features = [
   {
@@ -36,13 +36,7 @@ const features = [
 
 export const Features = () => {
   const isMobile = useIsMobile();
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [api, setApi] = useState<CarouselApi>();
-
-  const onSelect = useCallback(() => {
-    if (!api) return;
-    setActiveSlide(api.selectedScrollSnap());
-  }, [api]);
+  const { api, setApi, activeSlide, onSelect } = useCarousel();
 
   const FeatureCard = ({ feature, index }: { feature: typeof features[0], index: number }) => (
     <motion.div
@@ -108,17 +102,7 @@ export const Features = () => {
               <div className="absolute -right-2 top-1/2 -translate-y-1/2 z-10">
                 <CarouselNext className="h-8 w-8 rounded-full" />
               </div>
-              <div className="flex justify-center gap-2 mt-4">
-                {features.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      activeSlide === index ? "bg-coral" : "bg-gray-300"
-                    }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
+              <CarouselDots itemCount={features.length} activeSlide={activeSlide} />
             </Carousel>
           </div>
         ) : (
