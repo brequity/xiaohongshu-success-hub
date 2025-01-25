@@ -44,6 +44,13 @@ const benefits = [
 const Xiaohongshu = () => {
   const navigate = useNavigate();
 
+  const scrollToMarketingPlan = () => {
+    const marketingPlanSection = document.getElementById('marketing-plan');
+    if (marketingPlanSection) {
+      marketingPlanSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
@@ -78,7 +85,11 @@ const Xiaohongshu = () => {
               Tap into China's most influential social commerce platform. Our expert team will help you create a winning strategy to reach millions of potential customers and drive real business results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Button size="lg" className="bg-coral hover:bg-coral-light">
+              <Button 
+                size="lg" 
+                className="bg-coral hover:bg-coral-light"
+                onClick={scrollToMarketingPlan}
+              >
                 Start Your Growth Strategy
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
@@ -107,7 +118,7 @@ const Xiaohongshu = () => {
       </section>
 
       {/* Get a Quote Section */}
-      <section className="py-16 bg-white">
+      <section id="marketing-plan" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
