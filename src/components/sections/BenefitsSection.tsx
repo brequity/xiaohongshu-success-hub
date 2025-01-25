@@ -14,23 +14,23 @@ import { useCarousel } from "@/hooks/use-carousel";
 const benefits = [
   {
     icon: <TrendingUp className="w-6 h-6" />,
-    title: "User-Generated Content (UGC)",
-    description: "Xiaohongshu thrives on content created by its users, ranging from product reviews and lifestyle tips to travel experiences. This platform encourages authenticity and peer-to-peer recommendations, which are highly valued by its user base. Users can post photos, videos, and notes, creating a rich tapestry of content that influences buying decisions."
+    title: "Market Penetration",
+    description: "Access China's most influential social commerce platform with over 600 million active consumers ready to discover your brand"
   },
   {
     icon: <Users className="w-6 h-6" />,
-    title: "Integrated E-commerce",
-    description: "Unlike many Western social platforms, Xiaohongshu directly integrates e-commerce into its social interface. Users can discover products within the content they browse and purchase them without leaving the app. This seamless shopping experience is facilitated through features like product tags, 'buy' buttons, and direct links to e-commerce stores within posts or live streams."
+    title: "Premium Audience",
+    description: "Connect with affluent Chinese consumers who have high purchasing power and actively seek product recommendations"
   },
   {
     icon: <Zap className="w-6 h-6" />,
-    title: "Content Discovery via AI Algorithms",
-    description: "Xiaohongshu uses sophisticated AI algorithms to curate and present content based on user interests, behavior, and interaction history. The platform offers different feeds like \"Follow\" for content from followed accounts, \"Explore\" for personalized recommendations, and \"Nearby\" for location-based content. This personalization ensures users see content that is relevant and engaging to them."
+    title: "High ROI",
+    description: "Benefit from Xiaohongshu's exceptional conversion rates and proven track record in driving sales"
   },
   {
     icon: <CheckCircle2 className="w-6 h-6" />,
-    title: "Live Streaming and Influencer Marketing",
-    description: "Live streaming is a significant feature on Xiaohongshu, where brands and influencers can engage in real-time with their audience, showcasing products, offering tutorials, or hosting Q&A sessions. This feature not only boosts engagement but also directly impacts sales through live selling events. Influencers, or Key Opinion Leaders (KOLs), play a crucial role in marketing, leveraging their trust and connection with followers to promote products and lifestyles, enhancing brand visibility and credibility."
+    title: "Expert Support",
+    description: "Get comprehensive support from our team to develop and execute your Xiaohongshu marketing strategy"
   }
 ];
 
