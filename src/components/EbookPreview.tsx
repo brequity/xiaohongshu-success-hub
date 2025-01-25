@@ -7,6 +7,19 @@ export const EbookPreview = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
+        className="text-center mb-12"
+      >
+        <h2 className="text-3xl font-bold text-[#1A1F2C] mb-4">
+          Not Ready to Embark on Our Services?
+        </h2>
+        <p className="text-xl text-gray-600">
+          You can do it yourself by reading our Ebook on Amazon
+        </p>
+      </motion.div>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
         className="bg-white rounded-2xl shadow-lg overflow-hidden"
       >
         <div className="grid md:grid-cols-2 gap-8 p-8">
