@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import type { CarouselApi } from "@/components/ui/carousel";
 
 const benefits = [
   {
@@ -36,11 +37,12 @@ const benefits = [
 export const BenefitsSection = () => {
   const isMobile = useIsMobile();
   const [activeSlide, setActiveSlide] = useState(0);
+  const [api, setApi] = useState<CarouselApi>();
 
-  const handleSlideChange = useCallback((api: any) => {
+  const onSelect = useCallback(() => {
     if (!api) return;
     setActiveSlide(api.selectedScrollSnap());
-  }, []);
+  }, [api]);
 
   const BenefitCard = ({ benefit, index }: { benefit: typeof benefits[0], index: number }) => (
     <motion.div
@@ -73,11 +75,10 @@ export const BenefitsSection = () => {
               opts={{
                 align: "start",
                 loop: true,
-                dragFree: false,
-                containScroll: "trimSnaps"
               }}
               className="w-full"
-              onSlideChange={handleSlideChange}
+              setApi={setApi}
+              onSlideChange={onSelect}
             >
               <CarouselContent className="-ml-4">
                 {benefits.map((benefit, index) => (

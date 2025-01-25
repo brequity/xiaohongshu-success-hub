@@ -9,6 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useState, useCallback } from "react";
+import type { CarouselApi } from "@/components/ui/carousel";
 
 const features = [
   {
@@ -36,11 +37,12 @@ const features = [
 export const Features = () => {
   const isMobile = useIsMobile();
   const [activeSlide, setActiveSlide] = useState(0);
+  const [api, setApi] = useState<CarouselApi>();
 
-  const handleSlideChange = useCallback((api: any) => {
+  const onSelect = useCallback(() => {
     if (!api) return;
     setActiveSlide(api.selectedScrollSnap());
-  }, []);
+  }, [api]);
 
   const FeatureCard = ({ feature, index }: { feature: typeof features[0], index: number }) => (
     <motion.div
@@ -88,11 +90,10 @@ export const Features = () => {
               opts={{
                 align: "start",
                 loop: true,
-                dragFree: false,
-                containScroll: "trimSnaps"
               }}
               className="w-full"
-              onSlideChange={handleSlideChange}
+              setApi={setApi}
+              onSlideChange={onSelect}
             >
               <CarouselContent className="-ml-4">
                 {features.map((feature, index) => (
