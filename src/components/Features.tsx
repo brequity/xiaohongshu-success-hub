@@ -80,7 +80,7 @@ export const Features = () => {
             Discover Xiaohongshu (Rednote)
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover why Xiaohongshu has become China's most influential platform for lifestyle content and social commerce, connecting brands with over 200 million engaged users.
+            Explore how Xiaohongshu has emerged as China's premier hub for lifestyle content and social shopping, linking brands to an audience of more than 200 million active users.
           </p>
         </motion.div>
 
