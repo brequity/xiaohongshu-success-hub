@@ -52,6 +52,17 @@ const Admin = () => {
     }
   });
 
+  const formatDateTime = (dateString: string) => {
+    return new Date(dateString).toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
@@ -80,7 +91,8 @@ const Admin = () => {
                         <TableHead>Company</TableHead>
                         <TableHead>Contact</TableHead>
                         <TableHead>Information</TableHead>
-                        <TableHead>Date</TableHead>
+                        <TableHead>Created At</TableHead>
+                        <TableHead>Last Updated</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -93,7 +105,10 @@ const Admin = () => {
                             {lead.information || '-'}
                           </TableCell>
                           <TableCell>
-                            {new Date(lead.created_at).toLocaleDateString()}
+                            {formatDateTime(lead.created_at)}
+                          </TableCell>
+                          <TableCell>
+                            {formatDateTime(lead.updated_at)}
                           </TableCell>
                         </TableRow>
                       ))}
