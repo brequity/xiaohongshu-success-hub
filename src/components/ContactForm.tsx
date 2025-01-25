@@ -21,11 +21,21 @@ export const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+      // Store the submission in the database
+      const { error: dbError } = await supabase
+        .from('contact_form_submissions')
+        .insert([
+          { name, email, message }
+        ]);
+
+      if (dbError) throw dbError;
+
+      // Send email notification
+      const { error: emailError } = await supabase.functions.invoke('send-contact-email', {
         body: { name, email, message }
       });
 
-      if (error) throw error;
+      if (emailError) throw emailError;
       
       toast({
         title: "Message sent!",
@@ -37,7 +47,7 @@ export const ContactForm = () => {
       setEmail("");
       setMessage("");
     } catch (error: any) {
-      console.error("Error sending contact form:", error);
+      console.error("Error processing contact form:", error);
       toast({
         title: "Error",
         description: "Failed to send message. Please try again or contact us via WhatsApp.",
