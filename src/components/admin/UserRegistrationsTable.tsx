@@ -15,6 +15,18 @@ import { Badge } from "@/components/ui/badge";
 import { UserDialog } from "./user-registrations/UserDialog";
 import { CreateUserDialog } from "./user-registrations/CreateUserDialog";
 
+interface UserRole {
+  role: 'admin' | 'user';
+}
+
+interface User {
+  id: string;
+  email: string | null;
+  created_at: string;
+  updated_at: string;
+  user_roles?: UserRole[];
+}
+
 const formatDateTime = (dateString: string) => {
   return new Date(dateString).toLocaleString('en-US', {
     year: 'numeric',
@@ -26,7 +38,7 @@ const formatDateTime = (dateString: string) => {
 };
 
 export const UserRegistrationsTable = () => {
-  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const { data: users, isLoading: isUsersLoading, refetch } = useQuery({
@@ -46,11 +58,11 @@ export const UserRegistrationsTable = () => {
         console.error('Error fetching users:', error);
         throw error;
       }
-      return data;
+      return data as User[];
     }
   });
 
-  const handleEditClick = (user: any) => {
+  const handleEditClick = (user: User) => {
     setSelectedUser(user);
     setDialogOpen(true);
   };
