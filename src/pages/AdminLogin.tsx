@@ -41,7 +41,7 @@ const AdminLogin = () => {
       setIsLoading(true);
       setError(null);
       
-      console.log("Attempting to sign in with:", values.email);
+      console.log("Starting login process for:", values.email);
       
       // First attempt to sign in
       const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
@@ -50,13 +50,17 @@ const AdminLogin = () => {
       });
 
       if (signInError) {
-        console.error("Sign in error:", signInError);
-        throw new Error(signInError.message);
+        console.error("Sign in error details:", {
+          code: signInError.status,
+          message: signInError.message,
+          details: signInError
+        });
+        throw signInError;
       }
 
       if (!signInData.user) {
         console.error("No user data returned after sign in");
-        throw new Error("No user found");
+        throw new Error("Authentication failed - no user data");
       }
 
       console.log("Successfully signed in, checking admin role for user:", signInData.user.id);
@@ -70,18 +74,18 @@ const AdminLogin = () => {
         .single();
 
       if (rolesError) {
-        console.error("Roles error:", rolesError);
+        console.error("Error checking admin role:", rolesError);
         await supabase.auth.signOut();
-        throw new Error("Error checking admin privileges");
+        throw new Error("Error verifying admin privileges");
       }
 
       if (!roles) {
-        console.error("No admin role found for user");
+        console.error("No admin role found");
         await supabase.auth.signOut();
-        throw new Error("Unauthorized access - Admin privileges required");
+        throw new Error("Access denied - Admin privileges required");
       }
 
-      console.log("Admin role verified, proceeding to admin dashboard");
+      console.log("Admin role verified, proceeding to dashboard");
 
       toast({
         title: "Success",
@@ -90,11 +94,16 @@ const AdminLogin = () => {
 
       navigate("/admin");
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Login process failed:", error);
       
-      const errorMessage = error instanceof Error 
-        ? error.message 
-        : "Failed to login. Please check your credentials.";
+      let errorMessage = "Failed to login. Please check your credentials.";
+      
+      if (error instanceof Error) {
+        errorMessage = error.message;
+        if (errorMessage.includes("Invalid login credentials")) {
+          errorMessage = "Invalid email or password. Please try again.";
+        }
+      }
       
       setError(errorMessage);
       
@@ -104,7 +113,10 @@ const AdminLogin = () => {
         description: errorMessage,
       });
       
-      if (error instanceof Error && error.message.includes("Unauthorized access")) {
+      // Only reset form for certain errors
+      if (error instanceof Error && 
+          (error.message.includes("Invalid login credentials") || 
+           error.message.includes("Access denied"))) {
         form.reset();
       }
     } finally {
