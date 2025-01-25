@@ -19,9 +19,9 @@ Deno.serve(async (req) => {
 
     // First check if user exists
     const { data: existingUsers, error: searchError } = await supabase.auth.admin.listUsers({
-      filters: {
-        email: email
-      }
+      page: 1,
+      per_page: 1,
+      search: email
     })
 
     if (searchError) {
@@ -29,7 +29,7 @@ Deno.serve(async (req) => {
       throw searchError
     }
 
-    if (existingUsers?.users?.length > 0) {
+    if (existingUsers?.users?.some(u => u.email?.toLowerCase() === email.toLowerCase())) {
       console.log('User already exists:', email)
       return new Response(
         JSON.stringify({ error: 'A user with this email address already exists' }), {

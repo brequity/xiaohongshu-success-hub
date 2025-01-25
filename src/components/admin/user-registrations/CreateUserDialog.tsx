@@ -30,23 +30,18 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
     }
   });
 
-  const checkExistingUser = async (email: string) => {
-    const { data } = await supabase.auth.admin.listUsers({
-      page: 1,
-      perPage: 1,
-      search: email.trim().toLowerCase()
-    });
-    return data?.users?.some(user => user.email === email.trim().toLowerCase());
-  };
-
   const handleCreateUser = async (email: string, password: string) => {
+    console.log("Creating user with email:", email);
+    
     const { data: functionData, error: functionError } = await supabase.functions.invoke('create-admin-user', {
       body: { email, password }
     });
 
     if (functionError) {
+      console.error("Edge function error:", functionError);
       let errorMessage = functionError.message;
       try {
+        // Try to parse the error message as JSON
         const parsedError = JSON.parse(functionError.message);
         errorMessage = parsedError.error || errorMessage;
       } catch (e) {
@@ -73,14 +68,11 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
       setIsSubmitting(true);
       setError(null);
       
-      const userExists = await checkExistingUser(data.email);
-      if (userExists) {
-        setError("A user with this email address already exists. Please use a different email.");
-        return;
-      }
+      const normalizedEmail = data.email.trim().toLowerCase();
+      console.log("Starting user creation process for:", normalizedEmail);
 
       const functionData = await handleCreateUser(
-        data.email.trim().toLowerCase(),
+        normalizedEmail,
         data.password
       );
 
@@ -94,6 +86,7 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
         handleSuccess();
       }
     } catch (error: any) {
+      console.error("User creation failed:", error);
       setError(error.message);
       toast({
         title: "Error",
