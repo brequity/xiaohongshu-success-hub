@@ -24,9 +24,14 @@ const GrowthStrategyForm = () => {
     setIsSubmitting(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('send-growth-strategy-request', {
-        body: formData
-      });
+      const { error } = await supabase
+        .from('growth_strategy_leads')
+        .insert([{
+          email: formData.email,
+          company_name: formData.companyName,
+          contact_number: formData.contactNumber,
+          information: formData.information
+        }]);
 
       if (error) throw error;
 

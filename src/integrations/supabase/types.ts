@@ -36,6 +36,36 @@ export type Database = {
         }
         Relationships: []
       }
+      growth_strategy_leads: {
+        Row: {
+          company_name: string | null
+          contact_number: string
+          created_at: string
+          email: string
+          id: string
+          information: string | null
+          updated_at: string
+        }
+        Insert: {
+          company_name?: string | null
+          contact_number: string
+          created_at?: string
+          email: string
+          id?: string
+          information?: string | null
+          updated_at?: string
+        }
+        Update: {
+          company_name?: string | null
+          contact_number?: string
+          created_at?: string
+          email?: string
+          id?: string
+          information?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       newsletter_subscriptions: {
         Row: {
           created_at: string
