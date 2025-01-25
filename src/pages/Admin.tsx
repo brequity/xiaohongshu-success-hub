@@ -1,8 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Shield } from "lucide-react";
+import { Shield, Users, FileSpreadsheet } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Navigation } from "@/components/Navigation";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { useQuery } from "@tanstack/react-query";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -31,6 +40,19 @@ const Admin = () => {
     checkAdminStatus();
   }, [navigate]);
 
+  const { data: leads, isLoading: isLeadsLoading } = useQuery({
+    queryKey: ['growth-strategy-leads'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('growth_strategy_leads')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      return data;
+    }
+  });
+
   return (
     <div>
       <Navigation />
@@ -40,13 +62,48 @@ const Admin = () => {
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Add admin dashboard content here */}
-          <div className="p-6 bg-white rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-4">Welcome to Admin Dashboard</h2>
-            <p className="text-gray-600">
-              This is a protected admin area. More features will be added soon.
-            </p>
+        <div className="space-y-8">
+          <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
+            <div className="flex items-center gap-2 p-6 border-b">
+              <FileSpreadsheet className="h-5 w-5" />
+              <h2 className="text-xl font-semibold">Growth Strategy Leads</h2>
+            </div>
+            <div className="p-6">
+              {isLeadsLoading ? (
+                <p>Loading leads...</p>
+              ) : !leads?.length ? (
+                <p>No leads found.</p>
+              ) : (
+                <div className="rounded-md border">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Email</TableHead>
+                        <TableHead>Company</TableHead>
+                        <TableHead>Contact</TableHead>
+                        <TableHead>Information</TableHead>
+                        <TableHead>Date</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {leads.map((lead) => (
+                        <TableRow key={lead.id}>
+                          <TableCell>{lead.email}</TableCell>
+                          <TableCell>{lead.company_name || '-'}</TableCell>
+                          <TableCell>{lead.contact_number}</TableCell>
+                          <TableCell className="max-w-md truncate">
+                            {lead.information || '-'}
+                          </TableCell>
+                          <TableCell>
+                            {new Date(lead.created_at).toLocaleDateString()}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
