@@ -24,7 +24,7 @@ const caseStudies = [
     }
   },
   {
-    image: "/lovable-uploads/5e81858d-ab51-48e2-a60f-f4b633728fc3.png",
+    image: "/lovable-uploads/bf0c26bc-8eca-47ed-a3e5-ccade9d6f18d.png",
     title: "Lifestyle Brand",
     description: "Expanded market reach by 500% through influencer collaborations and user-generated content",
     metrics: {
