@@ -19,6 +19,13 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
         </Button>
         <Button 
           variant="ghost"
+          onClick={() => scrollToSection('pricing')}
+          disabled={isNavigating}
+        >
+          RedNote vs TikTok
+        </Button>
+        <Button 
+          variant="ghost"
           onClick={() => scrollToSection('starter-guide')}
           disabled={isNavigating}
         >

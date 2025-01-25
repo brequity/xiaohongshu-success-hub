@@ -42,6 +42,14 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
           <Button 
             variant="ghost" 
             className="w-full justify-start"
+            onClick={() => scrollToSection('pricing')}
+            disabled={isNavigating}
+          >
+            RedNote vs TikTok
+          </Button>
+          <Button 
+            variant="ghost" 
+            className="w-full justify-start"
             onClick={() => scrollToSection('starter-guide')}
             disabled={isNavigating}
           >
