@@ -24,7 +24,7 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
                 onClick={() => scrollToSection('top')}
                 className="bg-transparent hover:bg-accent"
               >
-                Home
+                Academy
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="p-2 w-48">

@@ -38,7 +38,7 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
               onClick={() => scrollToSection('top')}
               disabled={isNavigating}
             >
-              Home
+              Academy
             </Button>
             <Button 
               variant="ghost" 
