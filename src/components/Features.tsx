@@ -76,22 +76,28 @@ export const Features = () => {
         </motion.div>
 
         {isMobile ? (
-          <div className="relative">
-            <Carousel className="w-full">
-              <CarouselContent>
+          <div className="relative w-full px-4">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+                dragFree: false,
+                containScroll: "trimSnaps"
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-4">
                 {features.map((feature, index) => (
-                  <CarouselItem key={index}>
-                    <div className="px-1">
-                      <FeatureCard feature={feature} index={index} />
-                    </div>
+                  <CarouselItem key={index} className="pl-4 basis-full">
+                    <FeatureCard feature={feature} index={index} />
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <div className="absolute -left-4 top-1/2 -translate-y-1/2">
-                <CarouselPrevious />
+              <div className="absolute -left-2 top-1/2 -translate-y-1/2 z-10">
+                <CarouselPrevious className="h-8 w-8 rounded-full" />
               </div>
-              <div className="absolute -right-4 top-1/2 -translate-y-1/2">
-                <CarouselNext />
+              <div className="absolute -right-2 top-1/2 -translate-y-1/2 z-10">
+                <CarouselNext className="h-8 w-8 rounded-full" />
               </div>
             </Carousel>
           </div>
