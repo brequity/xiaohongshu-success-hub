@@ -7,7 +7,6 @@ import { BenefitsSection } from "@/components/sections/BenefitsSection";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
-import { LeadManagementSection } from "@/components/sections/LeadManagementSection";
 import { ContactForm } from "@/components/ContactForm";
 
 const Index = () => {
@@ -40,7 +39,6 @@ const Index = () => {
       <BenefitsSection />
       <CTASection />
       <ServicesSection />
-      <LeadManagementSection />
       <CaseStudiesSection />
       <ContactForm />
     </div>

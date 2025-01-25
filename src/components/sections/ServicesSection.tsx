@@ -1,4 +1,4 @@
-import { Building, Network, Users, ChartBar, Megaphone } from "lucide-react";
+import { Building, Network, Users, ChartBar, Megaphone, Bot } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const services = [
@@ -26,6 +26,11 @@ const services = [
     icon: <ChartBar className="w-10 h-10 text-coral" />,
     title: "Analytics and Reporting",
     description: "Detailed insights into campaign performance to continually refine strategy."
+  },
+  {
+    icon: <Bot className="w-10 h-10 text-coral" />,
+    title: "AI-Powered Lead Management",
+    description: "24/7 intelligent lead engagement and qualification system for faster response times and higher conversion rates."
   }
 ];
 
