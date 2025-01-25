@@ -6,6 +6,7 @@ import { MarketingPlanSection } from "@/components/sections/MarketingPlanSection
 import { BenefitsSection } from "@/components/sections/BenefitsSection";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { CTASection } from "@/components/sections/CTASection";
+import { ServicesSection } from "@/components/sections/ServicesSection";
 import { ContactForm } from "@/components/ContactForm";
 
 const Index = () => {
@@ -36,8 +37,9 @@ const Index = () => {
         handleGetStrategy={handleGetStrategy}
       />
       <BenefitsSection />
-      <CaseStudiesSection />
       <CTASection />
+      <ServicesSection />
+      <CaseStudiesSection />
       <ContactForm />
     </div>
   );
