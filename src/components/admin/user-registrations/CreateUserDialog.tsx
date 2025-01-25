@@ -21,6 +21,7 @@ interface CreateUserDialogProps {
 export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const form = useForm<CreateUserForm>({
     defaultValues: {
@@ -31,7 +32,21 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
 
   const onSubmit = async (data: CreateUserForm) => {
     try {
+      setIsSubmitting(true);
       setError(null);
+      
+      // Check if user exists first
+      const { data: existingUsers } = await supabase.auth.admin.listUsers({
+        filters: {
+          email: data.email.trim().toLowerCase()
+        }
+      });
+
+      if (existingUsers?.users?.length > 0) {
+        setError("A user with this email address already exists. Please use a different email.");
+        return;
+      }
+
       const { data: functionData, error: functionError } = await supabase.functions.invoke('create-admin-user', {
         body: {
           email: data.email.trim().toLowerCase(),
@@ -42,13 +57,9 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
       if (functionError) {
         let errorMessage = functionError.message;
         try {
-          // Try to parse the error message as JSON
-          const parsedBody = JSON.parse(functionError.message);
-          if (parsedBody.error) {
-            errorMessage = parsedBody.error;
-          }
+          const parsedError = JSON.parse(functionError.message);
+          errorMessage = parsedError.error || errorMessage;
         } catch (e) {
-          // If parsing fails, use the original message
           console.error('Error parsing error message:', e);
         }
         throw new Error(errorMessage);
@@ -65,11 +76,10 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
           title: "Success",
           description: "User created successfully",
         });
+        form.reset();
+        setOpen(false);
+        onUserCreated();
       }
-      
-      form.reset();
-      setOpen(false);
-      onUserCreated();
     } catch (error: any) {
       setError(error.message);
       toast({
@@ -77,6 +87,8 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
         description: error.message || "Failed to create user",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -118,6 +130,7 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
                       placeholder="user@example.com" 
                       {...field} 
                       onChange={(e) => field.onChange(e.target.value.toLowerCase())}
+                      disabled={isSubmitting}
                     />
                   </FormControl>
                   <FormMessage />
@@ -138,14 +151,19 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} />
+                    <Input 
+                      type="password" 
+                      placeholder="••••••••" 
+                      {...field} 
+                      disabled={isSubmitting}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
-              Create User
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Creating..." : "Create User"}
             </Button>
           </form>
         </Form>
