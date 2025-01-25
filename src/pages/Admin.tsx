@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Shield, FileSpreadsheet, X } from "lucide-react";
+import { Shield, FileSpreadsheet, Users, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Table,
@@ -61,6 +61,19 @@ const Admin = () => {
     }
   });
 
+  const { data: users, isLoading: isUsersLoading } = useQuery({
+    queryKey: ['user-registrations'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      return data;
+    }
+  });
+
   const formatDateTime = (dateString: string) => {
     return new Date(dateString).toLocaleString('en-US', {
       year: 'numeric',
@@ -81,6 +94,43 @@ const Admin = () => {
         </div>
         
         <div className="space-y-8">
+          {/* User Registrations Section */}
+          <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
+            <div className="flex items-center gap-2 p-6 border-b">
+              <Users className="h-5 w-5" />
+              <h2 className="text-xl font-semibold">User Registrations</h2>
+            </div>
+            <div className="p-6">
+              {isUsersLoading ? (
+                <p>Loading users...</p>
+              ) : !users?.length ? (
+                <p>No registered users found.</p>
+              ) : (
+                <div className="rounded-md border">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Email</TableHead>
+                        <TableHead>Created At</TableHead>
+                        <TableHead>Last Updated</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {users.map((user) => (
+                        <TableRow key={user.id}>
+                          <TableCell>{user.email || '-'}</TableCell>
+                          <TableCell>{formatDateTime(user.created_at)}</TableCell>
+                          <TableCell>{formatDateTime(user.updated_at)}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Growth Strategy Leads Section */}
           <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
             <div className="flex items-center gap-2 p-6 border-b">
               <FileSpreadsheet className="h-5 w-5" />
