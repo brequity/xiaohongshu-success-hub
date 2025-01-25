@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export const PlatformComparison = () => {
+const PlatformComparison = () => {
   const comparisons = [
     {
       feature: "Primary Content Type",
@@ -92,3 +92,5 @@ export const PlatformComparison = () => {
     </div>
   );
 };
+
+export default PlatformComparison;
