@@ -7,6 +7,7 @@ import { BenefitsSection } from "@/components/sections/BenefitsSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
+import { AboutUsSection } from "@/components/sections/AboutUsSection";
 import { ContactForm } from "@/components/ContactForm";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -89,6 +90,14 @@ const Index = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.8 }}
+        >
+          <AboutUsSection />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 2.1 }}
         >
           <ContactForm />
         </motion.div>
