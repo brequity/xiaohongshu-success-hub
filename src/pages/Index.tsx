@@ -4,10 +4,11 @@ import { Navigation } from "@/components/Navigation";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { MarketingPlanSection } from "@/components/sections/MarketingPlanSection";
 import { BenefitsSection } from "@/components/sections/BenefitsSection";
-import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
+import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { ContactForm } from "@/components/ContactForm";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -26,22 +27,73 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navigation />
-      <HeroSection scrollToMarketingPlan={scrollToMarketingPlan} />
-      <MarketingPlanSection
-        marketingObjective={marketingObjective}
-        budget={budget}
-        setMarketingObjective={setMarketingObjective}
-        setBudget={setBudget}
-        handleGetStrategy={handleGetStrategy}
-      />
-      <BenefitsSection />
-      <CTASection />
-      <ServicesSection />
-      <CaseStudiesSection />
-      <ContactForm />
-    </div>
+    <AnimatePresence mode="wait">
+      <div className="min-h-screen bg-white">
+        <Navigation />
+        
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <HeroSection scrollToMarketingPlan={scrollToMarketingPlan} />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <MarketingPlanSection
+            marketingObjective={marketingObjective}
+            budget={budget}
+            setMarketingObjective={setMarketingObjective}
+            setBudget={setBudget}
+            handleGetStrategy={handleGetStrategy}
+          />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <BenefitsSection />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
+        >
+          <CTASection />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.2 }}
+        >
+          <ServicesSection />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.5 }}
+        >
+          <CaseStudiesSection />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.8 }}
+        >
+          <ContactForm />
+        </motion.div>
+      </div>
+    </AnimatePresence>
   );
 };
 
