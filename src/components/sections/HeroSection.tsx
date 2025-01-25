@@ -10,6 +10,13 @@ const stats = [
 ];
 
 export const HeroSection = ({ scrollToMarketingPlan }: { scrollToMarketingPlan: () => void }) => {
+  const scrollToCaseStudies = () => {
+    const caseStudiesSection = document.querySelector('#case-studies');
+    if (caseStudiesSection) {
+      caseStudiesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="pt-32 pb-20 relative overflow-hidden">
       {/* Background Image */}
@@ -48,7 +55,12 @@ export const HeroSection = ({ scrollToMarketingPlan }: { scrollToMarketingPlan: 
               Start Your Growth Strategy
               <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
-            <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="bg-white/10 hover:bg-white/20 text-white border-white"
+              onClick={scrollToCaseStudies}
+            >
               View Success Stories
             </Button>
           </div>
