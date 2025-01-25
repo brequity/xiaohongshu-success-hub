@@ -34,7 +34,7 @@ export const MarketingPlanSection = ({
           className="max-w-3xl mx-auto"
         >
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Get Your Custom Marketing Plan</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#ea384c]">Get Your Custom Marketing Plan</h2>
             <p className="text-gray-600">
               Select your marketing objectives and budget to receive a tailored strategy that maximizes your ROI on Xiaohongshu
             </p>
