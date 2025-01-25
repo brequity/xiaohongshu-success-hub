@@ -1,47 +1,39 @@
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
-  const scrollToFeatures = () => {
-    const featuresSection = document.querySelector('#features');
-    if (featuresSection) {
-      featuresSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <section className="min-h-[80vh] flex items-center justify-center relative">
-      <img 
-        src="/lovable-uploads/be80b333-e12f-4cac-8731-d442fa67f8bf.png"
-        alt="Hero background"
-        className="absolute inset-0 w-full h-full object-cover object-center"
-        style={{ objectPosition: "center 25%" }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
-
-      <div className="container px-4 mx-auto relative z-10">
-        <motion.div 
+    <section className="relative">
+      <div className="h-[400px] w-full relative overflow-hidden">
+        <img
+          src="/lovable-uploads/cfa0847e-9f5c-4e97-87bb-371204052bad.png"
+          alt="Xiaohongshu content creator using phone"
+          className="w-full h-full object-cover"
+          loading="eager"
+          fetchPriority="high"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+      
+      <div className="absolute inset-0 flex items-center justify-center">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto"
+          transition={{ duration: 0.5 }}
+          className="text-center text-white px-4"
         >
-          <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-coral/90 text-white rounded-full">
-            Understanding Xiaohongshu (RED)
-          </span>
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
-            Your Gateway to China's Leading Lifestyle Platform
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            Xiaohongshu Academy
           </h1>
-          <p className="text-base md:text-xl text-gray-100 mb-8">
-            Xiaohongshu is more than just a social media platform; it's a lifestyle and e-commerce hub where over 200 million young, affluent Chinese users share their experiences in fashion, beauty, and travel.
+          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+            Master the art of content creation on China's most influential lifestyle platform
           </p>
-          <Button 
-            size="lg"
-            onClick={scrollToFeatures}
-            className="bg-coral hover:bg-coral-light text-white transition-all duration-300 transform hover:scale-105"
-          >
-            Explore Xiaohongshu Features
-          </Button>
+          <Link to="/register">
+            <Button size="lg" className="bg-[#ea384c] hover:bg-[#ea384c]/90">
+              Get Started
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>
