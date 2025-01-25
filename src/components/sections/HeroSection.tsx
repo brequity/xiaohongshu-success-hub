@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const stats = [
-  { number: "600M+", label: "Monthly Active Users" },
+  { number: "200M+", label: "Monthly Active Users" },
   { number: "70%", label: "Users with High Purchasing Power" },
   { number: "80%", label: "Brand Conversion Rate" },
   { number: "#1", label: "Social Commerce Platform" },
