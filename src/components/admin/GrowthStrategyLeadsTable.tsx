@@ -1,4 +1,5 @@
-import { FileSpreadsheet } from "lucide-react";
+import { useState } from "react";
+import { FileSpreadsheet, Pencil } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -9,6 +10,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { LeadDialog } from "./growth-strategy/LeadDialog";
 
 const formatDateTime = (dateString: string) => {
   return new Date(dateString).toLocaleString('en-US', {
@@ -21,7 +24,10 @@ const formatDateTime = (dateString: string) => {
 };
 
 export const GrowthStrategyLeadsTable = () => {
-  const { data: leads, isLoading: isLeadsLoading } = useQuery({
+  const [selectedLead, setSelectedLead] = useState<any>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const { data: leads, isLoading: isLeadsLoading, refetch } = useQuery({
     queryKey: ['growth-strategy-leads'],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -33,6 +39,11 @@ export const GrowthStrategyLeadsTable = () => {
       return data;
     }
   });
+
+  const handleEditClick = (lead: any) => {
+    setSelectedLead(lead);
+    setDialogOpen(true);
+  };
 
   return (
     <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
@@ -55,6 +66,7 @@ export const GrowthStrategyLeadsTable = () => {
                   <TableHead>Contact Number</TableHead>
                   <TableHead>Created At</TableHead>
                   <TableHead>Information</TableHead>
+                  <TableHead>Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -67,6 +79,15 @@ export const GrowthStrategyLeadsTable = () => {
                     <TableCell className="max-w-xs truncate">
                       {lead.information || '-'}
                     </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleEditClick(lead)}
+                      >
+                        <Pencil className="h-4 w-4" />
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -74,6 +95,15 @@ export const GrowthStrategyLeadsTable = () => {
           </div>
         )}
       </div>
+      <LeadDialog
+        lead={selectedLead}
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        onLeadUpdated={() => {
+          refetch();
+          setDialogOpen(false);
+        }}
+      />
     </div>
   );
 };
