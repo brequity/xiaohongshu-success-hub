@@ -19,6 +19,10 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleHomeClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -35,7 +39,7 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
           <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col gap-4 mt-4">
-          <Link to="/">
+          <Link to="/" onClick={handleHomeClick}>
             <Button variant="ghost" className="w-full justify-start">
               Home
             </Button>
