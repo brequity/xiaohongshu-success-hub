@@ -33,24 +33,39 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
     try {
       setError(null);
       const { data: functionData, error: functionError } = await supabase.functions.invoke('create-admin-user', {
-        body: data
+        body: {
+          email: data.email.trim().toLowerCase(),
+          password: data.password
+        }
       });
 
       if (functionError) {
-        const errorMessage = functionError.message;
-        let parsedError;
+        let errorMessage = functionError.message;
         try {
-          parsedError = JSON.parse(errorMessage);
-          throw new Error(parsedError.error);
+          // Try to parse the error message as JSON
+          const parsedBody = JSON.parse(functionError.message);
+          if (parsedBody.error) {
+            errorMessage = parsedBody.error;
+          }
         } catch (e) {
-          throw new Error(errorMessage);
+          // If parsing fails, use the original message
+          console.error('Error parsing error message:', e);
         }
+        throw new Error(errorMessage);
       }
 
-      toast({
-        title: "Success",
-        description: "User created successfully",
-      });
+      if (functionData?.warning) {
+        toast({
+          title: "Warning",
+          description: functionData.warning,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Success",
+          description: "User created successfully",
+        });
+      }
       
       form.reset();
       setOpen(false);
@@ -98,7 +113,12 @@ export const CreateUserDialog = ({ onUserCreated }: CreateUserDialogProps) => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="user@example.com" {...field} />
+                    <Input 
+                      type="email" 
+                      placeholder="user@example.com" 
+                      {...field} 
+                      onChange={(e) => field.onChange(e.target.value.toLowerCase())}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
