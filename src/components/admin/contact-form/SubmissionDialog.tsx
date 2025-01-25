@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -30,6 +30,15 @@ export const SubmissionDialog = ({
   const [editedName, setEditedName] = useState("");
   const [editedEmail, setEditedEmail] = useState("");
   const [editedMessage, setEditedMessage] = useState("");
+
+  // Reset form when submission changes
+  useEffect(() => {
+    if (submission) {
+      setEditedName(submission.name);
+      setEditedEmail(submission.email);
+      setEditedMessage(submission.message);
+    }
+  }, [submission]);
 
   const handleEdit = async () => {
     if (!submission) return;
@@ -64,7 +73,7 @@ export const SubmissionDialog = ({
           <div>
             <h3 className="font-medium text-sm">Name</h3>
             <Input 
-              value={editedName || submission.name}
+              value={editedName}
               onChange={(e) => setEditedName(e.target.value)}
               className="mt-1"
             />
@@ -72,7 +81,7 @@ export const SubmissionDialog = ({
           <div>
             <h3 className="font-medium text-sm">Email</h3>
             <Input 
-              value={editedEmail || submission.email}
+              value={editedEmail}
               onChange={(e) => setEditedEmail(e.target.value)}
               className="mt-1"
             />
@@ -80,7 +89,7 @@ export const SubmissionDialog = ({
           <div>
             <h3 className="font-medium text-sm">Message</h3>
             <Textarea 
-              value={editedMessage || submission.message}
+              value={editedMessage}
               onChange={(e) => setEditedMessage(e.target.value)}
               className="mt-1"
             />
