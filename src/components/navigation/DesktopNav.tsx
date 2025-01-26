@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { Home, GraduationCap, BookOpen, ScrollText, HelpCircle, UserPlus } from "lucide-react";
+import { Home, GraduationCap, BookOpen, ScrollText, HelpCircle, UserPlus, Mail } from "lucide-react";
 
 interface DesktopNavProps {
   isNavigating: boolean;
@@ -82,6 +82,15 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
+        <Button
+          variant="ghost"
+          className="flex items-center gap-2"
+          onClick={() => scrollToSection('contact')}
+          disabled={isNavigating}
+        >
+          <Mail className="h-4 w-4" />
+          Contact Us
+        </Button>
       </div>
       <div>
         <Link to="/register">

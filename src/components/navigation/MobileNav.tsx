@@ -6,7 +6,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu, ChevronRight, Home, GraduationCap, BookOpen, HelpCircle, ScrollText, UserPlus } from "lucide-react";
+import { Menu, ChevronRight, Home, GraduationCap, BookOpen, HelpCircle, ScrollText, UserPlus, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface MobileNavProps {
@@ -92,6 +92,15 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
               </Button>
             </Link>
           </div>
+          <Button 
+            variant="ghost" 
+            className="w-full justify-start gap-2"
+            onClick={() => scrollToSection('contact')}
+            disabled={isNavigating}
+          >
+            <Mail className="h-4 w-4" />
+            Contact Us
+          </Button>
           <Link to="/register">
             <Button variant="ghost" className="w-full justify-start gap-2">
               <UserPlus className="h-4 w-4" />
