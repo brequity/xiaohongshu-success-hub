@@ -36,6 +36,12 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
             Home
           </Button>
         </Link>
+        <Link to="/xhs" onClick={handleXiaohongshuClick}>
+          <Button variant="ghost" className="flex items-center gap-2">
+            <BookOpen className="h-4 w-4" />
+            Xiaohongshu
+          </Button>
+        </Link>
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
@@ -60,12 +66,6 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <Link to="/xhs" onClick={handleXiaohongshuClick}>
-          <Button variant="ghost" className="flex items-center gap-2">
-            <BookOpen className="h-4 w-4" />
-            Xiaohongshu
-          </Button>
-        </Link>
         <Button 
           variant="ghost"
           onClick={() => scrollToSection('starter-guide')}

@@ -48,6 +48,12 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
               Home
             </Button>
           </Link>
+          <Link to="/xhs" onClick={handleXiaohongshuClick}>
+            <Button variant="ghost" className="w-full justify-start gap-2">
+              <BookOpen className="h-4 w-4" />
+              Xiaohongshu
+            </Button>
+          </Link>
           <div className="space-y-3">
             <Link to="/academy" onClick={handleAcademyClick}>
               <Button 
@@ -68,12 +74,6 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
               RedNote vs TikTok
             </Button>
           </div>
-          <Link to="/xhs" onClick={handleXiaohongshuClick}>
-            <Button variant="ghost" className="w-full justify-start gap-2">
-              <BookOpen className="h-4 w-4" />
-              Xiaohongshu
-            </Button>
-          </Link>
           <Button 
             variant="ghost" 
             className="w-full justify-start gap-2"
