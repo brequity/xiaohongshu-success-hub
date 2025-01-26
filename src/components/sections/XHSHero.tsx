@@ -5,11 +5,11 @@ export const XHSHero = () => {
     <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="/lovable-uploads/2a1041b0-8810-4ef0-bccc-541adaaddf00.png"
+          src="/lovable-uploads/d546e03c-f5db-416b-90df-f51daf01e9c5.png"
           alt="Xiaohongshu Banner"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/30" />
       </div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
