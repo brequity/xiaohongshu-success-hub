@@ -1,10 +1,10 @@
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { Menu, Home, BookOpen, Mail, UserPlus, Hash } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -30,17 +30,17 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
   };
 
   return (
-    <Sheet>
-      <SheetTrigger asChild>
+    <Drawer>
+      <DrawerTrigger asChild>
         <Button variant="ghost" size="icon">
           <Menu className="h-5 w-5" />
         </Button>
-      </SheetTrigger>
-      <SheetContent>
-        <SheetHeader className="mb-8">
-          <SheetTitle>Menu</SheetTitle>
-        </SheetHeader>
-        <nav className="flex-1 overflow-y-auto">
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader className="mb-8">
+          <DrawerTitle>Menu</DrawerTitle>
+        </DrawerHeader>
+        <nav className="flex-1 overflow-y-auto px-4">
           <div className="flex flex-col gap-4">
             <Link to="/" onClick={handleHomeClick}>
               <MobileMenuItem 
@@ -77,7 +77,7 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
             />
           </div>
         </nav>
-      </SheetContent>
-    </Sheet>
+      </DrawerContent>
+    </Drawer>
   );
 };
