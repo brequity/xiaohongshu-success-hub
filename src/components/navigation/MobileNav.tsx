@@ -37,83 +37,85 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent className="h-screen flex flex-col justify-center">
-        <SheetHeader className="absolute top-4 left-4">
+      <SheetContent className="flex flex-col">
+        <SheetHeader className="mb-8">
           <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
-        <div className="flex flex-col gap-4">
-          <Link to="/" onClick={handleHomeClick}>
-            <Button variant="ghost" className="w-full justify-start gap-2">
-              <Home className="h-4 w-4" />
-              Home
-            </Button>
-          </Link>
-          <Link to="/xhs" onClick={handleXiaohongshuClick}>
-            <Button variant="ghost" className="w-full justify-start gap-2">
-              <BookOpen className="h-4 w-4" />
-              Xiaohongshu
-            </Button>
-          </Link>
-          <Link to="/hashtag-generator">
-            <Button variant="ghost" className="w-full justify-start gap-2">
-              <Hash className="h-4 w-4" />
-              Hashtag Generator
-            </Button>
-          </Link>
-          <div className="space-y-3">
-            <Link to="/academy" onClick={handleAcademyClick}>
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start gap-2"
-              >
-                <GraduationCap className="h-4 w-4" />
-                Academy
+        <nav className="flex-1 overflow-y-auto">
+          <div className="flex flex-col gap-4">
+            <Link to="/" onClick={handleHomeClick}>
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <Home className="h-4 w-4" />
+                Home
               </Button>
             </Link>
+            <Link to="/xhs" onClick={handleXiaohongshuClick}>
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <BookOpen className="h-4 w-4" />
+                Xiaohongshu
+              </Button>
+            </Link>
+            <Link to="/hashtag-generator">
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <Hash className="h-4 w-4" />
+                Hashtag Generator
+              </Button>
+            </Link>
+            <div className="space-y-3">
+              <Link to="/academy" onClick={handleAcademyClick}>
+                <Button 
+                  variant="ghost" 
+                  className="w-full justify-start gap-2"
+                >
+                  <GraduationCap className="h-4 w-4" />
+                  Academy
+                </Button>
+              </Link>
+              <Button 
+                variant="ghost" 
+                className="w-full justify-start pl-8 text-sm gap-2"
+                onClick={() => scrollToSection('pricing')}
+                disabled={isNavigating}
+              >
+                <ChevronRight className="h-4 w-4" />
+                RedNote vs TikTok
+              </Button>
+              <Link to="/starter-guide">
+                <Button 
+                  variant="ghost" 
+                  className="w-full justify-start pl-8 text-sm gap-2"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                  Starter Guide
+                </Button>
+              </Link>
+              <Link to="/quiz">
+                <Button 
+                  variant="ghost" 
+                  className="w-full justify-start pl-8 text-sm gap-2"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                  Quiz
+                </Button>
+              </Link>
+            </div>
             <Button 
               variant="ghost" 
-              className="w-full justify-start pl-8 text-sm gap-2"
-              onClick={() => scrollToSection('pricing')}
+              className="w-full justify-start gap-2"
+              onClick={() => scrollToSection('contact')}
               disabled={isNavigating}
             >
-              <ChevronRight className="h-4 w-4" />
-              RedNote vs TikTok
+              <Mail className="h-4 w-4" />
+              Contact Us
             </Button>
-            <Link to="/starter-guide">
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start pl-8 text-sm gap-2"
-              >
-                <ChevronRight className="h-4 w-4" />
-                Starter Guide
-              </Button>
-            </Link>
-            <Link to="/quiz">
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start pl-8 text-sm gap-2"
-              >
-                <ChevronRight className="h-4 w-4" />
-                Quiz
+            <Link to="/register">
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <UserPlus className="h-4 w-4" />
+                Sign Up
               </Button>
             </Link>
           </div>
-          <Button 
-            variant="ghost" 
-            className="w-full justify-start gap-2"
-            onClick={() => scrollToSection('contact')}
-            disabled={isNavigating}
-          >
-            <Mail className="h-4 w-4" />
-            Contact Us
-          </Button>
-          <Link to="/register">
-            <Button variant="ghost" className="w-full justify-start gap-2">
-              <UserPlus className="h-4 w-4" />
-              Sign Up
-            </Button>
-          </Link>
-        </div>
+        </nav>
       </SheetContent>
     </Sheet>
   );
