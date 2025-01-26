@@ -10,6 +10,7 @@ import AdminLogin from "./pages/AdminLogin";
 import Admin from "./pages/Admin";
 import Register from "./pages/Register";
 import Xiaohongshu from "./pages/Xiaohongshu";
+import XHS from "./pages/XHS";
 import GrowthStrategyForm from "./pages/GrowthStrategyForm";
 import Academy from "./pages/Academy";
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/admin" element={<Admin />} />
           <Route path="/register" element={<Register />} />
           <Route path="/xiaohongshu" element={<Xiaohongshu />} />
+          <Route path="/xhs" element={<XHS />} />
           <Route path="/growth-strategy" element={<GrowthStrategyForm />} />
           <Route path="/academy" element={<Academy />} />
         </Routes>
