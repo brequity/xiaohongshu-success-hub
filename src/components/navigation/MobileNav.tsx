@@ -73,22 +73,25 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
               <ChevronRight className="h-4 w-4" />
               RedNote vs TikTok
             </Button>
+            <Link to="/starter-guide">
+              <Button 
+                variant="ghost" 
+                className="w-full justify-start pl-8 text-sm gap-2"
+              >
+                <ChevronRight className="h-4 w-4" />
+                Starter Guide
+              </Button>
+            </Link>
+            <Link to="/quiz">
+              <Button 
+                variant="ghost" 
+                className="w-full justify-start pl-8 text-sm gap-2"
+              >
+                <ChevronRight className="h-4 w-4" />
+                Quiz
+              </Button>
+            </Link>
           </div>
-          <Button 
-            variant="ghost" 
-            className="w-full justify-start gap-2"
-            onClick={() => scrollToSection('starter-guide')}
-            disabled={isNavigating}
-          >
-            <HelpCircle className="h-4 w-4" />
-            Starter Guide
-          </Button>
-          <Link to="/quiz">
-            <Button variant="ghost" className="w-full justify-start gap-2">
-              <ScrollText className="h-4 w-4" />
-              Quiz
-            </Button>
-          </Link>
           <Link to="/register">
             <Button variant="ghost" className="w-full justify-start gap-2">
               <UserPlus className="h-4 w-4" />

@@ -52,7 +52,7 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
                 </NavigationMenuTrigger>
               </Link>
               <NavigationMenuContent>
-                <div className="p-2 w-48">
+                <div className="p-2 w-48 space-y-2">
                   <button
                     onClick={() => scrollToSection('pricing')}
                     className="w-full text-left px-2 py-1.5 text-sm hover:bg-accent rounded-md transition-colors flex items-center gap-2"
@@ -61,26 +61,27 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
                     <ScrollText className="h-4 w-4" />
                     RedNote vs TikTok
                   </button>
+                  <Link to="/starter-guide">
+                    <button
+                      className="w-full text-left px-2 py-1.5 text-sm hover:bg-accent rounded-md transition-colors flex items-center gap-2"
+                    >
+                      <HelpCircle className="h-4 w-4" />
+                      Starter Guide
+                    </button>
+                  </Link>
+                  <Link to="/quiz">
+                    <button
+                      className="w-full text-left px-2 py-1.5 text-sm hover:bg-accent rounded-md transition-colors flex items-center gap-2"
+                    >
+                      <ScrollText className="h-4 w-4" />
+                      Quiz
+                    </button>
+                  </Link>
                 </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <Button 
-          variant="ghost"
-          onClick={() => scrollToSection('starter-guide')}
-          disabled={isNavigating}
-          className="flex items-center gap-2"
-        >
-          <HelpCircle className="h-4 w-4" />
-          Starter Guide
-        </Button>
-        <Link to="/quiz">
-          <Button variant="ghost" className="flex items-center gap-2">
-            <ScrollText className="h-4 w-4" />
-            Quiz
-          </Button>
-        </Link>
       </div>
       <div>
         <Link to="/register">
