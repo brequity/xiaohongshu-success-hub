@@ -32,16 +32,21 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button 
+          variant="ghost" 
+          size="icon"
+          className="relative z-50"
+        >
           <Menu className="h-5 w-5" />
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader className="mb-8">
-          <DrawerTitle>Menu</DrawerTitle>
+      <DrawerContent className="fixed inset-x-0 bottom-0 z-50 flex h-[85vh] flex-col rounded-t-[10px] bg-background">
+        <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
+        <DrawerHeader className="relative px-4 pb-6 pt-0">
+          <DrawerTitle className="text-center text-lg font-semibold">Menu</DrawerTitle>
         </DrawerHeader>
-        <nav className="flex-1 overflow-y-auto px-4">
-          <div className="flex flex-col gap-4">
+        <nav className="scrollbar-none flex-1 overflow-y-auto px-4">
+          <div className="flex flex-col gap-4 pb-8">
             <Link to="/" onClick={handleHomeClick}>
               <MobileMenuItem 
                 icon={Home}
