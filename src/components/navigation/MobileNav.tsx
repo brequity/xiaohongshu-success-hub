@@ -68,7 +68,7 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
               RedNote vs TikTok
             </Button>
           </div>
-          <Link to="/xiaohongshu" onClick={handleXiaohongshuClick}>
+          <Link to="/xhs" onClick={handleXiaohongshuClick}>
             <Button variant="ghost" className="w-full justify-start gap-2">
               <BookOpen className="h-4 w-4" />
               Xiaohongshu
