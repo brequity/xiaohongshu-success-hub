@@ -37,11 +37,11 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent>
-        <SheetHeader>
+      <SheetContent className="h-screen flex flex-col justify-center">
+        <SheetHeader className="absolute top-4 left-4">
           <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
-        <div className="flex flex-col gap-4 mt-4">
+        <div className="flex flex-col gap-4">
           <Link to="/" onClick={handleHomeClick}>
             <Button variant="ghost" className="w-full justify-start gap-2">
               <Home className="h-4 w-4" />
