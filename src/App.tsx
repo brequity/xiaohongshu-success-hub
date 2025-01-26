@@ -13,6 +13,7 @@ import Xiaohongshu from "./pages/Xiaohongshu";
 import XHS from "./pages/XHS";
 import GrowthStrategyForm from "./pages/GrowthStrategyForm";
 import Academy from "./pages/Academy";
+import HashtagGenerator from "./pages/HashtagGenerator";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/xhs" element={<XHS />} />
           <Route path="/growth-strategy" element={<GrowthStrategyForm />} />
           <Route path="/academy" element={<Academy />} />
+          <Route path="/hashtag-generator" element={<HashtagGenerator />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

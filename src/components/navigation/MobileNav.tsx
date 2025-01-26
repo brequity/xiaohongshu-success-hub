@@ -6,7 +6,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu, ChevronRight, Home, GraduationCap, BookOpen, HelpCircle, ScrollText, UserPlus, Mail } from "lucide-react";
+import { Menu, ChevronRight, Home, GraduationCap, BookOpen, HelpCircle, ScrollText, UserPlus, Mail, Hash } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface MobileNavProps {
@@ -52,6 +52,12 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
             <Button variant="ghost" className="w-full justify-start gap-2">
               <BookOpen className="h-4 w-4" />
               Xiaohongshu
+            </Button>
+          </Link>
+          <Link to="/hashtag-generator">
+            <Button variant="ghost" className="w-full justify-start gap-2">
+              <Hash className="h-4 w-4" />
+              Hashtag Generator
             </Button>
           </Link>
           <div className="space-y-3">

@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { Home, GraduationCap, BookOpen, ScrollText, HelpCircle, UserPlus, Mail } from "lucide-react";
+import { Home, GraduationCap, BookOpen, ScrollText, HelpCircle, UserPlus, Mail, Hash } from "lucide-react";
 
 interface DesktopNavProps {
   isNavigating: boolean;
@@ -40,6 +40,12 @@ export const DesktopNav = ({ isNavigating, scrollToSection }: DesktopNavProps) =
           <Button variant="ghost" className="flex items-center gap-2">
             <BookOpen className="h-4 w-4" />
             Xiaohongshu
+          </Button>
+        </Link>
+        <Link to="/hashtag-generator">
+          <Button variant="ghost" className="flex items-center gap-2">
+            <Hash className="h-4 w-4" />
+            Hashtag Generator
           </Button>
         </Link>
         <NavigationMenu>
