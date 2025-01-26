@@ -1,10 +1,15 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
+interface Hashtag {
+  chinese: string;
+  english: string;
+}
+
 interface Category {
   name: string;
   description: string;
-  hashtags: string[];
+  hashtags: Hashtag[];
 }
 
 const categories: Category[] = [
@@ -12,64 +17,64 @@ const categories: Category[] = [
     name: "Beauty & Skincare",
     description: "Popular hashtags for beauty products and skincare routines",
     hashtags: [
-      "#护肤推荐",
-      "#美妆分享",
-      "#化妆技巧",
-      "#护肤心得",
-      "#美妆测评",
-      "#护肤品推荐",
-      "#美妆教程",
-      "#护肤小知识",
-      "#美妆好物",
-      "#护肤经验分享"
+      { chinese: "#护肤推荐", english: "Skincare Recommendations" },
+      { chinese: "#美妆分享", english: "Beauty Sharing" },
+      { chinese: "#化妆技巧", english: "Makeup Tips" },
+      { chinese: "#护肤心得", english: "Skincare Experience" },
+      { chinese: "#美妆测评", english: "Beauty Reviews" },
+      { chinese: "#护肤品推荐", english: "Skincare Product Recommendations" },
+      { chinese: "#美妆教程", english: "Makeup Tutorial" },
+      { chinese: "#护肤小知识", english: "Skincare Tips" },
+      { chinese: "#美妆好物", english: "Beauty Finds" },
+      { chinese: "#护肤经验分享", english: "Skincare Experience Sharing" }
     ]
   },
   {
     name: "Fashion & Style",
     description: "Trending hashtags for fashion and style content",
     hashtags: [
-      "#穿搭分享",
-      "#时尚搭配",
-      "#日常穿搭",
-      "#穿搭推荐",
-      "#时尚单品",
-      "#搭配技巧",
-      "#穿搭灵感",
-      "#时尚穿搭",
-      "#穿搭日记",
-      "#搭配分享"
+      { chinese: "#穿搭分享", english: "Outfit Sharing" },
+      { chinese: "#时尚搭配", english: "Fashion Matching" },
+      { chinese: "#日常穿搭", english: "Daily Outfits" },
+      { chinese: "#穿搭推荐", english: "Outfit Recommendations" },
+      { chinese: "#时尚单品", english: "Fashion Items" },
+      { chinese: "#搭配技巧", english: "Styling Tips" },
+      { chinese: "#穿搭灵感", english: "Outfit Inspiration" },
+      { chinese: "#时尚穿搭", english: "Fashion Styling" },
+      { chinese: "#穿搭日记", english: "Outfit Diary" },
+      { chinese: "#搭配分享", english: "Style Sharing" }
     ]
   },
   {
     name: "Food & Dining",
     description: "Popular hashtags for food and restaurant content",
     hashtags: [
-      "#美食推荐",
-      "#美食分享",
-      "#美食探店",
-      "#美食测评",
-      "#美食打卡",
-      "#美食记录",
-      "#美食vlog",
-      "#美食攻略",
-      "#美食日记",
-      "#美食探索"
+      { chinese: "#美食推荐", english: "Food Recommendations" },
+      { chinese: "#美食分享", english: "Food Sharing" },
+      { chinese: "#美食探店", english: "Restaurant Discovery" },
+      { chinese: "#美食测评", english: "Food Reviews" },
+      { chinese: "#美食打卡", english: "Food Check-in" },
+      { chinese: "#美食记录", english: "Food Journal" },
+      { chinese: "#美食vlog", english: "Food Vlog" },
+      { chinese: "#美食攻略", english: "Food Guide" },
+      { chinese: "#美食日记", english: "Food Diary" },
+      { chinese: "#美食探索", english: "Food Exploration" }
     ]
   },
   {
     name: "Lifestyle & Travel",
     description: "Trending hashtags for lifestyle and travel content",
     hashtags: [
-      "#生活方式",
-      "#旅行分享",
-      "#生活记录",
-      "#旅行日记",
-      "#生活日常",
-      "#旅行攻略",
-      "#生活感悟",
-      "#旅行探索",
-      "#生活态度",
-      "#旅行vlog"
+      { chinese: "#生活方式", english: "Lifestyle" },
+      { chinese: "#旅行分享", english: "Travel Sharing" },
+      { chinese: "#生活记录", english: "Life Records" },
+      { chinese: "#旅行日记", english: "Travel Diary" },
+      { chinese: "#生活日常", english: "Daily Life" },
+      { chinese: "#旅行攻略", english: "Travel Guide" },
+      { chinese: "#生活感悟", english: "Life Insights" },
+      { chinese: "#旅行探索", english: "Travel Exploration" },
+      { chinese: "#生活态度", english: "Life Attitude" },
+      { chinese: "#旅行vlog", english: "Travel Vlog" }
     ]
   }
 ];
@@ -88,17 +93,19 @@ export const HashtagCategories = () => {
               <p className="text-gray-600 mb-4">{category.description}</p>
               <div className="flex flex-wrap gap-2">
                 {category.hashtags.map((hashtag) => (
-                  <Badge
-                    key={hashtag}
-                    variant="secondary"
-                    className="text-sm py-1 px-3 cursor-pointer hover:bg-primary hover:text-white transition-colors"
-                    onClick={() => {
-                      navigator.clipboard.writeText(hashtag);
-                      // You could add a toast notification here
-                    }}
-                  >
-                    {hashtag}
-                  </Badge>
+                  <div key={hashtag.chinese} className="flex flex-col items-center gap-1 mb-2">
+                    <Badge
+                      variant="secondary"
+                      className="text-sm py-1 px-3 cursor-pointer hover:bg-primary hover:text-white transition-colors"
+                      onClick={() => {
+                        navigator.clipboard.writeText(hashtag.chinese);
+                        // You could add a toast notification here
+                      }}
+                    >
+                      {hashtag.chinese}
+                    </Badge>
+                    <span className="text-xs text-gray-500">{hashtag.english}</span>
+                  </div>
                 ))}
               </div>
             </Card>
