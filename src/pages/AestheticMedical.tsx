@@ -18,6 +18,7 @@ import {
   AlertTriangle
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { FAQSection } from "@/components/sections/FAQSection";
 
 const strategies = [
   {
@@ -169,6 +170,8 @@ const AestheticMedical = () => {
               ))}
             </div>
           </section>
+
+          <FAQSection />
 
           <section className="text-center">
             <h2 className="text-2xl font-semibold mb-4">Ready to Start?</h2>
