@@ -88,25 +88,33 @@ export const MarketInsightsSection = () => {
               <p className="text-gray-600">
                 An increasing number of Chinese consumers are looking abroad for medical aesthetic treatments. Approximately 16% of those considering or undergoing procedures in recent years have expressed interest in seeking treatments overseas, with Hong Kong, Macau, Taiwan, Japan, and South Korea being top destinations.
               </p>
-              <div className="mt-4 space-y-3">
-                <h4 className="font-medium">This trend is driven by several factors:</h4>
-                <ul className="list-disc pl-5 space-y-2 text-gray-600">
-                  <li>Perceived Expertise and Technology: Many Chinese consumers view overseas clinics as offering superior expertise, advanced technology, and more cutting-edge treatments compared to domestic providers.</li>
-                  <li>Diverse Treatment Options: International clinics often provide a broader range of services, including innovative or niche treatments not yet widely available in China.</li>
-                  <li>High-Quality Standards: Countries like Japan and South Korea are renowned for their meticulous attention to detail, safety standards, and natural-looking results, which align with Chinese preferences.</li>
-                  <li>Discretion and Privacy: Seeking treatments abroad allows clients to maintain privacy, avoiding potential social stigma associated with aesthetic enhancements.</li>
-                  <li>Combining Treatment with Travel: Many consumers view overseas treatments as part of a luxury experience, combining medical aesthetics with tourism and shopping.</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <p className="text-gray-600">
-                China's medical aesthetics market continues to thrive, fueled by increasing domestic demand and a growing interest in international options. For businesses, adapting to the preferences of local consumers while also understanding the appeal of overseas treatments can open new opportunities for growth and differentiation in this dynamic industry.
-              </p>
             </div>
           </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-12 bg-gray-50 p-8 rounded-xl"
+        >
+          <h3 className="text-xl font-semibold mb-6">Key Drivers of International Medical Tourism</h3>
+          <div className="prose max-w-none text-gray-600">
+            <p className="mb-6">
+              The growing trend of seeking medical aesthetic treatments abroad is driven by several compelling factors:
+            </p>
+            <ul className="list-disc pl-6 space-y-3 mb-8">
+              <li><span className="font-medium">Perceived Expertise and Technology:</span> Many Chinese consumers view overseas clinics as offering superior expertise, advanced technology, and more cutting-edge treatments compared to domestic providers.</li>
+              <li><span className="font-medium">Diverse Treatment Options:</span> International clinics often provide a broader range of services, including innovative or niche treatments not yet widely available in China.</li>
+              <li><span className="font-medium">High-Quality Standards:</span> Countries like Japan and South Korea are renowned for their meticulous attention to detail, safety standards, and natural-looking results, which align with Chinese preferences.</li>
+              <li><span className="font-medium">Discretion and Privacy:</span> Seeking treatments abroad allows clients to maintain privacy, avoiding potential social stigma associated with aesthetic enhancements.</li>
+              <li><span className="font-medium">Combining Treatment with Travel:</span> Many consumers view overseas treatments as part of a luxury experience, combining medical aesthetics with tourism and shopping.</li>
+            </ul>
+            <p>
+              China's medical aesthetics market continues to thrive, fueled by increasing domestic demand and a growing interest in international options. For businesses, adapting to the preferences of local consumers while also understanding the appeal of overseas treatments can open new opportunities for growth and differentiation in this dynamic industry.
+            </p>
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   );
