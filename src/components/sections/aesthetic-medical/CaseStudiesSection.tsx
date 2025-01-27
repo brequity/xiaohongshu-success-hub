@@ -8,7 +8,7 @@ const caseStudies = [
     name: "KCells",
     country: "Korea",
     engagements: "12,100+",
-    description: "Utilising contents to drive interest over time, due to the proximity for Chinese audience, it has gathered fans and over time build trust with Chinese audience to turn them from audience to interested clients who are willing to fly over to seek consultation.",
+    description: "Utilizing engaging and consistent content to cultivate interest over time, Xiaohongshu has effectively leveraged its proximity to the Chinese audience. By fostering a deep connection and building trust, the platform has transformed casual viewers into enthusiastic followers and, ultimately, into interested clients. Many of these clients are even willing to travel internationally to seek consultations, showcasing the platform's powerful influence in the aesthetic medical industry.",
     icon: <Building2 className="w-6 h-6 text-coral" />,
     flag: <Flag className="w-4 h-4 text-red-500" />,
     videoId: "nnF2dHjrHrU"
