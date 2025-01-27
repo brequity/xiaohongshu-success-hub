@@ -7,6 +7,8 @@ import { MarketInsightsSection } from "@/components/sections/aesthetic-medical/M
 import { MarketingStrategiesSection } from "@/components/sections/aesthetic-medical/MarketingStrategiesSection";
 import { CaseStudiesSection } from "@/components/sections/aesthetic-medical/CaseStudiesSection";
 import { ChallengesSection } from "@/components/sections/aesthetic-medical/ChallengesSection";
+import { SectionTitle } from "@/components/sections/aesthetic-medical/shared/SectionTitle";
+import { motion } from "framer-motion";
 
 const AestheticMedical = () => {
   return (
@@ -15,7 +17,12 @@ const AestheticMedical = () => {
       <HeroSection />
       
       <main className="container mx-auto px-4 py-20">
-        <div className="max-w-4xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-4xl mx-auto"
+        >
           <IntroductionSection />
           <MarketInsightsSection />
           <MarketingStrategiesSection />
@@ -23,17 +30,16 @@ const AestheticMedical = () => {
           <ChallengesSection />
           <FAQSection />
 
-          {/* CTA Section */}
           <section className="text-center">
-            <h2 className="text-2xl font-semibold mb-4">Ready to Start?</h2>
-            <p className="text-gray-600 mb-8">
-              Let us help you create a successful marketing strategy for your aesthetic medical clinic on Xiaohongshu.
-            </p>
+            <SectionTitle 
+              title="Ready to Start?"
+              subtitle="Let us help you create a successful marketing strategy for your aesthetic medical clinic on Xiaohongshu."
+            />
             <Button className="bg-coral hover:bg-coral/90">
               Contact Us for Support
             </Button>
           </section>
-        </div>
+        </motion.div>
       </main>
     </div>
   );
