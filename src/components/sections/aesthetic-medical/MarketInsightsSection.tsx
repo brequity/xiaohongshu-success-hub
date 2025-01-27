@@ -83,36 +83,36 @@ export const MarketInsightsSection = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="col-span-2"
+              className="col-span-2 relative px-8"
             >
               <Carousel
                 opts={{
                   align: "start",
                   loop: true,
                 }}
-                className="w-full"
+                className="w-full relative"
                 setApi={setApi}
                 onSlideChange={onSelect}
               >
-                <CarouselContent className="-ml-4">
+                <CarouselContent>
                   {insights.map((insight, index) => (
-                    <CarouselItem key={index} className="pl-4 basis-full">
+                    <CarouselItem key={index}>
                       <InsightCard insight={insight} />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <div className="absolute -left-2 top-1/2 -translate-y-1/2 z-10">
+                <div className="absolute -left-4 top-1/2 -translate-y-1/2 z-10">
                   <CarouselPrevious className="h-8 w-8 rounded-full" />
                 </div>
-                <div className="absolute -right-2 top-1/2 -translate-y-1/2 z-10">
+                <div className="absolute -right-4 top-1/2 -translate-y-1/2 z-10">
                   <CarouselNext className="h-8 w-8 rounded-full" />
                 </div>
-                <CarouselDots 
-                  itemCount={insights.length} 
-                  activeSlide={activeSlide} 
-                  onDotClick={handleDotClick}
-                />
               </Carousel>
+              <CarouselDots 
+                itemCount={insights.length} 
+                activeSlide={activeSlide} 
+                onDotClick={handleDotClick}
+              />
             </motion.div>
           ) : (
             <>
