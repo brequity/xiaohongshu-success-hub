@@ -17,6 +17,7 @@ import {
   MessageCircle,
   AlertTriangle
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 const strategies = [
   {
@@ -92,15 +93,45 @@ const AestheticMedical = () => {
     <div className="min-h-screen bg-white">
       <Navigation />
       
+      {/* Hero Section */}
+      <section className="relative h-[60vh] overflow-hidden">
+        <div 
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: "url('/lovable-uploads/bf0c26bc-8eca-47ed-a3e5-ccade9d6f18d.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        
+        <div className="relative z-10 h-full flex items-center justify-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center text-white px-4"
+          >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              Aesthetic Medical Marketing
+            </h1>
+            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+              Strategic marketing solutions for aesthetic medical clinics on Xiaohongshu
+            </p>
+            <Button 
+              size="lg" 
+              className="bg-coral hover:bg-coral-light"
+            >
+              Get Started
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+      
       <main className="container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-center mb-4 text-coral">
-            Marketing Strategies for Aesthetic Medical Clinics
-          </h1>
-          <p className="text-lg text-gray-600 text-center mb-12">
-            Effective marketing approaches for aesthetic medical clinics on Xiaohongshu
-          </p>
-
           <section className="mb-16">
             <h2 className="text-2xl font-semibold mb-8">Key Marketing Strategies</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
