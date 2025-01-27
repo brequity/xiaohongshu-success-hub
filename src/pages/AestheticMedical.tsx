@@ -17,7 +17,8 @@ import {
   MessageCircle,
   AlertTriangle,
   Building2,
-  MapPin
+  MapPin,
+  Flag
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { FAQSection } from "@/components/sections/FAQSection";
@@ -97,14 +98,16 @@ const caseStudies = [
     country: "Korea",
     engagements: "12,100+",
     description: "Utilising contents to drive interest over time, due to the proximity for Chinese audience, it has gathered fans and over time build trust with Chinese audience to turn them from audience to interested clients who are willing to fly over to seek consultation.",
-    icon: <Building2 className="w-6 h-6 text-coral" />
+    icon: <Building2 className="w-6 h-6 text-coral" />,
+    flag: <Flag className="w-4 h-4 text-red-500" />
   },
   {
     name: "Dr Zhang",
     country: "Singapore",
     engagements: "3,200+",
     description: "With the growing numbers of affluence Chinese residing in Singapore, this targets local affluence Chinese who are based in Singapore. Creating educational contents and clinic's USP, this has connected with the targeted audience and driven high number of enquiries and in turn becoming customers at clinic.",
-    icon: <Building2 className="w-6 h-6 text-coral" />
+    icon: <Building2 className="w-6 h-6 text-coral" />,
+    flag: <Flag className="w-4 h-4 text-red-500" />
   }
 ];
 
@@ -217,6 +220,7 @@ const AestheticMedical = () => {
                       </div>
                       <div className="flex items-center gap-4 text-sm text-gray-600">
                         <div className="flex items-center gap-1">
+                          {study.flag}
                           <MapPin className="w-4 h-4" />
                           {study.country}
                         </div>
