@@ -11,7 +11,7 @@ const caseStudies = [
     description: "Utilising contents to drive interest over time, due to the proximity for Chinese audience, it has gathered fans and over time build trust with Chinese audience to turn them from audience to interested clients who are willing to fly over to seek consultation.",
     icon: <Building2 className="w-6 h-6 text-coral" />,
     flag: <Flag className="w-4 h-4 text-red-500" />,
-    videoId: "349FzITX9-0"
+    videoId: "nnF2dHjrHrU"
   },
   {
     name: "Dr Zhang",
@@ -75,9 +75,9 @@ export const CaseStudiesSection = () => {
                     className="relative w-full pt-[56.25%] rounded-lg overflow-hidden"
                   >
                     <iframe
-                      src={`https://www.youtube.com/embed/${study.videoId}?autoplay=${isVideoInView ? 1 : 0}&rel=0&modestbranding=1`}
+                      src={`https://www.youtube.com/embed/${study.videoId}?rel=0&modestbranding=1`}
                       className="absolute top-0 left-0 w-full h-full border-0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     ></iframe>
                   </div>
