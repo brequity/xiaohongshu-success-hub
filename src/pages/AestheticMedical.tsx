@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { HeroSection } from "@/components/sections/aesthetic-medical/HeroSection";
 import { IntroductionSection } from "@/components/sections/aesthetic-medical/IntroductionSection";
+import { MarketInsightsSection } from "@/components/sections/aesthetic-medical/MarketInsightsSection";
 import { MarketingStrategiesSection } from "@/components/sections/aesthetic-medical/MarketingStrategiesSection";
 import { CaseStudiesSection } from "@/components/sections/aesthetic-medical/CaseStudiesSection";
 import { ChallengesSection } from "@/components/sections/aesthetic-medical/ChallengesSection";
@@ -16,6 +17,7 @@ const AestheticMedical = () => {
       <main className="container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto">
           <IntroductionSection />
+          <MarketInsightsSection />
           <MarketingStrategiesSection />
           <CaseStudiesSection />
           <ChallengesSection />
