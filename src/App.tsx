@@ -14,6 +14,7 @@ import XHS from "./pages/XHS";
 import GrowthStrategyForm from "./pages/GrowthStrategyForm";
 import Academy from "./pages/Academy";
 import HashtagGenerator from "./pages/HashtagGenerator";
+import AestheticMedical from "./pages/AestheticMedical";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/growth-strategy" element={<GrowthStrategyForm />} />
           <Route path="/academy" element={<Academy />} />
           <Route path="/hashtag-generator" element={<HashtagGenerator />} />
+          <Route path="/aesthetic-medical" element={<AestheticMedical />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
