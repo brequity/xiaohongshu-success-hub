@@ -72,7 +72,8 @@ export const CaseStudiesSection = () => {
                 {study.videoId && (
                   <div 
                     ref={videoRef}
-                    className="relative w-full pt-[56.25%] rounded-lg overflow-hidden"
+                    className="relative w-full max-w-[400px] mx-auto"
+                    style={{ paddingBottom: '177.77%' }} // 16:9 aspect ratio for portrait video
                   >
                     <iframe
                       src={`https://www.youtube.com/embed/${study.videoId}?rel=0&modestbranding=1`}
