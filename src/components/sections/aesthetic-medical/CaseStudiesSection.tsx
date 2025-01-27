@@ -19,7 +19,8 @@ const caseStudies = [
     engagements: "3,200+",
     description: "With the growing numbers of affluence Chinese residing in Singapore, this targets local affluence Chinese who are based in Singapore. Creating educational contents and clinic's USP, this has connected with the targeted audience and driven high number of enquiries and in turn becoming customers at clinic.",
     icon: <Building2 className="w-6 h-6 text-coral" />,
-    flag: <Flag className="w-4 h-4 text-red-500" />
+    flag: <Flag className="w-4 h-4 text-red-500" />,
+    videoId: "DkqORVZaH30"
   }
 ];
 
