@@ -6,7 +6,7 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Menu, Home, BookOpen, Hash, Mail, UserPlus, GraduationCap } from "lucide-react";
+import { Menu, Home, BookOpen, Hash, Mail, UserPlus, GraduationCap, Stethoscope } from "lucide-react";
 
 interface MobileNavProps {
   isNavigating: boolean;
@@ -57,6 +57,13 @@ export const MobileNav = ({ isNavigating, scrollToSection }: MobileNavProps) => 
               <Button variant="ghost" className="w-full justify-start gap-2">
                 <BookOpen className="h-4 w-4" />
                 Xiaohongshu
+              </Button>
+            </Link>
+
+            <Link to="/aesthetic-medical" onClick={() => setIsOpen(false)} className="w-full">
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <Stethoscope className="h-4 w-4" />
+                Aesthetic Medical
               </Button>
             </Link>
 
