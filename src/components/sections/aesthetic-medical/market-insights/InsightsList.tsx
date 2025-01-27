@@ -17,7 +17,7 @@ export const InsightsList = () => {
     {
       icon: Users,
       title: "Evolving Consumer Demographics",
-      description: "The market is increasingly driven by "mature" consumers aged 26 and above, who now comprise more than half of all paying customers. This demographic focuses on anti-aging and facial rejuvenation treatments and demonstrates higher spending per session along with more frequent visits, highlighting their importance as a target audience.",
+      description: 'The market is increasingly driven by "mature" consumers aged 26 and above, who now comprise more than half of all paying customers. This demographic focuses on anti-aging and facial rejuvenation treatments and demonstrates higher spending per session along with more frequent visits, highlighting their importance as a target audience.',
     },
     {
       icon: MapPin,
